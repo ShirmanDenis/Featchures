@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SQLite;
 
-namespace Server.Core.Tables
+namespace Server.Core
 {
     [Table("TestTable")]
     class TestTable

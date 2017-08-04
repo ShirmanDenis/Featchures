@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using SQLite;
+using SQLitePCL;
 
 namespace Server.Core
 {
@@ -12,9 +14,12 @@ namespace Server.Core
     {
         static void Main(string[] args)
         {
-            using (var connection = new SQLiteConnection(@"DataBases\Test.db"))
+            var db = new SQLiteConnection("Test.db");
             {
-                
+                db.BeginTransaction();
+                db.CreateTable<TestTable>();
+                db.Insert(new TestTable() {Text = "First"});
+                db.Close();
             }
         }
     }
