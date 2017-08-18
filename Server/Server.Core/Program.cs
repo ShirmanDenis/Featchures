@@ -9,20 +9,12 @@ namespace Server.Core
     {
         static void Main(string[] args)
         {
-            using (var server = new Server())
+            using (var server = new Server(new ContextHandlerBase()))
             {
                 server.Start("http://+:8080/");
 
                 Console.Write("Send to server: ");
                 var data = Console.ReadLine();
-
-                const string baseAdress = "http://localhost:8080/";
-                var uri = new Uri(baseAdress);
-                var webClient = new WebClient { BaseAddress = baseAdress };
-
-                webClient.UploadString(uri, data);
-
-                Console.Write("Sending..");
             }
         }
 

@@ -25,6 +25,12 @@ namespace Server.Core
         private readonly Dictionary<string, int> _threadsReg = new Dictionary<string, int>();
         private int currentId = 0;
         private Logger _logger = LogManager.GetCurrentClassLogger();
+        private IContextHandler _contextHandler;
+
+        public Server(IContextHandler contextHandler)
+        {
+            _contextHandler = contextHandler;
+        }
 
         public void Start(string prefix)
         {
@@ -100,19 +106,10 @@ namespace Server.Core
         {
             _logger.Info("In HandleInputContext()");
 
-            var request = context.Request;
-            string result;
-            using (var reader = new StreamReader(request.InputStream))
+            using (_contextHandler)
             {
-               result = await reader.ReadToEndAsync();
+               await _contextHandler.HandleInputContext(context);
             }
-
-            using (var writer = new StreamWriter(context.Response.OutputStream))
-            {
-                var wtf = "wtf";
-                await writer.WriteLineAsync($"Result {(string.IsNullOrEmpty(result) ? result : wtf)}");
-            }
-            context.Response.Close();
         }
 
         public void Dispose()
