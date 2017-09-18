@@ -77,16 +77,16 @@ public:
 	Figure(Figure* parent, const Point& position);
 
 	explicit Figure(Figure* parent = nullptr);
+	virtual void Rotate(double angleInDegree) = 0;
+	virtual void Draw() = 0;
+
+	Figure* GetParent() const;
 
 	virtual ~Figure();
 
 protected:
 	Color Color = Color.White();
-	Point Position{0,0};
-	virtual void Draw() = 0;
-
-	Figure* GetParent() const;
-	
+	Point Position{0,0};	
 private:
 	Figure* _parent;
 };

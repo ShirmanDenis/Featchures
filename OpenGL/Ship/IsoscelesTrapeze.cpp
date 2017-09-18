@@ -10,13 +10,6 @@ IsoscelesTrapeze::IsoscelesTrapeze(Figure* parent, Point position, double height
 {
 }
 
-IsoscelesTrapeze::IsoscelesTrapeze(Figure* parent, double height, double bot_base, double top_base): Figure(parent),
-                                                                                                     _height(height),
-                                                                                                     _botBase(bot_base),
-                                                                                                     _topBase(top_base)
-{
-}
-
 void IsoscelesTrapeze::Draw()
 {
 	auto delta = abs(_botBase - _topBase) / 2;
@@ -74,4 +67,9 @@ void IsoscelesTrapeze::SetBotBase(double botBase)
 
 IsoscelesTrapeze::~IsoscelesTrapeze()
 {
+}
+
+void IsoscelesTrapeze::Rotate(double angleInDegree)
+{
+
 }

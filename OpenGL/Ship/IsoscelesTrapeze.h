@@ -5,8 +5,6 @@ class IsoscelesTrapeze : public Figure
 public:
 	IsoscelesTrapeze(Figure* parent, Point position, double height, double bot_base, double top_base);
 
-	IsoscelesTrapeze(Figure* parent, double height, double bot_base, double top_base);
-
 	void Draw() override;
 
 	double GetHeight() const;
@@ -22,6 +20,7 @@ public:
 	void SetBotBase(double botBase);
 
 	~IsoscelesTrapeze() override;
+	void Rotate(double angleInDegree) override;
 private:
 	double _height, _botBase, _topBase;
 };

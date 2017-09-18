@@ -21,7 +21,7 @@ int x1 = 0, rsize = 25, xstep = 1;
 char buf[19];
 
 IsoscelesTrapeze trapeze{ nullptr, Point(100, 10), 100/*H*/, 50/*bb*/,100/*tb*/};
-Triangle triangle{ nullptr, Point(100,10), 50, 100, 60 };
+Triangle triangle{ nullptr, Point(100,10), 50, 100, 50 };
 
 void window() {
 	glutReshapeWindow(oWidth, oHeight);
