@@ -71,3 +71,14 @@ void Triangle::SetAngleInDegree(double angleInDegree)
 		throw std::exception("Value can't be less then zero");
 	_angle = angleInDegree;
 }
+
+void Triangle::Rotate(double angleInDegree)
+{
+}
+
+Point Triangle::GetCenter()
+{
+	Point center;
+
+	return center;
+}

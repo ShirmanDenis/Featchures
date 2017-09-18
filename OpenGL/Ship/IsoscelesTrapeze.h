@@ -21,6 +21,7 @@ public:
 
 	~IsoscelesTrapeze() override;
 	void Rotate(double angleInDegree) override;
+	Point GetCenter() override;
 private:
 	double _height, _botBase, _topBase;
 };

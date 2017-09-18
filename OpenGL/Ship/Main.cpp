@@ -9,6 +9,7 @@
 #include <iostream>
 #include "IsoscelesTrapeze.h"
 #include "Triangle.h"
+#include "Square.h"
 
 using namespace std;
 
@@ -22,6 +23,7 @@ char buf[19];
 
 IsoscelesTrapeze trapeze{ nullptr, Point(100, 10), 100/*H*/, 50/*bb*/,100/*tb*/};
 Triangle triangle{ nullptr, Point(100,10), 50, 100, 50 };
+Square square{ nullptr, Point(100,10), 50, 100 };
 
 void window() {
 	glutReshapeWindow(oWidth, oHeight);
@@ -53,7 +55,7 @@ void display() {
 
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	triangle.Draw();
+	square.Draw();
 
 	glutSwapBuffers();
 }

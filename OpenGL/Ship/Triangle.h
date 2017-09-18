@@ -19,6 +19,8 @@ public:
 	void   SetA(double value);
 	void   SetB(double value);
 	void   SetAngleInDegree(double value);
+	void Rotate(double angleInDegree) override;
+	Point GetCenter() override;
 private:
 	double _a, _b, _angle;
 };

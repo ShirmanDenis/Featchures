@@ -65,6 +65,7 @@ struct Point
 {
 	double X;
 	double Y;
+	Point() : X(0), Y(0) {}
 	Point(double x, double y)
 	{
 		X = x;
@@ -74,19 +75,19 @@ struct Point
 
 class Figure{
 public:
+	Color Color = Color.White();
+	Point Position{ 0,0 };
+	
 	Figure(Figure* parent, const Point& position);
 
 	explicit Figure(Figure* parent = nullptr);
 	virtual void Rotate(double angleInDegree) = 0;
 	virtual void Draw() = 0;
+	virtual Point GetCenter() = 0;
 
 	Figure* GetParent() const;
 
 	virtual ~Figure();
-
-protected:
-	Color Color = Color.White();
-	Point Position{0,0};	
 private:
 	Figure* _parent;
 };

@@ -73,3 +73,10 @@ void IsoscelesTrapeze::Rotate(double angleInDegree)
 {
 
 }
+
+Point IsoscelesTrapeze::GetCenter()
+{
+	Point center;
+
+	return center;
+}
