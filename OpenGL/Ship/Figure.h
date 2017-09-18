@@ -1,5 +1,6 @@
 #pragma once
 #define PI 3.14159265 
+#include <utility>
 
 struct Color
 {
@@ -74,6 +75,41 @@ struct Point
 class Figure{
 public:
 	Figure(Figure* parent, const Point& position);
+
+	Figure(const Figure& other)
+		: Color(other.Color),
+		  Position(other.Position),
+		  _parent(other._parent)
+	{
+	}
+
+	Figure(Figure&& other) noexcept
+		: Color(std::move(other.Color)),
+		  Position(std::move(other.Position)),
+		  _parent(other._parent)
+	{
+	}
+
+	Figure& operator=(const Figure& other)
+	{
+		if (this == &other)
+			return *this;
+		Color = other.Color;
+		Position = other.Position;
+		_parent = other._parent;
+		return *this;
+	}
+
+	Figure& operator=(Figure&& other) noexcept
+	{
+		if (this == &other)
+			return *this;
+		Color = std::move(other.Color);
+		Position = std::move(other.Position);
+		_parent = other._parent;
+		return *this;
+	}
+
 	explicit Figure(Figure* parent);
 protected:
 	Color Color = Color.White();
