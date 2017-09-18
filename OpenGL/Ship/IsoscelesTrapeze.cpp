@@ -3,42 +3,6 @@
 #include <algorithm>
 #include "IsoscelesTrapeze.h"
 
-IsoscelesTrapeze::IsoscelesTrapeze(const IsoscelesTrapeze& other): Figure(other),
-                                                                   _height(other._height),
-                                                                   _botBase(other._botBase),
-                                                                   _topBase(other._topBase)
-{
-}
-
-IsoscelesTrapeze::IsoscelesTrapeze(IsoscelesTrapeze&& other) noexcept: Figure(std::move(other)),
-                                                                       _height(other._height),
-                                                                       _botBase(other._botBase),
-                                                                       _topBase(other._topBase)
-{
-}
-
-IsoscelesTrapeze& IsoscelesTrapeze::operator=(const IsoscelesTrapeze& other)
-{
-	if (this == &other)
-		return *this;
-	Figure::operator =(other);
-	_height = other._height;
-	_botBase = other._botBase;
-	_topBase = other._topBase;
-	return *this;
-}
-
-IsoscelesTrapeze& IsoscelesTrapeze::operator=(IsoscelesTrapeze&& other) noexcept
-{
-	if (this == &other)
-		return *this;
-	Figure::operator =(std::move(other));
-	_height = other._height;
-	_botBase = other._botBase;
-	_topBase = other._topBase;
-	return *this;
-}
-
 IsoscelesTrapeze::IsoscelesTrapeze(Figure* parent, Point position, double height, double bot_base, double top_base): Figure(parent, position),
                                                                                                                          _height(height),
                                                                                                                          _botBase(bot_base),

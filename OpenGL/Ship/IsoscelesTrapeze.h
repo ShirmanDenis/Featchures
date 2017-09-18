@@ -1,21 +1,14 @@
 #pragma once
 #include "Figure.h"
-class IsoscelesTrapeze : Figure
+class IsoscelesTrapeze : public Figure
 {
 public:
-	IsoscelesTrapeze(const IsoscelesTrapeze& other);
-
-	IsoscelesTrapeze(IsoscelesTrapeze&& other) noexcept;
-
-	IsoscelesTrapeze& operator=(const IsoscelesTrapeze& other);
-
-	IsoscelesTrapeze& operator=(IsoscelesTrapeze&& other) noexcept;
-
 	IsoscelesTrapeze(Figure* parent, Point position, double height, double bot_base, double top_base);
 
 	IsoscelesTrapeze(Figure* parent, double height, double bot_base, double top_base);
 
-	void Draw() override;;
+	void Draw() override;
+
 	double GetHeight() const;
 
 	double GetTopBase() const;

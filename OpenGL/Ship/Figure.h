@@ -76,46 +76,13 @@ class Figure{
 public:
 	Figure(Figure* parent, const Point& position);
 
-	Figure(const Figure& other)
-		: Color(other.Color),
-		  Position(other.Position),
-		  _parent(other._parent)
-	{
-	}
+	explicit Figure(Figure* parent = nullptr);
 
-	Figure(Figure&& other) noexcept
-		: Color(std::move(other.Color)),
-		  Position(std::move(other.Position)),
-		  _parent(other._parent)
-	{
-	}
+	virtual ~Figure();
 
-	Figure& operator=(const Figure& other)
-	{
-		if (this == &other)
-			return *this;
-		Color = other.Color;
-		Position = other.Position;
-		_parent = other._parent;
-		return *this;
-	}
-
-	Figure& operator=(Figure&& other) noexcept
-	{
-		if (this == &other)
-			return *this;
-		Color = std::move(other.Color);
-		Position = std::move(other.Position);
-		_parent = other._parent;
-		return *this;
-	}
-
-	explicit Figure(Figure* parent);
 protected:
 	Color Color = Color.White();
 	Point Position{0,0};
-
-	virtual ~Figure();
 	virtual void Draw() = 0;
 
 	Figure* GetParent() const;

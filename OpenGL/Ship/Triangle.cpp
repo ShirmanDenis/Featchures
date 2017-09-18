@@ -41,42 +41,6 @@ double Triangle::GetA() const
 	return _a;
 }
 
-Triangle::Triangle(const Triangle& other): Figure(other),
-                                           _a(other._a),
-                                           _b(other._b),
-                                           _angle(other._angle)
-{
-}
-
-Triangle::Triangle(Triangle&& other) noexcept: Figure(std::move(other)),
-                                               _a(other._a),
-                                               _b(other._b),
-                                               _angle(other._angle)
-{
-}
-
-Triangle& Triangle::operator=(const Triangle& other)
-{
-	if (this == &other)
-		return *this;
-	Figure::operator =(other);
-	_a = other._a;
-	_b = other._b;
-	_angle = other._angle;
-	return *this;
-}
-
-Triangle& Triangle::operator=(Triangle&& other) noexcept
-{
-	if (this == &other)
-		return *this;
-	Figure::operator =(std::move(other));
-	_a = other._a;
-	_b = other._b;
-	_angle = other._angle;
-	return *this;
-}
-
 double Triangle::GetB() const
 {
 	return _b;
