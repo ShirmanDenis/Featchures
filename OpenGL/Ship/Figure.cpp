@@ -1,9 +1,9 @@
 #include "Figure.h"
 
-Figure::Figure(Figure * parent, double x, double y) : Figure(parent)
+Figure::Figure(Figure * parent, const Point& position) : Figure(parent)
 {
-	_x = x;
-	_y = y;
+	Position.X = position.X;
+	Position.Y = position.Y;
 }
 
 Figure::Figure(Figure* parent)
@@ -19,24 +19,4 @@ Figure::~Figure()
 Figure * Figure::GetParent() const
 {
 	return _parent;
-}
-
-double Figure::GetX() const
-{
-	return _x;
-}
-
-double Figure::GetY() const
-{
-	return _y;
-}
-
-void Figure::SetX(double x)
-{
-	_x = x;
-}
-
-void Figure::SetY(double y)
-{
-	_y = y;
 }

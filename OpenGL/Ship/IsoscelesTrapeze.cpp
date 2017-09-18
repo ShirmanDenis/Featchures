@@ -1,74 +1,113 @@
 #include "Figure.h"
 #include <GL/glew.h>
-#include <cmath>
 #include <algorithm>
+#include "IsoscelesTrapeze.h"
 
-class IsoscelesTrapeze : Figure
+IsoscelesTrapeze::IsoscelesTrapeze(const IsoscelesTrapeze& other): Figure(other),
+                                                                   _height(other._height),
+                                                                   _botBase(other._botBase),
+                                                                   _topBase(other._topBase)
 {
-public:
-	IsoscelesTrapeze(Figure* parent, double x, double y, double height, double bot_base, double top_base)
-		: Figure(parent, x, y),
-		  _height(height),
-		  _botBase(bot_base),
-		  _topBase(top_base)
-	{
-	}
+}
 
-	IsoscelesTrapeze(Figure* parent, double height, double bot_base, double top_base)
-		: Figure(parent),
-		  _height(height),
-		  _botBase(bot_base),
-		  _topBase(top_base)
-	{
-	}
+IsoscelesTrapeze::IsoscelesTrapeze(IsoscelesTrapeze&& other) noexcept: Figure(std::move(other)),
+                                                                       _height(other._height),
+                                                                       _botBase(other._botBase),
+                                                                       _topBase(other._topBase)
+{
+}
 
-	void Draw() override
-	{
-		auto delta = abs(_botBase - _topBase) / 2;
+IsoscelesTrapeze& IsoscelesTrapeze::operator=(const IsoscelesTrapeze& other)
+{
+	if (this == &other)
+		return *this;
+	Figure::operator =(other);
+	_height = other._height;
+	_botBase = other._botBase;
+	_topBase = other._topBase;
+	return *this;
+}
 
-		glBegin(GL_POLYGON);
-		glColor3b(Color.R, Color.G, Color.B);
-		auto currentX = GetX();
-		auto currentY = GetY();
+IsoscelesTrapeze& IsoscelesTrapeze::operator=(IsoscelesTrapeze&& other) noexcept
+{
+	if (this == &other)
+		return *this;
+	Figure::operator =(std::move(other));
+	_height = other._height;
+	_botBase = other._botBase;
+	_topBase = other._topBase;
+	return *this;
+}
 
-		glVertex2d(currentX, currentY);
+IsoscelesTrapeze::IsoscelesTrapeze(Figure* parent, Point position, double height, double bot_base, double top_base): Figure(parent, position),
+                                                                                                                         _height(height),
+                                                                                                                         _botBase(bot_base),
+                                                                                                                         _topBase(top_base)
+{
+}
 
-		glVertex2d(currentX -= delta, currentY += _height);
-		glVertex2d(currentX += std::max(_botBase, _topBase), currentY);
-		glVertex2d(currentX -= delta, currentY -= _height);
+IsoscelesTrapeze::IsoscelesTrapeze(Figure* parent, double height, double bot_base, double top_base): Figure(parent),
+                                                                                                     _height(height),
+                                                                                                     _botBase(bot_base),
+                                                                                                     _topBase(top_base)
+{
+}
 
-		glVertex2d(GetX(), GetY());
-		glEnd();
-	};
-	double GetHeight() const
-	{
-		return _height;
-	}
-	double GetTopBase() const
-	{
-		return _topBase;
-	}
-	double GetBotBase() const
-	{
-		return _botBase;
-	}
-	void SetHeight(double height)
-	{
-		_height = height;
-	}
-	void SetTopBase(double topBase)
-	{
-		_topBase = topBase;
-	}
-	void SetBotBase(double botBase)
-	{
-		_botBase = botBase;
-	}
+void IsoscelesTrapeze::Draw()
+{
+	auto delta = abs(_botBase - _topBase) / 2;
+	auto currentX = Position.X;
+	auto currentY = Position.Y;
 
-	~IsoscelesTrapeze() override
-	{
-	}
-private:
-	double _height, _botBase, _topBase;
-	
-};
+	glBegin(GL_POLYGON);
+	glColor3ub(Color.R, Color.G, Color.B);
+
+	glVertex2d(currentX, currentY);
+
+	glVertex2d(currentX -= delta, currentY += _height);
+	glVertex2d(currentX += std::max(_botBase, _topBase), currentY);
+	glVertex2d(currentX -= delta, currentY -= _height);
+
+	glVertex2d(Position.X, Position.Y);
+	glEnd();
+}
+
+double IsoscelesTrapeze::GetHeight() const
+{
+	return _height;
+}
+
+double IsoscelesTrapeze::GetTopBase() const
+{
+	return _topBase;
+}
+
+double IsoscelesTrapeze::GetBotBase() const
+{
+	return _botBase;
+}
+
+void IsoscelesTrapeze::SetHeight(double height)
+{
+	if (height < 0)
+		throw std::exception("Value can't be less then zero");
+	_height = height;
+}
+
+void IsoscelesTrapeze::SetTopBase(double topBase)
+{
+	if (topBase < 0)
+		throw std::exception("Value can't be less then zero");
+	_topBase = topBase;
+}
+
+void IsoscelesTrapeze::SetBotBase(double botBase)
+{
+	if (botBase < 0)
+		throw std::exception("Value can't be less then zero");
+	_botBase = botBase;
+}
+
+IsoscelesTrapeze::~IsoscelesTrapeze()
+{
+}
