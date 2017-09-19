@@ -78,6 +78,11 @@ struct Point
 		X = x;
 		Y = y;
 	}
+
+	double DistanceTo(Point other)
+	{
+		return sqrt((X - other.X) * (X - other.X) + (Y - other.Y) * (Y - other.Y));
+	}
 };
 
 enum Direction

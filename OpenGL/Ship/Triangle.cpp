@@ -16,7 +16,10 @@ Triangle::~Triangle()
 void Triangle::Draw()
 {
 	glBegin(GL_POLYGON);
-	
+	if (IsVisible())
+		glColor3ub(Color.R, Color.G, Color.B);
+	else
+		glColor4f(1, 0, 0, 0); 
 	glVertex2d(_a.X, _a.Y);
 	glVertex2d(_b.X, _b.Y);
 	glVertex2d(_c.X, _c.Y);
@@ -98,7 +101,12 @@ std::vector<Point> Triangle::GetVertexes()
 
 double Triangle::GetArea()
 {
-	return  0;
+	auto ab = _a.DistanceTo(_b);
+	auto bc = _b.DistanceTo(_c);
+	auto ac = _a.DistanceTo(_c);
+
+	auto semiperimeter = (ab + bc + ac) / 2.0;
+	return sqrt(semiperimeter * (semiperimeter - ab) * (semiperimeter - ac) * (semiperimeter - bc));
 }
 
 void Triangle::Move(double dx, double dy)
@@ -114,9 +122,19 @@ void Triangle::Move(double dx, double dy)
 
 void Triangle::Hide()
 {
-		
+	Figure::Hide();
+	glEnable(GL_ALPHA_TEST);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	Draw();
+
+	glDisable(GL_BLEND);
+	glDisable(GL_ALPHA_TEST);
 }
 
 void Triangle::Show()
 {
+	Figure::Show();
+	Draw();
 }

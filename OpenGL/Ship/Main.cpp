@@ -23,6 +23,7 @@ char buf[19];
 int i = 0;
 IsoscelesTrapeze trapeze{ nullptr, Point(100, 10), 100/*H*/, 50/*bb*/,100/*tb*/};
 Triangle triangle{ nullptr, Point(200,200), Point(150,100), Point(200,50)};
+Triangle triangle2{ nullptr, Point(200,200), Point(150,100), Point(200,50) };
 Square square{ nullptr, Point(100,50), 50, 100 };
 
 void window() {
@@ -40,17 +41,14 @@ void SetViewPort(int w, int h) {
 }
 
 void TimerFunction(int value) {
-	triangle.Move(1, 0);
+	triangle2.Hide();
 	glutPostRedisplay();  // перерисовываем экран
 	glutTimerFunc(1, TimerFunction, 1);  //запускаем таймер заново.
 }
 
 void display() {
-
 	glClear(GL_COLOR_BUFFER_BIT);
-	
-	triangle.Draw();
-	
+	triangle.Show();
 	glutSwapBuffers();
 }
 
@@ -65,9 +63,11 @@ int main(int argc, char * argv[]) {
 	glutReshapeFunc(SetViewPort);
 	glutKeyboardFunc(keys);
 	glutDisplayFunc(display);
-	
-	//window();
-	//glutTimerFunc(1000, TimerFunction, 1);
+	window();
+	triangle.Rotate(30);
+	triangle2.Rotate(15);
+	triangle2.SetColor(Color().Red());
+	glutTimerFunc(3000, TimerFunction, 1);
 	glutMainLoop();
 	return 0;
 }

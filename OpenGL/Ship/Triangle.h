@@ -8,8 +8,6 @@ public:
 	Triangle(Figure* const parent, const Point& a, const Point b, const Point c);
 
 	~Triangle() override;
-	void Draw() override;
-
 	Point GetA() const;
 	Point GetB() const;
 	Point GetC() const;
@@ -22,6 +20,8 @@ public:
 	void Move(double dx, double dy) override;
 	void Hide() override;
 	void Show() override;
+protected:
+	void Draw() override;
 private:
 	Point _a, _b, _c;
 };
