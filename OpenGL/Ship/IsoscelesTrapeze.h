@@ -20,7 +20,7 @@ public:
 	void SetBotBase(double botBase);
 
 	~IsoscelesTrapeze() override;
-	void Rotate(double angleInDegree, Direction direction = ClockWise) override;
+	void Rotate(double angleInDegree, const Point* around = nullptr, Direction direction = ClockWise) override;
 	std::vector<Point> GetVertexes() override;
 	double GetArea() override;
 private:

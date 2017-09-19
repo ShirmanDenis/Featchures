@@ -96,8 +96,7 @@ public:
 	Figure(Figure* parent, const Point& position);
 	explicit Figure(Figure* parent = nullptr);
 
-	virtual void Rotate(double angleInDegree, Direction direction = ClockWise) = 0;
-	virtual void Draw() = 0;
+	virtual void Rotate(double angleInDegree, const Point* around = nullptr, Direction direction = ClockWise) = 0;
 	virtual std::vector<Point> GetVertexes() = 0;
 	virtual double GetArea() = 0;
 
@@ -118,6 +117,7 @@ public:
 protected:
 	Color Color = Color.White();
 	Point Position{ 0,0 };
+	virtual void Draw() = 0;
 private:
 	Figure* _parent;
 	bool _isVisible = false;

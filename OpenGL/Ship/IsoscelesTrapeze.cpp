@@ -69,7 +69,7 @@ IsoscelesTrapeze::~IsoscelesTrapeze()
 {
 }
 
-void IsoscelesTrapeze::Rotate(double angleInDegree, Direction direction)
+void IsoscelesTrapeze::Rotate(double angleInDegree, const Point* around, Direction direction)
 {
 
 }

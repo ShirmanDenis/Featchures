@@ -26,13 +26,18 @@ double Square::GetB() const
 	return _b;
 }
 
-void Square::Rotate(double angleInDegree, Direction direction)
+void Square::Rotate(double angleInDegree, const Point* around, Direction direction)
 {
 }
 
 void Square::Draw()
 {
 	glBegin(GL_POLYGON);
+
+	if (IsVisible())
+		glColor3ub(Color.R, Color.G, Color.B);
+	else
+		glColor4f(1, 0, 0, 0);
 
 	auto currX = Position.X;
 	auto currY = Position.Y;
@@ -54,5 +59,5 @@ std::vector<Point> Square::GetVertexes()
 
 double Square::GetArea()
 {
-	return 0;
+	return _a * _b;
 }

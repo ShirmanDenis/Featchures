@@ -16,10 +16,12 @@ Triangle::~Triangle()
 void Triangle::Draw()
 {
 	glBegin(GL_POLYGON);
+
 	if (IsVisible())
 		glColor3ub(Color.R, Color.G, Color.B);
 	else
 		glColor4f(1, 0, 0, 0); 
+
 	glVertex2d(_a.X, _a.Y);
 	glVertex2d(_b.X, _b.Y);
 	glVertex2d(_c.X, _c.Y);
@@ -58,43 +60,48 @@ void Triangle::SetC(Point value)
 	_c = value;
 }
 
-void Triangle::Rotate(double angleInDegree, Direction direction)
+void Triangle::Rotate(double angleInDegree, const Point* around, Direction direction)
 {
 	double t_x, t_y;
+	auto arroundPoint = (around != nullptr) ? around : &Position;
 	auto rad = angleInDegree * PI / 180;
 	if (direction == CounterClockWise) {
 		t_x = _a.X;
 		t_y = _a.Y;
-		_a.X = Position.X + (t_x - Position.X) * cos(rad) - (t_y - Position.Y) * sin(rad);
-		_a.Y = Position.Y + (t_y - Position.Y) * cos(rad) + (t_x - Position.X) * sin(rad);
+		_a.X = arroundPoint->X + (t_x - arroundPoint->X) * cos(rad) - (t_y - arroundPoint->Y) * sin(rad);
+		_a.Y = arroundPoint->Y + (t_y - arroundPoint->Y) * cos(rad) + (t_x - arroundPoint->X) * sin(rad);
 		t_x = _b.X;
 		t_y = _b.Y;
-		_b.X = Position.X + (t_x - Position.X) * cos(rad) - (t_y - Position.Y) * sin(rad);
-		_b.Y = Position.Y + (t_y - Position.Y) * cos(rad) + (t_x - Position.X) * sin(rad);
+		_b.X = arroundPoint->X + (t_x - arroundPoint->X) * cos(rad) - (t_y - arroundPoint->Y) * sin(rad);
+		_b.Y = arroundPoint->Y + (t_y - arroundPoint->Y) * cos(rad) + (t_x - arroundPoint->X) * sin(rad);
 		t_x = _c.X;
 		t_y = _c.Y;
-		_c.X = Position.X + (t_x - Position.X) * cos(rad) - (t_y - Position.Y) * sin(rad);
-		_c.Y = Position.Y + (t_y - Position.Y) * cos(rad) + (t_x - Position.X) * sin(rad);
+		_c.X = arroundPoint->X + (t_x - arroundPoint->X) * cos(rad) - (t_y - arroundPoint->Y) * sin(rad);
+		_c.Y = arroundPoint->Y + (t_y - arroundPoint->Y) * cos(rad) + (t_x - arroundPoint->X) * sin(rad);
 	}
 	else {
 		t_x = _a.X;
 		t_y = _a.Y;
-		_a.X = Position.X + (t_x - Position.X) * cos(rad) + (t_y - Position.Y) * sin(rad);
-		_a.Y = Position.Y + (t_y - Position.Y) * cos(rad) - (t_x - Position.X) * sin(rad);
+		_a.X = arroundPoint->X + (t_x - arroundPoint->X) * cos(rad) + (t_y - arroundPoint->Y) * sin(rad);
+		_a.Y = arroundPoint->Y + (t_y - arroundPoint->Y) * cos(rad) - (t_x - arroundPoint->X) * sin(rad);
 		t_x = _b.X;
 		t_y = _b.Y;
-		_b.X = Position.X + (t_x - Position.X) * cos(rad) + (t_y - Position.Y) * sin(rad);
-		_b.Y = Position.Y + (t_y - Position.Y) * cos(rad) - (t_x - Position.X) * sin(rad);
+		_b.X = arroundPoint->X + (t_x - arroundPoint->X) * cos(rad) + (t_y - arroundPoint->Y) * sin(rad);
+		_b.Y = arroundPoint->Y + (t_y - arroundPoint->Y) * cos(rad) - (t_x - arroundPoint->X) * sin(rad);
 		t_x = _c.X;
 		t_y = _c.Y;
-		_c.X = Position.X + (t_x - Position.X) * cos(rad) + (t_y - Position.Y) * sin(rad);
-		_c.Y = Position.Y + (t_y - Position.Y) * cos(rad) - (t_x - Position.X) * sin(rad);
+		_c.X = arroundPoint->X + (t_x - arroundPoint->X) * cos(rad) + (t_y - arroundPoint->Y) * sin(rad);
+		_c.Y = arroundPoint->Y + (t_y - arroundPoint->Y) * cos(rad) - (t_x - arroundPoint->X) * sin(rad);
 	}
 }
 
 std::vector<Point> Triangle::GetVertexes()
 {
 	auto result = std::vector<Point>();
+
+	result.push_back(_a);
+	result.push_back(_b);
+	result.push_back(_c);
 
 	return result;
 }
@@ -118,23 +125,4 @@ void Triangle::Move(double dx, double dy)
 	_a.Y += dy;
 	_b.Y += dy;
 	_c.Y += dy;
-}
-
-void Triangle::Hide()
-{
-	Figure::Hide();
-	glEnable(GL_ALPHA_TEST);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-	Draw();
-
-	glDisable(GL_BLEND);
-	glDisable(GL_ALPHA_TEST);
-}
-
-void Triangle::Show()
-{
-	Figure::Show();
-	Draw();
 }

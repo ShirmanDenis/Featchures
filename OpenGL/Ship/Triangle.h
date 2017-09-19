@@ -14,12 +14,10 @@ public:
 	void   SetA(Point value);
 	void   SetB(Point value);
 	void   SetC(Point value);
-	void Rotate(double angleInDegree, Direction direction = ClockWise) override;
+	void Rotate(double angleInDegree, const Point* around = nullptr, Direction direction = ClockWise) override;
 	std::vector<Point> GetVertexes() override;
 	double GetArea() override;
 	void Move(double dx, double dy) override;
-	void Hide() override;
-	void Show() override;
 protected:
 	void Draw() override;
 private:

@@ -1,4 +1,5 @@
 #include "Figure.h"
+#include <GL/glew.h>
 
 Figure::Figure(Figure * parent, const Point& position) : Figure(parent)
 {
@@ -56,12 +57,23 @@ void Figure::Hide()
 {
 	if (_isVisible)
 		_isVisible = false;
+
+	glEnable(GL_ALPHA_TEST);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	Draw();
+
+	glDisable(GL_BLEND);
+	glDisable(GL_ALPHA_TEST);
 }
 
 void Figure::Show()
 {
 	if (!_isVisible)
 		_isVisible = true;
+
+	Draw();
 }
 
 bool Figure::IsVisible() const
