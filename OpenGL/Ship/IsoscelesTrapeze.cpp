@@ -69,14 +69,17 @@ IsoscelesTrapeze::~IsoscelesTrapeze()
 {
 }
 
-void IsoscelesTrapeze::Rotate(double angleInDegree)
+void IsoscelesTrapeze::Rotate(double angleInDegree, Direction direction)
 {
 
 }
 
-Point IsoscelesTrapeze::GetCenter()
+std::vector<Point> IsoscelesTrapeze::GetVertexes()
 {
-	Point center;
+	return std::vector<Point>();
+}
 
-	return center;
+double IsoscelesTrapeze::GetArea()
+{
+	return  0;
 }

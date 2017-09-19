@@ -2,17 +2,10 @@
 #include "Triangle.h"
 #include <GL/glew.h>
 
-Triangle::Triangle(Figure* const parent, const Point& position, const double a, const double b, const double angle): Figure(parent, position),
-                                                                                                                     _a(a),
-                                                                                                                     _b(b),
-                                                                                                                     _angle(angle)
-{
-}
-
-Triangle::Triangle(Figure* const parent, const double a, const double b, const double angle): Figure(parent),
-                                                                                              _a(a),
-                                                                                              _b(b),
-                                                                                              _angle(angle)
+Triangle::Triangle(Figure* const parent, const Point& a, const Point b, const Point c): Figure(parent, a),
+                                                                                                    _a(a),
+                                                                                                    _b(b),
+                                                                                                    _c(c)
 {
 }
 
@@ -22,63 +15,108 @@ Triangle::~Triangle()
 
 void Triangle::Draw()
 {
-	auto currX = Position.X;
-	auto currY = Position.Y;
-	auto deltaY = _a * cos(90 - (_angle * PI / 180));
-	auto deltaX = sqrt(_a*_a - deltaY * deltaY);
+	glBegin(GL_POLYGON);
+	
+	glVertex2d(_a.X, _a.Y);
+	glVertex2d(_b.X, _b.Y);
+	glVertex2d(_c.X, _c.Y);
 
-	glBegin(GL_TRIANGLES);
-	
-	glVertex2d(currX += deltaX, currY += deltaY);
-	glVertex2d(currX += _b - deltaX, currY -= deltaY);
-	glVertex2d(Position.X, Position.Y);
-	
 	glEnd();
 }
 
-double Triangle::GetA() const
+Point Triangle::GetA() const
 {
 	return _a;
 }
 
-double Triangle::GetB() const
+Point Triangle::GetB() const
 {
 	return _b;
 }
 
-double Triangle::GetAngle() const
+Point Triangle::GetC() const
 {
-	return _angle;
+	return _c;
 }
 
-void Triangle::SetA(double value)
+void Triangle::SetA(Point value)
 {
-	if (value < 0)
-		throw std::exception("Value can't be less then zero");
 	_a = value;
 }
 
-void Triangle::SetB(double value)
+void Triangle::SetB(Point value)
 {
-	if (value < 0)
-		throw std::exception("Value can't be less then zero");
+
 	_b = value;
 }
 
-void Triangle::SetAngleInDegree(double angleInDegree)
+void Triangle::SetC(Point value)
 {
-	if (angleInDegree < 0)
-		throw std::exception("Value can't be less then zero");
-	_angle = angleInDegree;
+	_c = value;
 }
 
-void Triangle::Rotate(double angleInDegree)
+void Triangle::Rotate(double angleInDegree, Direction direction)
 {
+	double t_x, t_y;
+	auto rad = angleInDegree * PI / 180;
+	if (direction == CounterClockWise) {
+		t_x = _a.X;
+		t_y = _a.Y;
+		_a.X = Position.X + (t_x - Position.X) * cos(rad) - (t_y - Position.Y) * sin(rad);
+		_a.Y = Position.Y + (t_y - Position.Y) * cos(rad) + (t_x - Position.X) * sin(rad);
+		t_x = _b.X;
+		t_y = _b.Y;
+		_b.X = Position.X + (t_x - Position.X) * cos(rad) - (t_y - Position.Y) * sin(rad);
+		_b.Y = Position.Y + (t_y - Position.Y) * cos(rad) + (t_x - Position.X) * sin(rad);
+		t_x = _c.X;
+		t_y = _c.Y;
+		_c.X = Position.X + (t_x - Position.X) * cos(rad) - (t_y - Position.Y) * sin(rad);
+		_c.Y = Position.Y + (t_y - Position.Y) * cos(rad) + (t_x - Position.X) * sin(rad);
+	}
+	else {
+		t_x = _a.X;
+		t_y = _a.Y;
+		_a.X = Position.X + (t_x - Position.X) * cos(rad) + (t_y - Position.Y) * sin(rad);
+		_a.Y = Position.Y + (t_y - Position.Y) * cos(rad) - (t_x - Position.X) * sin(rad);
+		t_x = _b.X;
+		t_y = _b.Y;
+		_b.X = Position.X + (t_x - Position.X) * cos(rad) + (t_y - Position.Y) * sin(rad);
+		_b.Y = Position.Y + (t_y - Position.Y) * cos(rad) - (t_x - Position.X) * sin(rad);
+		t_x = _c.X;
+		t_y = _c.Y;
+		_c.X = Position.X + (t_x - Position.X) * cos(rad) + (t_y - Position.Y) * sin(rad);
+		_c.Y = Position.Y + (t_y - Position.Y) * cos(rad) - (t_x - Position.X) * sin(rad);
+	}
 }
 
-Point Triangle::GetCenter()
+std::vector<Point> Triangle::GetVertexes()
 {
-	Point center;
+	auto result = std::vector<Point>();
 
-	return center;
+	return result;
+}
+
+double Triangle::GetArea()
+{
+	return  0;
+}
+
+void Triangle::Move(double dx, double dy)
+{
+	_a.X += dx;
+	_b.X += dx;
+	_c.X += dx;
+
+	_a.Y += dy;
+	_b.Y += dy;
+	_c.Y += dy;
+}
+
+void Triangle::Hide()
+{
+		
+}
+
+void Triangle::Show()
+{
 }

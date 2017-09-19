@@ -26,7 +26,7 @@ double Square::GetB() const
 	return _b;
 }
 
-void Square::Rotate(double angleInDegree)
+void Square::Rotate(double angleInDegree, Direction direction)
 {
 }
 
@@ -47,9 +47,12 @@ void Square::Draw()
 	glEnd();
 }
 
-Point Square::GetCenter()
+std::vector<Point> Square::GetVertexes()
 {
-	Point center;
+	return std::vector<Point>();
+}
 
-	return center;
+double Square::GetArea()
+{
+	return 0;
 }

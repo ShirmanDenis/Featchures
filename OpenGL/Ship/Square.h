@@ -24,9 +24,10 @@ public:
 	double GetA() const;
 	double GetB() const;
 
-	void Rotate(double angleInDegree) override;
+	void Rotate(double angleInDegree, Direction direction = ClockWise) override;
 	void Draw() override;
-	Point GetCenter() override;
+	std::vector<Point> GetVertexes() override;
+	double GetArea() override;
 private:
 	double _a, _b;
 };

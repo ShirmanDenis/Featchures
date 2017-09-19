@@ -20,10 +20,10 @@ zoom = 30, left = 0, direct = 1, old = 0;
 int Width, Height, oWidth = 700, oHeight = 500;
 int x1 = 0, rsize = 25, xstep = 1;
 char buf[19];
-
+int i = 0;
 IsoscelesTrapeze trapeze{ nullptr, Point(100, 10), 100/*H*/, 50/*bb*/,100/*tb*/};
-Triangle triangle{ nullptr, Point(100,10), 50, 100, 50 };
-Square square{ nullptr, Point(100,10), 50, 100 };
+Triangle triangle{ nullptr, Point(200,200), Point(150,100), Point(200,50)};
+Square square{ nullptr, Point(100,50), 50, 100 };
 
 void window() {
 	glutReshapeWindow(oWidth, oHeight);
@@ -40,23 +40,17 @@ void SetViewPort(int w, int h) {
 }
 
 void TimerFunction(int value) {
-	if (x1 > Width - rsize || x1 < -Width)   /// проверка на достижение края экрана по OX
-		xstep = -xstep;
-	x1 += xstep;   // сдвигаем координаты на заданный шаг
-	if (x1 >(Width - rsize + xstep))   /// проверяем не приведёт ли это к выходу за границу экрана
-		x1 = Width - rsize - 1;
-	else if (x1 < -(Width + xstep))  // с другой стороны
-		x1 = -Width - 1;
+	triangle.Move(1, 0);
 	glutPostRedisplay();  // перерисовываем экран
-	glutTimerFunc(33, TimerFunction, 1);  //запускаем таймер заново.
+	glutTimerFunc(1, TimerFunction, 1);  //запускаем таймер заново.
 }
 
 void display() {
 
 	glClear(GL_COLOR_BUFFER_BIT);
-
-	square.Draw();
-
+	
+	triangle.Draw();
+	
 	glutSwapBuffers();
 }
 
@@ -71,8 +65,9 @@ int main(int argc, char * argv[]) {
 	glutReshapeFunc(SetViewPort);
 	glutKeyboardFunc(keys);
 	glutDisplayFunc(display);
+	
 	//window();
-	//glutTimerFunc(33, TimerFunction, 1);
+	//glutTimerFunc(1000, TimerFunction, 1);
 	glutMainLoop();
 	return 0;
 }

@@ -20,8 +20,9 @@ public:
 	void SetBotBase(double botBase);
 
 	~IsoscelesTrapeze() override;
-	void Rotate(double angleInDegree) override;
-	Point GetCenter() override;
+	void Rotate(double angleInDegree, Direction direction = ClockWise) override;
+	std::vector<Point> GetVertexes() override;
+	double GetArea() override;
 private:
 	double _height, _botBase, _topBase;
 };
