@@ -15,20 +15,15 @@ using namespace std;
 using namespace GLDrawing;
 #define KEY_ESCAPE 27
 
-int Top = 50, Left = 162,
-zoom = 30, left = 0, direct = 1, old = 0;
-int Width, Height, oWidth = 700, oHeight = 500;
-int x1 = 0, rsize = 25, xstep = 1;
-char buf[19];
-int i = 0;
+int Width = 1000, Height = 600;
 IsoscelesTrapeze trapeze{ nullptr, Point(100, 10), 100/*H*/, 50/*bb*/,100/*tb*/};
 Triangle triangle{ nullptr, Point(200,200), Point(150,100), Point(200,50)};
 Triangle triangle2{ nullptr, Point(200,200), Point(150,100), Point(200,50) };
-GLDrawing::Rectangle rectangle{ nullptr, Point(200,200), Point(450, 400) };
-
+GLDrawing::Rectangle ground{ nullptr, Point(0,0), Point(Width, Height/3) };
+GLDrawing::Rectangle sea{ nullptr, Point(0, Height / 3.0), Point(Width, 3*Height / 3) };
 void window() {
-	glutReshapeWindow(oWidth, oHeight);
-	glutPositionWindow(Left, Top);
+	glutReshapeWindow(Width, Height);
+	//glutPositionWindow(Left, Top);
 }
 
 void SetViewPort(int w, int h) {
@@ -41,8 +36,8 @@ void SetViewPort(int w, int h) {
 }
 
 void TimerFunction(int value) {
-	rectangle.Rotate(1);
-	//triangle.Rotate(1);
+	ground.Rotate(1);
+	triangle.Rotate(1);
 	glutPostRedisplay();  // перерисовываем экран
 	glutTimerFunc(1, TimerFunction, 1);  //запускаем таймер заново.
 }
@@ -50,8 +45,8 @@ void TimerFunction(int value) {
 void display() {
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	rectangle.Show();
-	//triangle.Show();
+	ground.Show();
+	sea.Show();
 	glutSwapBuffers();
 }
 
@@ -67,10 +62,9 @@ int main(int argc, char * argv[]) {
 	glutKeyboardFunc(keys);
 	glutDisplayFunc(display);
 	window();
-	//triangle.Rotate(30);
-	//triangle2.Rotate(15);
-	//triangle2.SetColor(Color().Red());
-	glutTimerFunc(1, TimerFunction, 1);
+	sea.SetColor(Color::Turquoise());
+	ground.SetColor(Color::Blue());
+	//glutTimerFunc(1, TimerFunction, 1);
 	glutMainLoop();
 	return 0;
 }

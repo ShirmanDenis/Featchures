@@ -18,8 +18,7 @@ namespace GLDrawing {
 		std::vector<Point> GetVertexes() override;
 		double GetArea() override;
 		void Move(double dx, double dy) override;
-	protected:
-		void Draw() override;
+		void Draw() override;		
 	private:
 		Point _a, _b, _c;
 	};
