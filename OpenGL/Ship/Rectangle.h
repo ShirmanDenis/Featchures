@@ -9,6 +9,11 @@ namespace GLDrawing {
 			_bottomLeft(bottom_left),
 			_topRight(top_right)
 		{
+			_topLeft.X = _bottomLeft.X;
+			_topLeft.Y = _topRight.Y;
+
+			_bottomRight.X = _topRight.X;
+			_bottomRight.Y = _bottomLeft.Y;
 		}
 
 		void SetBottomLeft(Point a);
@@ -23,6 +28,6 @@ namespace GLDrawing {
 		double GetArea() override;
 		~Rectangle() override {};
 	private:
-		Point _bottomLeft, _topRight;
+		Point _bottomLeft, _topRight, _topLeft, _bottomRight;
 	};
 }

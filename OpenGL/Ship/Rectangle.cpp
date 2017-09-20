@@ -24,12 +24,11 @@ Point Rectangle::GetTopRight() const
 
 void Rectangle::Rotate(double angleInDegree, const Point* around, Direction direction)
 {
-	Point squareCenter;
-	squareCenter.X = _topRight.X - _bottomLeft.X;
-	squareCenter.Y = _topRight.Y - _bottomLeft.Y;
-	auto arroundPoint = (around != nullptr) ? around : &squareCenter;
+	auto arroundPoint = (around != nullptr) ? around : &Position;
 	_bottomLeft.Rotate(arroundPoint, angleInDegree, direction);
 	_topRight.Rotate(arroundPoint, angleInDegree, direction);
+	_bottomRight.Rotate(arroundPoint, angleInDegree, direction);
+	_topLeft.Rotate(arroundPoint, angleInDegree, direction);
 }
 
 void Rectangle::Draw()
@@ -41,15 +40,10 @@ void Rectangle::Draw()
 	else
 		glColor4f(1, 0, 0, 0);
 
-	auto currX = Position.X;
-	auto currY = Position.Y;
-	auto deltaY = _topRight.Y - _bottomLeft.Y;
-	auto deltaX = _topRight.X - _bottomLeft.X;
-	glVertex2d(currX, currY);
-	glVertex2d(currX, currY += deltaY);
-	glVertex2d(currX += deltaX, currY);
-	glVertex2d(currX, currY -= deltaY);
 	glVertex2d(_bottomLeft.X, _bottomLeft.Y);
+	glVertex2d(_topLeft.X, _topLeft.Y);
+	glVertex2d(_topRight.X, _topRight.Y);
+	glVertex2d(_bottomRight.X, _bottomRight.Y);
 	glEnd();
 }
 

@@ -42,7 +42,7 @@ void SetViewPort(int w, int h) {
 
 void TimerFunction(int value) {
 	rectangle.Rotate(1);
-	triangle.Rotate(1);
+	//triangle.Rotate(1);
 	glutPostRedisplay();  // перерисовываем экран
 	glutTimerFunc(1, TimerFunction, 1);  //запускаем таймер заново.
 }
@@ -50,8 +50,8 @@ void TimerFunction(int value) {
 void display() {
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	//rectangle.Show();
-	triangle.Show();
+	rectangle.Show();
+	//triangle.Show();
 	glutSwapBuffers();
 }
 
