@@ -9,10 +9,10 @@
 #include <iostream>
 #include "IsoscelesTrapeze.h"
 #include "Triangle.h"
-#include "Square.h"
+#include "Rectangle.h"
 
 using namespace std;
-
+using namespace GLDrawing;
 #define KEY_ESCAPE 27
 
 int Top = 50, Left = 162,
@@ -24,7 +24,7 @@ int i = 0;
 IsoscelesTrapeze trapeze{ nullptr, Point(100, 10), 100/*H*/, 50/*bb*/,100/*tb*/};
 Triangle triangle{ nullptr, Point(200,200), Point(150,100), Point(200,50)};
 Triangle triangle2{ nullptr, Point(200,200), Point(150,100), Point(200,50) };
-Square square{ nullptr, Point(100,50), 50, 100 };
+GLDrawing::Rectangle rectangle{ nullptr, Point(200,200), Point(450, 400) };
 
 void window() {
 	glutReshapeWindow(oWidth, oHeight);
@@ -41,13 +41,16 @@ void SetViewPort(int w, int h) {
 }
 
 void TimerFunction(int value) {
-	triangle2.Hide();
+	rectangle.Rotate(1);
+	triangle.Rotate(1);
 	glutPostRedisplay();  // перерисовываем экран
 	glutTimerFunc(1, TimerFunction, 1);  //запускаем таймер заново.
 }
 
 void display() {
 	glClear(GL_COLOR_BUFFER_BIT);
+
+	//rectangle.Show();
 	triangle.Show();
 	glutSwapBuffers();
 }
@@ -64,10 +67,10 @@ int main(int argc, char * argv[]) {
 	glutKeyboardFunc(keys);
 	glutDisplayFunc(display);
 	window();
-	triangle.Rotate(30);
-	triangle2.Rotate(15);
-	triangle2.SetColor(Color().Red());
-	glutTimerFunc(3000, TimerFunction, 1);
+	//triangle.Rotate(30);
+	//triangle2.Rotate(15);
+	//triangle2.SetColor(Color().Red());
+	glutTimerFunc(1, TimerFunction, 1);
 	glutMainLoop();
 	return 0;
 }

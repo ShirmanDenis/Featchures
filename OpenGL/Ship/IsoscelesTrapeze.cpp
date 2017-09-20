@@ -2,7 +2,7 @@
 #include <GL/glew.h>
 #include <algorithm>
 #include "IsoscelesTrapeze.h"
-
+using namespace GLDrawing;
 IsoscelesTrapeze::IsoscelesTrapeze(Figure* parent, Point position, double height, double bot_base, double top_base): Figure(parent, position),
                                                                                                                          _height(height),
                                                                                                                          _botBase(bot_base),

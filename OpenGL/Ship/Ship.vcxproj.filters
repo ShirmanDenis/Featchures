@@ -27,7 +27,7 @@
     <ClCompile Include="Triangle.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
-    <ClCompile Include="Square.cpp">
+    <ClCompile Include="Rectangle.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
   </ItemGroup>
@@ -41,7 +41,7 @@
     <ClInclude Include="Triangle.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="Square.h">
+    <ClInclude Include="Rectangle.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
   </ItemGroup>

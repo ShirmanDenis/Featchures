@@ -1,6 +1,6 @@
 #include "Figure.h"
 #include <GL/glew.h>
-
+using namespace GLDrawing;
 Figure::Figure(Figure * parent, const Point& position) : Figure(parent)
 {
 	Position.X = position.X;
@@ -76,7 +76,7 @@ void Figure::Show()
 	Draw();
 }
 
-bool Figure::IsVisible() const
+bool GLDrawing::Figure::IsVisible() const
 {
 	return _isVisible;
 }

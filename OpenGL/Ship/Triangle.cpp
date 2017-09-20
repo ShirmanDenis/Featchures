@@ -1,7 +1,7 @@
 #include <exception>
 #include "Triangle.h"
 #include <GL/glew.h>
-
+using namespace GLDrawing;
 Triangle::Triangle(Figure* const parent, const Point& a, const Point b, const Point c): Figure(parent, a),
                                                                                                     _a(a),
                                                                                                     _b(b),
@@ -62,37 +62,10 @@ void Triangle::SetC(Point value)
 
 void Triangle::Rotate(double angleInDegree, const Point* around, Direction direction)
 {
-	double t_x, t_y;
 	auto arroundPoint = (around != nullptr) ? around : &Position;
-	auto rad = angleInDegree * PI / 180;
-	if (direction == CounterClockWise) {
-		t_x = _a.X;
-		t_y = _a.Y;
-		_a.X = arroundPoint->X + (t_x - arroundPoint->X) * cos(rad) - (t_y - arroundPoint->Y) * sin(rad);
-		_a.Y = arroundPoint->Y + (t_y - arroundPoint->Y) * cos(rad) + (t_x - arroundPoint->X) * sin(rad);
-		t_x = _b.X;
-		t_y = _b.Y;
-		_b.X = arroundPoint->X + (t_x - arroundPoint->X) * cos(rad) - (t_y - arroundPoint->Y) * sin(rad);
-		_b.Y = arroundPoint->Y + (t_y - arroundPoint->Y) * cos(rad) + (t_x - arroundPoint->X) * sin(rad);
-		t_x = _c.X;
-		t_y = _c.Y;
-		_c.X = arroundPoint->X + (t_x - arroundPoint->X) * cos(rad) - (t_y - arroundPoint->Y) * sin(rad);
-		_c.Y = arroundPoint->Y + (t_y - arroundPoint->Y) * cos(rad) + (t_x - arroundPoint->X) * sin(rad);
-	}
-	else {
-		t_x = _a.X;
-		t_y = _a.Y;
-		_a.X = arroundPoint->X + (t_x - arroundPoint->X) * cos(rad) + (t_y - arroundPoint->Y) * sin(rad);
-		_a.Y = arroundPoint->Y + (t_y - arroundPoint->Y) * cos(rad) - (t_x - arroundPoint->X) * sin(rad);
-		t_x = _b.X;
-		t_y = _b.Y;
-		_b.X = arroundPoint->X + (t_x - arroundPoint->X) * cos(rad) + (t_y - arroundPoint->Y) * sin(rad);
-		_b.Y = arroundPoint->Y + (t_y - arroundPoint->Y) * cos(rad) - (t_x - arroundPoint->X) * sin(rad);
-		t_x = _c.X;
-		t_y = _c.Y;
-		_c.X = arroundPoint->X + (t_x - arroundPoint->X) * cos(rad) + (t_y - arroundPoint->Y) * sin(rad);
-		_c.Y = arroundPoint->Y + (t_y - arroundPoint->Y) * cos(rad) - (t_x - arroundPoint->X) * sin(rad);
-	}
+	_a.Rotate(arroundPoint, angleInDegree, direction);
+	_b.Rotate(arroundPoint, angleInDegree, direction);
+	_c.Rotate(arroundPoint, angleInDegree, direction);
 }
 
 std::vector<Point> Triangle::GetVertexes()
