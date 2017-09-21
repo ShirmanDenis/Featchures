@@ -15,8 +15,7 @@ namespace Test
         {
             // инициализация 
             Glut.glutInit();
-            //Glut.glutInitDisplayMode(Glut.GLUT_RGB | Glut.GLUT_DOUBLE | Glut.GLUT_DEPTH);
-            Glut.glutInitDisplayMode(Glut.GLUT_RGB | Glut.GLUT_SINGLE);
+            Glut.glutInitDisplayMode(Glut.GLUT_RGB | Glut.GLUT_DOUBLE | Glut.GLUT_DEPTH);
             Gl.glClearColor(255, 255, 255, 1);
             // установка порта вывода в соответствии с размерами элемента anT 
             Gl.glViewport(0, 0, AnT.Width, AnT.Height); 
@@ -24,15 +23,15 @@ namespace Test
             Gl.glMatrixMode(Gl.GL_PROJECTION);
             Gl.glLoadIdentity();
 
-            //Glu.gluPerspective(45, (float)AnT.Width / (float)AnT.Height, 0.1, 200);
-            if ((float) AnT.Width <= (float) AnT.Height)
-            {
-                Glu.gluOrtho2D(0.0, 30.0 * (float) AnT.Height / (float) AnT.Width, 0.0, 30.0);
-            }
-            else
-            {
-                Glu.gluOrtho2D(0.0, 30.0 * (float)AnT.Width / (float)AnT.Height, 0.0, 30.0);
-            }
+            Glu.gluPerspective(45, (float)AnT.Width / (float)AnT.Height, 0.1, 200);
+            //if ((float)AnT.Width <= (float)AnT.Height)
+            //{
+            //    Glu.gluOrtho2D(0.0, 30.0 * (float)AnT.Height / (float)AnT.Width, 0.0, 30.0);
+            //}
+            //else
+            //{
+            //    Glu.gluOrtho2D(0.0, 30.0 * (float)AnT.Width / (float)AnT.Height, 0.0, 30.0);
+            //}
             Gl.glMatrixMode(Gl.GL_MODELVIEW);
             Gl.glLoadIdentity(); // настройка параметров OpenGL для визуализации 
             //Gl.glEnable(Gl.GL_DEPTH_TEST);

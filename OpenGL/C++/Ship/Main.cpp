@@ -11,6 +11,7 @@
 #include "Triangle.h"
 #include "Rectangle.h"
 #include "Ship.h"
+#include "Circle.h"
 
 using namespace std;
 using namespace GLDrawing;
@@ -18,10 +19,10 @@ using namespace GLDrawing;
 
 int Width = 1000, Height = 600, i = 1;
 IsoscelesTrapeze trapeze{ nullptr, Point(100, 10), 100/*H*/, 50/*bb*/,100/*tb*/};
+Circle circle{ nullptr, Point(100, 500), 100};
 Triangle triangle{ nullptr, Point(200,200), Point(150,100), Point(200,50)};
-Triangle triangle2{ nullptr, Point(200,100), Point(150,100), Point(200,50) };
-GLDrawing::Rectangle ground{ nullptr, Point(0,0), Point(Width, Height/3) };
-GLDrawing::Rectangle sea{ nullptr, Point(0, Height / 3.0), Point(Width, 3*Height / 3) };
+GLDrawing::Rectangle sea{ nullptr, Point(0,0), Point(Width, Height/3) };
+GLDrawing::Rectangle sky{ nullptr, Point(0, Height / 3.0), Point(Width, 3*Height / 3) };
 Ship ship{ nullptr, Point(200, 150) };
 void window() {
 	glutReshapeWindow(Width, Height);
@@ -52,10 +53,13 @@ void TimerFunction(int value) {
 
 void display() {
 	glClear(GL_COLOR_BUFFER_BIT);
-
-	ground.Show();
+	
 	sea.Show();
+	sky.Show();
+	circle.Show();
 	ship.Show();
+	
+
 	glutSwapBuffers();
 }
 
@@ -71,8 +75,9 @@ int main(int argc, char * argv[]) {
 	glutKeyboardFunc(keys);
 	glutDisplayFunc(display);
 	window();
-	sea.SetColor(Color::Turquoise());
-	ground.SetColor(Color::Blue());
+	sky.SetColor(Color::Turquoise());
+	sea.SetColor(Color::Blue());
+	circle.SetColor(Color::Yellow());
 	glutTimerFunc(1, TimerFunction, 1);
 	glutMainLoop();
 	return 0;
