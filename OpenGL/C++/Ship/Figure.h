@@ -89,7 +89,7 @@ namespace GLDrawing {
 		{
 			return sqrt((X - other.X) * (X - other.X) + (Y - other.Y) * (Y - other.Y));
 		}
-		void Rotate(const Point* arround, double angleInDegree, Direction direction = ClockWise)
+		void Rotate(Point arround, double angleInDegree, Direction direction = ClockWise)
 		{
 			auto rad = angleInDegree * PI / 180;
 
@@ -97,15 +97,15 @@ namespace GLDrawing {
 			{
 				auto t_x = X;
 				auto t_y = Y;
-				X = arround->X + (t_x - arround->X) * cos(rad) - (t_y - arround->Y) * sin(rad);
-				Y = arround->Y + (t_y - arround->Y) * cos(rad) + (t_x - arround->X) * sin(rad);
+				X = arround.X + (t_x - arround.X) * cos(rad) - (t_y - arround.Y) * sin(rad);
+				Y = arround.Y + (t_y - arround.Y) * cos(rad) + (t_x - arround.X) * sin(rad);
 			}
 			else
 			{
 				auto t_x = X;
 				auto t_y = Y;
-				X = arround->X + (t_x - arround->X) * cos(rad) + (t_y - arround->Y) * sin(rad);
-				Y = arround->Y + (t_y - arround->Y) * cos(rad) - (t_x - arround->X) * sin(rad);
+				X = arround.X + (t_x - arround.X) * cos(rad) + (t_y - arround.Y) * sin(rad);
+				Y = arround.Y + (t_y - arround.Y) * cos(rad) - (t_x - arround.X) * sin(rad);
 			}
 		}
 	};

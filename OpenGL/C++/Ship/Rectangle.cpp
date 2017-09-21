@@ -25,10 +25,10 @@ Point Rectangle::GetTopRight() const
 void Rectangle::Rotate(double angleInDegree, const Point* around, Direction direction)
 {
 	auto arroundPoint = (around != nullptr) ? around : &Position;
-	_bottomLeft.Rotate(arroundPoint, angleInDegree, direction);
-	_topRight.Rotate(arroundPoint, angleInDegree, direction);
-	_bottomRight.Rotate(arroundPoint, angleInDegree, direction);
-	_topLeft.Rotate(arroundPoint, angleInDegree, direction);
+	_bottomLeft.Rotate(*arroundPoint, angleInDegree, direction);
+	_topRight.Rotate(*arroundPoint, angleInDegree, direction);
+	_bottomRight.Rotate(*arroundPoint, angleInDegree, direction);
+	_topLeft.Rotate(*arroundPoint, angleInDegree, direction);
 }
 
 void Rectangle::Draw()

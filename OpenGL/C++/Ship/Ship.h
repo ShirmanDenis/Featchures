@@ -5,18 +5,25 @@
 #include "Triangle.h"
 
 namespace GLDrawing {
- class Ship : Figure
+ class Ship : public Figure
  {
  public:
+
+	 Ship(Figure* const parent, const Point& position);
+
 	 void Rotate(double angleInDegree, const Point* around, Direction direction) override;
 	 std::vector<Point> GetVertexes() override;
 	 double GetArea() override;
+	 ~Ship() override;
 
  protected:
 	 void Draw() override;
+
+ public:
+	 Point Position;
+	 void Move(double dx, double dy) override;
  private:
-	 IsoscelesTrapeze _deck;
-	 Rectangle _mest;
-	 Triangle _sail;
+	 IsoscelesTrapeze* _deck;
+	 Triangle* _sail;
  };	
 }

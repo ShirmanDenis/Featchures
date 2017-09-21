@@ -63,9 +63,9 @@ void Triangle::SetC(Point value)
 void Triangle::Rotate(double angleInDegree, const Point* around, Direction direction)
 {
 	auto arroundPoint = (around != nullptr) ? around : &Position;
-	_a.Rotate(arroundPoint, angleInDegree, direction);
-	_b.Rotate(arroundPoint, angleInDegree, direction);
-	_c.Rotate(arroundPoint, angleInDegree, direction);
+	_a.Rotate(*arroundPoint, angleInDegree, direction);
+	_b.Rotate(*arroundPoint, angleInDegree, direction);
+	_c.Rotate(*arroundPoint, angleInDegree, direction);
 }
 
 std::vector<Point> Triangle::GetVertexes()

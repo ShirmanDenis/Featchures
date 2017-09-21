@@ -146,12 +146,14 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="IsoscelesTrapeze.cpp" />
     <ClCompile Include="Rectangle.cpp" />
+    <ClCompile Include="Ship.cpp" />
     <ClCompile Include="Triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Figure.h" />
     <ClInclude Include="IsoscelesTrapeze.h" />
     <ClInclude Include="Rectangle.h" />
+    <ClInclude Include="Ship.h" />
     <ClInclude Include="Triangle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
