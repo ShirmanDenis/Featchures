@@ -14,11 +14,14 @@ using namespace GLDrawing;
 // ----------------------------------------------------------
 // Global Variables
 // ----------------------------------------------------------
-int sphereSlices = 10;
-int sphereStacks = 10;
-int netDelimiters = 2;
-double rotate_y = 45;
-double rotate_x = 45;
+int w = 1000;
+int h = 800;
+int sphereSlices = 20;
+int sphereStacks = 20;
+int netDelimiters = 3;
+double rotate_y = 0;
+double rotate_x = 0;
+double translate_z = 0;
 
 void drawCube()
 {
@@ -126,7 +129,7 @@ void drawNet(int delimterCount)
 }
 
 void window() {
-	glutReshapeWindow(1000, 800);
+	glutReshapeWindow(w, h);
 	glutPositionWindow(0, 0);
 }
 
@@ -219,11 +222,13 @@ void display() {
 	// Rotate when user changes rotate_x and rotate_y
 	glRotatef(rotate_x, 1.0, 0.0, 0.0);
 	glRotatef(rotate_y, 0.0, 1.0, 0.0);	
-
+	//Cube frame
 	glColor3ub(0, 0,255);
 	glutWireCube(1);
+	// 4 shperes 
 	draw4Spheres();
-	//drawNet(netDelimiters);
+	
+	drawNet(netDelimiters);
 	
 	glFlush();
 	glutSwapBuffers();
@@ -234,6 +239,10 @@ void display() {
 // ----------------------------------------------------------
 void specialKeys(int key, int x, int y) {
 
+	if (key == GLUT_KEY_SHIFT_L)
+		translate_z += 0.1;
+	if (key == GLUT_KEY_ALT_L)
+		translate_z -= 0.1;
 	//  Right arrow - increase rotation by 5 degree
 	if (key == GLUT_KEY_RIGHT)
 		rotate_y += 5;
