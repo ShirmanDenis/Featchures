@@ -17,6 +17,6 @@ namespace GLDrawing
 	protected:
 		void Draw() override;
 	private:
-		int _num = 10000;
+		int _num = 1000;
 	};
 }
