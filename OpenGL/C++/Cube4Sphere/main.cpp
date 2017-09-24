@@ -7,14 +7,16 @@
 #include <GL/glew.h>
 #include <GL/freeglut.h>
 #include <iostream>
+#include "../Ship/Figure.h"
 
-void display();
-void specialKeys();
+using namespace GLDrawing;
 
 // ----------------------------------------------------------
 // Global Variables
 // ----------------------------------------------------------
-int slices = 3;
+int sphereSlices = 10;
+int sphereStacks = 10;
+int netDelimiters = 2;
 double rotate_y = 45;
 double rotate_x = 45;
 
@@ -128,18 +130,85 @@ void window() {
 	glutPositionWindow(0, 0);
 }
 
-void drawSphere(double x, double y, double z, double rad, int slices, int stacks)
+void drawSphere(double x, double y, double z, double rad, int slices, int stacks, GLDrawing::Color color)
 {
 	glPushMatrix();
 	glTranslated(x, y, z);
-	glColor3ub(255, 255, 0);
+	glColor3ub(color.R, color.G, color.B);
 	glutWireSphere(rad, slices, stacks);
 	glPopMatrix();
 }
 
-// ----------------------------------------------------------
-// display() Callback function
-// ----------------------------------------------------------
+void draw4Spheres()
+{
+	auto halfOfCellSize = 1. / netDelimiters * 0.5;
+	// Top Left Near
+	drawSphere(-0.5 + halfOfCellSize,
+		0.5 - halfOfCellSize,
+		0.5 - halfOfCellSize,
+		halfOfCellSize,
+		sphereSlices,
+		sphereStacks,
+		Color::Red());
+	// Top Left Far
+	drawSphere(-0.5 + halfOfCellSize,
+		0.5 - halfOfCellSize,
+		-0.5 + halfOfCellSize,
+		halfOfCellSize,
+		sphereSlices,
+		sphereStacks,
+		Color::Green());
+	// Top Right Near
+	drawSphere(0.5 - halfOfCellSize,
+		0.5 - halfOfCellSize,
+		0.5 - halfOfCellSize,
+		halfOfCellSize,
+		sphereSlices,
+		sphereStacks,
+		Color::Blue());
+	// Top Right Far
+	drawSphere(0.5 - halfOfCellSize,
+		0.5 - halfOfCellSize,
+		-0.5 + halfOfCellSize,
+		halfOfCellSize,
+		sphereSlices,
+		sphereStacks,
+		Color::Yellow());
+	// Bot Left Near
+	drawSphere(-0.5 + halfOfCellSize,
+		-0.5 + halfOfCellSize,
+		0.5 - halfOfCellSize,
+		halfOfCellSize,
+		sphereSlices,
+		sphereStacks,
+		Color::Pink());
+	// Bot Left Far
+	drawSphere(-0.5 + halfOfCellSize,
+		-0.5 + halfOfCellSize,
+		-0.5 + halfOfCellSize,
+		halfOfCellSize,
+		sphereSlices,
+		sphereStacks,
+		Color::Turquoise());
+	// Bot Right Near
+	drawSphere(0.5 - halfOfCellSize,
+		-0.5 + halfOfCellSize,
+		0.5 - halfOfCellSize,
+		halfOfCellSize,
+		sphereSlices,
+		sphereStacks,
+		Color::Brown());
+	// Bot Right Far
+	drawSphere(0.5 - halfOfCellSize,
+		-0.5 + halfOfCellSize,
+		-0.5 + halfOfCellSize,
+		halfOfCellSize,
+		sphereSlices,
+		sphereStacks,
+		Color::Orange());
+
+}
+
 void display() {
 	//  Clear screen and Z-buffer
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -151,10 +220,11 @@ void display() {
 	glRotatef(rotate_x, 1.0, 0.0, 0.0);
 	glRotatef(rotate_y, 0.0, 1.0, 0.0);	
 
-	drawCube();
-	drawNet(3);
-	auto halfOfCellSize = 1. / slices * 0.5;
-	drawSphere(0.5 + halfOfCellSize, 0.5 + halfOfCellSize, 0.5 + halfOfCellSize, halfOfCellSize, 10, 10);
+	glColor3ub(0, 0,255);
+	glutWireCube(1);
+	draw4Spheres();
+	//drawNet(netDelimiters);
+	
 	glFlush();
 	glutSwapBuffers();
 }
@@ -180,7 +250,6 @@ void specialKeys(int key, int x, int y) {
 
 	//  Request display update
 	glutPostRedisplay();
-
 }
 
 // ----------------------------------------------------------
