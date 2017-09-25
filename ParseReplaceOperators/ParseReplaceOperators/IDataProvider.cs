@@ -9,7 +9,7 @@ namespace ParseReplaceOperators
     interface IDataProvider
     {
         string GetString(string name);
-        int GetSequenceCount();
-        void SetElement(string value, int i);
+        int GetSequenceCount(string name);
+        void SetElement(string sequenceName, string value, int i);
     }
 }

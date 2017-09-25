@@ -1,5 +1,5 @@
 firstValue its first; DOG_DOG_DOG;
-text second text
+text secondVal text
 
 if (5>10) then
 	doSomething();

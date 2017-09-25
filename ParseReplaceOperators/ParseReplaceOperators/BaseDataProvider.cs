@@ -10,15 +10,15 @@ namespace ParseReplaceOperators
     class BaseDataProvider : IDataProvider
     {
         private readonly Dictionary<string, string> VariablesValues = new Dictionary<string, string>();
-
+        private readonly Dictionary<string, string[]> Sequences = new Dictionary<string, string[]>();
         public BaseDataProvider(string filePath)
         {
             var vars = File.ReadAllLines(filePath);
 
             foreach (var str in vars)
             {
-                var parsedVariable = str.Split();
-                VariablesValues.Add(parsedVariable[0], parsedVariable[1].Trim('\"'));
+                var parsedVariable = str.Split(',');
+                VariablesValues.Add(parsedVariable[0], parsedVariable[1].Trim('\"', ' '));
             }
         }
 
@@ -27,14 +27,16 @@ namespace ParseReplaceOperators
             return VariablesValues[name];
         }
 
-        public int GetSequenceCount()
+        public int GetSequenceCount(string name)
         {
-            throw new NotImplementedException();
+            var items = VariablesValues[name].Trim('\"').Split();
+            Sequences.Add(name, items);
+            return items.Length;
         }
 
-        public void SetElement(string value, int i)
+        public void SetElement(string sequenceName, string value, int i)
         {
-            throw new NotImplementedException();
+            Sequences[sequenceName][i] = value;
         }
     }
 }

@@ -67,6 +67,7 @@ namespace ParseReplaceOperators
             {
                 var varName = currentMatch.Groups["varName"].Value;
                 var collectionName = currentMatch.Groups["collection"].Value;
+                var itemsCount = DataProvider.GetSequenceCount(collectionName);
             }
             return "**matchedButNotHandled**";
         }
