@@ -14,7 +14,10 @@ namespace ParseReplaceOperators
         public readonly StringBuilder Result = new StringBuilder();
 
         private readonly StreamReader inputContext;
-        private readonly Regex regex = new Regex("(?<varibles>{{[ ]?(?<varName>[a-zA-Z0-9]+)[ ]?}})", RegexOptions.Singleline);
+        private readonly Regex regex = new Regex("(?<varibles>{{[ ]?(?<varName>[a-zA-Z0-9]+)[ ]?}})|" +
+                                                 "(?<IF>{{if [(]{1}(?<condition>.+)[)]{1} then}})|" +
+                                                 "(?<ForEach>{{foreach[ ]?[(]{1}[ ]?var (?<varName>[a-zA-Z0-9]+) in (?<collection>[a-zA-Z0-9]+)[ ]?[)]{1}[ ]?}})", 
+                                                 RegexOptions.Singleline);
 
         public OpParser(IDataProvider dataProvider, string filePath)
         {
@@ -39,8 +42,14 @@ namespace ParseReplaceOperators
 
         private void FindAndReplaceOperators(string inputString)
         {
-            if(!regex.IsMatch(inputString)) return;
+            if (!regex.IsMatch(inputString))
+            {
+                Result.AppendLine(inputString);
+                return;
+            }
+
             var changedStr = regex.Replace(inputString, MatchEvaluator);
+
             Result.AppendLine(changedStr);
         }
 
@@ -48,12 +57,18 @@ namespace ParseReplaceOperators
         {
             if (currentMatch.Groups["varibles"].Success)
             {
-                var varGroup = currentMatch.Groups["varName"];
-                var varName = varGroup.Value;
-                var varValue = DataProvider.GetString(varName);
-                return varValue;
+                return DataProvider.GetString(currentMatch.Groups["varName"].Value);
             }
-            return "NAN";
+            if (currentMatch.Groups["IF"].Success)
+            {
+                return $"if ({DataProvider.GetString(currentMatch.Groups["condition"].Value)}) then"; ;
+            }
+            if (currentMatch.Groups["ForEach"].Success)
+            {
+                var varName = currentMatch.Groups["varName"].Value;
+                var collectionName = currentMatch.Groups["collection"].Value;
+            }
+            return "**matchedButNotHandled**";
         }
     }
 }

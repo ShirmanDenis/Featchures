@@ -1,3 +1,4 @@
 fir7stVar "firstValue"
 99dog "DOG_DOG_DOG"
 secondVar99 "second Val"
+condition1 "5>10"
