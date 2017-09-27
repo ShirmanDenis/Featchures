@@ -13,7 +13,7 @@ namespace ParseReplaceOperators
         {
             var opParser = new OpParser(new BaseDataProvider("data.txt"), "test.txt");
             opParser.Parse();
-            var str = AppContext.BaseDirectory.Split('\\');
+            var str = AppDomain.CurrentDomain.BaseDirectory.Split('\\');
             str[str.Length - 2] = "";
             str[str.Length - 3] = "";
 

@@ -3,4 +3,5 @@ text {{secondVar99}} text
 
 {{if (condition1) then}}
 	doSomething();
+
 {{foreach( var elem in collection1)}}
