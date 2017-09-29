@@ -13,16 +13,20 @@ namespace ParseReplaceOperators
         public IDataProvider DataProvider { get; set; }
         public readonly StringBuilder Result = new StringBuilder();
 
+        private readonly Dictionary<string, string> ElementInCollection = new Dictionary<string, string>();
         private readonly StreamReader inputContext;
         private readonly Regex regex = new Regex("(?<varibles>{{[ ]?(?<varName>[a-zA-Z0-9]+)[ ]?}})|" +
                                                  "(?<IF>{{if [(]{1}(?<condition>.+)[)]{1} then}})|" +
-                                                 "(?<ForEach>{{foreach[ ]?[(]{1}[ ]?var (?<varName>[a-zA-Z0-9]+) in (?<collection>[a-zA-Z0-9]+)[ ]?[)]{1}[ ]?}})", 
+                                                 "(?<ForEach>{{foreach[ ]?[(]{1}[ ]?var (?<varName>[a-zA-Z0-9]+) in (?<collection>[a-zA-Z0-9]+)[ ]?[)]{1}[ ]?}})|" + 
+                                                 "(?<BodyExpression>{{--.+--}})", 
                                                  RegexOptions.Singleline);
 
         public OpParser(IDataProvider dataProvider, string filePath)
         {
             DataProvider = dataProvider;
+
             if (!File.Exists(filePath)) File.WriteAllText(filePath, "");
+
             inputContext = File.OpenText(filePath);
         }
 
@@ -31,6 +35,7 @@ namespace ParseReplaceOperators
             while (!inputContext.EndOfStream)
             {
                 var currentString = inputContext.ReadLine();
+
                 FindAndReplaceOperators(currentString);               
             }
         }
@@ -67,9 +72,20 @@ namespace ParseReplaceOperators
             {
                 var varName = currentMatch.Groups["varName"].Value;
                 var collectionName = currentMatch.Groups["collection"].Value;
-                var itemsCount = DataProvider.GetSequenceCount(collectionName);
+                ElementInCollection.Add(varName, collectionName);
+
+                return currentMatch.Value;
+            }
+            if (currentMatch.Groups["BodyExpression"].Success)
+            {
+                return HandleForeachBodyExpression(currentMatch.Groups["BodyExpression"].Value);
             }
             return "**matchedButNotHandled**";
+        }
+
+        private string HandleForeachBodyExpression(string expression)
+        {
+            return "Body";
         }
     }
 }

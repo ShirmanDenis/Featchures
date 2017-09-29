@@ -5,3 +5,4 @@ text {{secondVar99}} text
 	doSomething();
 
 {{foreach( var elem in collection1)}}
+{{-- elem = "value" --}}
