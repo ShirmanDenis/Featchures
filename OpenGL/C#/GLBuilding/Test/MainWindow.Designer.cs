@@ -1,6 +1,6 @@
 ﻿namespace Test
 {
-    partial class Form1
+    partial class MainWindow
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -45,14 +45,14 @@
             this.AnT.DepthBits = ((byte)(16));
             this.AnT.Location = new System.Drawing.Point(12, 12);
             this.AnT.Name = "AnT";
-            this.AnT.Size = new System.Drawing.Size(421, 375);
+            this.AnT.Size = new System.Drawing.Size(840, 587);
             this.AnT.StencilBits = ((byte)(0));
             this.AnT.TabIndex = 0;
             this.AnT.Load += new System.EventHandler(this.simpleOpenGlControl1_Load);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(453, 12);
+            this.button1.Location = new System.Drawing.Point(858, 12);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
@@ -62,7 +62,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(453, 50);
+            this.button2.Location = new System.Drawing.Point(858, 41);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 2;
@@ -70,16 +70,17 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // Form1
+            // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(540, 399);
+            this.ClientSize = new System.Drawing.Size(945, 600);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.AnT);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "MainWindow";
+            this.Text = "GLBuild3D";
+            this.Shown += new System.EventHandler(this.MainWindow_Shown);
             this.ResumeLayout(false);
 
         }
