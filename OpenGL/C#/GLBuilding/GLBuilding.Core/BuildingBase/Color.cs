@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GLBuilding.Core.BuildingBase
+namespace GLBuilding.Core
 {
     public enum Direction
     {
