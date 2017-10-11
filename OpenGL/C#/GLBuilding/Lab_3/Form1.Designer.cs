@@ -53,7 +53,6 @@
             this.trackBarZ = new System.Windows.Forms.TrackBar();
             this.trackBarY = new System.Windows.Forms.TrackBar();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.buttonColor = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarX)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarZoom)).BeginInit();
@@ -74,7 +73,7 @@
             this.GlWindow.DepthBits = ((byte)(16));
             this.GlWindow.Location = new System.Drawing.Point(12, 12);
             this.GlWindow.Name = "GlWindow";
-            this.GlWindow.Size = new System.Drawing.Size(517, 450);
+            this.GlWindow.Size = new System.Drawing.Size(603, 558);
             this.GlWindow.StencilBits = ((byte)(0));
             this.GlWindow.TabIndex = 0;
             // 
@@ -106,7 +105,11 @@
             "Цилиндр",
             "Куб",
             "Конус",
-            "Тор"});
+            "Тор",
+            "Октаэдр",
+            "Додекаэдр",
+            "Тетраэдр",
+            "Икосаэдр"});
             this.comboBoxObject.Location = new System.Drawing.Point(20, 92);
             this.comboBoxObject.Name = "comboBoxObject";
             this.comboBoxObject.Size = new System.Drawing.Size(121, 21);
@@ -222,7 +225,7 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.checkBox1);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Location = new System.Drawing.Point(535, 12);
+            this.groupBox1.Location = new System.Drawing.Point(621, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(432, 174);
             this.groupBox1.TabIndex = 12;
@@ -321,22 +324,11 @@
             this.trackBarY.TabIndex = 12;
             this.trackBarY.Scroll += new System.EventHandler(this.trackBarY_Scroll);
             // 
-            // buttonColor
-            // 
-            this.buttonColor.Location = new System.Drawing.Point(535, 192);
-            this.buttonColor.Name = "buttonColor";
-            this.buttonColor.Size = new System.Drawing.Size(75, 23);
-            this.buttonColor.TabIndex = 13;
-            this.buttonColor.Text = "Color";
-            this.buttonColor.UseVisualStyleBackColor = true;
-            this.buttonColor.Click += new System.EventHandler(this.button1_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(979, 473);
-            this.Controls.Add(this.buttonColor);
+            this.ClientSize = new System.Drawing.Size(1063, 582);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.GlWindow);
             this.Name = "Form1";
@@ -379,7 +371,6 @@
         private System.Windows.Forms.TrackBar trackBarZ;
         private System.Windows.Forms.TrackBar trackBarY;
         private System.Windows.Forms.ColorDialog colorDialog1;
-        private System.Windows.Forms.Button buttonColor;
     }
 }
 

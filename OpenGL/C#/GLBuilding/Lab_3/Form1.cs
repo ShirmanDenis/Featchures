@@ -16,7 +16,7 @@ namespace Lab_3
     {
         // вспомогательные переменные - в них будут храниться обработанные значения, 
         // полученные при перетаскивании ползунков пользователем 
-        double a = 0, b = 0, c = -20, d = 0, zoom = 1; 
+        double a, b = 0, c = -20, d = 0, zoom = 1; 
         // выбранные оси 
         int os_x = 1, os_y = 0, os_z = 0;
 
@@ -173,7 +173,7 @@ namespace Lab_3
             Gl.glRotated(d, os_x, os_y, os_z);
             // и масштабирование объекта 
             Gl.glScaled(zoom, zoom, zoom);
-            //Gl.glColor3ub(color.R, color.G, color.B);
+            //.glColor3ub(color.R, color.G, color.B);
             // в зависимости от установленного типа объекта 
             switch (comboBoxObject.SelectedIndex) {
                 // рисуем нужный объект, используя функции библиотеки GLUT 
@@ -186,7 +186,7 @@ namespace Lab_3
                             Glut.glutSolidSphere(2, slices, slices);
                         // полигональная сфера 
                         break ;
-                    }
+                }
                 case 1: {
                         if (Wire)
                             // если установлен сеточный режим визуализации 
@@ -195,7 +195,7 @@ namespace Lab_3
                         else
                             Glut.glutSolidCylinder(1, 2, slices, slices);
                         break;
-                    }
+                }
                 case 2: {
                         if (Wire)
                             // если установлен сеточный режим визуализации 
@@ -204,7 +204,7 @@ namespace Lab_3
                         else
                             Glut.glutSolidCube(2);
                         break;
-                    }
+                }
                 case 3: {
                         if (Wire)
                             // если установлен сеточный режим визуализации 
@@ -213,7 +213,7 @@ namespace Lab_3
                         else
                             Glut.glutSolidCone(2, 3, slices, slices);
                         break;
-                    }
+                }
                 case 4: {
                         if (Wire)
                             // если установлен сеточный режим визуализации 
@@ -222,7 +222,46 @@ namespace Lab_3
                         else
                             Glut.glutSolidTorus(0.2, 2.2, slices, slices);
                         break;
-                    }
+                }
+                case 5:{
+                    if (Wire)
+                        // если установлен сеточный режим визуализации 
+                        Glut.glutWireOctahedron();
+                    // тор 
+                    else
+                        Glut.glutSolidOctahedron();
+                    break;
+                }
+                case 6:
+                {
+                    if (Wire)
+                        // если установлен сеточный режим визуализации 
+                        Glut.glutWireDodecahedron();
+                    // тор 
+                    else
+                        Glut.glutSolidDodecahedron();
+                    break;
+                }
+                case 7:
+                {
+                    if (Wire)
+                        // если установлен сеточный режим визуализации 
+                        Glut.glutWireTetrahedron();
+                    // тор 
+                    else
+                        Glut.glutSolidTetrahedron();
+                    break;
+                }
+                case 8:
+                {
+                    if (Wire)
+                        // если установлен сеточный режим визуализации 
+                        Glut.glutWireIcosahedron();
+                    // тор 
+                    else
+                        Glut.glutSolidIcosahedron();
+                    break;
+                }
             } 
             // возвращаем состояние матрицы 
             Gl.glPopMatrix();
