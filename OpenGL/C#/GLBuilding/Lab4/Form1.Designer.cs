@@ -31,6 +31,15 @@
             this.components = new System.ComponentModel.Container();
             this.glWindow = new Tao.Platform.Windows.SimpleOpenGlControl();
             this.renderTimer = new System.Windows.Forms.Timer(this.components);
+            this.ContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.MenuItemCone = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemStar = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemLineStipple = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemDepth = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemBackWall = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemSelection = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemEdges = new System.Windows.Forms.ToolStripMenuItem();
+            this.ContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // glWindow
@@ -49,6 +58,7 @@
             this.glWindow.StencilBits = ((byte)(0));
             this.glWindow.TabIndex = 0;
             this.glWindow.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+            this.glWindow.MouseClick += new System.Windows.Forms.MouseEventHandler(this.glWindow_MouseClick);
             this.glWindow.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.glWindow_PreviewKeyDown);
             // 
             // renderTimer
@@ -56,6 +66,70 @@
             this.renderTimer.Enabled = true;
             this.renderTimer.Interval = 30;
             this.renderTimer.Tick += new System.EventHandler(this.renderTimer_Tick);
+            // 
+            // ContextMenu
+            // 
+            this.ContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuItemCone,
+            this.MenuItemStar,
+            this.MenuItemLineStipple});
+            this.ContextMenu.Name = "ContextMenu";
+            this.ContextMenu.Size = new System.Drawing.Size(111, 70);
+            // 
+            // MenuItemCone
+            // 
+            this.MenuItemCone.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuItemDepth,
+            this.MenuItemBackWall,
+            this.MenuItemSelection});
+            this.MenuItemCone.Name = "MenuItemCone";
+            this.MenuItemCone.Size = new System.Drawing.Size(152, 22);
+            this.MenuItemCone.Text = "Конус";
+            this.MenuItemCone.Click += new System.EventHandler(this.contextCone_Click);
+            // 
+            // MenuItemStar
+            // 
+            this.MenuItemStar.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuItemEdges});
+            this.MenuItemStar.Name = "MenuItemStar";
+            this.MenuItemStar.Size = new System.Drawing.Size(152, 22);
+            this.MenuItemStar.Text = "Звезда";
+            this.MenuItemStar.Click += new System.EventHandler(this.MenuItemStar_Click);
+            // 
+            // MenuItemLineStipple
+            // 
+            this.MenuItemLineStipple.Name = "MenuItemLineStipple";
+            this.MenuItemLineStipple.Size = new System.Drawing.Size(152, 22);
+            this.MenuItemLineStipple.Text = "Лучи";
+            this.MenuItemLineStipple.Click += new System.EventHandler(this.MenuItemLinesStipple_Click);
+            // 
+            // MenuItemDepth
+            // 
+            this.MenuItemDepth.Name = "MenuItemDepth";
+            this.MenuItemDepth.Size = new System.Drawing.Size(152, 22);
+            this.MenuItemDepth.Text = "Глубина";
+            this.MenuItemDepth.Click += new System.EventHandler(this.MenuItemDepth_Click);
+            // 
+            // MenuItemBackWall
+            // 
+            this.MenuItemBackWall.Name = "MenuItemBackWall";
+            this.MenuItemBackWall.Size = new System.Drawing.Size(152, 22);
+            this.MenuItemBackWall.Text = "Стенки";
+            this.MenuItemBackWall.Click += new System.EventHandler(this.MenuItemBackWall_Click);
+            // 
+            // MenuItemSelection
+            // 
+            this.MenuItemSelection.Name = "MenuItemSelection";
+            this.MenuItemSelection.Size = new System.Drawing.Size(152, 22);
+            this.MenuItemSelection.Text = "Отбор";
+            this.MenuItemSelection.Click += new System.EventHandler(this.MenuItemSelection_Click);
+            // 
+            // MenuItemEdges
+            // 
+            this.MenuItemEdges.Name = "MenuItemEdges";
+            this.MenuItemEdges.Size = new System.Drawing.Size(152, 22);
+            this.MenuItemEdges.Text = "Вершины";
+            this.MenuItemEdges.Click += new System.EventHandler(this.MenuItemEdges_Click);
             // 
             // Form1
             // 
@@ -67,6 +141,7 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+            this.ContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -75,6 +150,14 @@
 
         private Tao.Platform.Windows.SimpleOpenGlControl glWindow;
         private System.Windows.Forms.Timer renderTimer;
+        private System.Windows.Forms.ContextMenuStrip ContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemCone;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemDepth;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemBackWall;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemSelection;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemStar;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemEdges;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemLineStipple;
     }
 }
 

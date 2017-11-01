@@ -1,30 +1,35 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tao.FreeGlut;
 using Tao.OpenGl;
 
 namespace Lab4
 {
+    public enum FigureToDraw
+    {
+        Cone,
+        Star,
+        LineSun
+    }
+
     public partial class Form1 : Form
     {
-        private bool _isMouseDown = false;
-        private Point _previousMouseLoaction;
-        private double _zoom = 1;
-        private double _rotateAngle = 45;
-        private int _osX = 0, _osY = 1, _osZ = 0, rot;
-        private float xRot, yRot;
-        private double _moveX, _moveY, _moveZ = -8;
-        private float _size = 1;
+        private FigureToDraw _currentFigure = FigureToDraw.Cone;
+
+        private double _rotateAngleX = -110;
+        private double _rotateAngleY = 0;
+        private float xRot = 65, yRot = 215;
+        private double _moveX, _moveY, _moveZ = -120;
+
+        private bool _isSelection;
+        private bool _isDepth;
+        private bool _isBackWall;
+        private int _isEdge = 1;
+
         private void glWindow_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
-            if (e.KeyCode == Keys.Up || 
+            if (e.KeyCode == Keys.Up ||
                 e.KeyCode == Keys.Down ||
                 e.KeyCode == Keys.Left ||
                 e.KeyCode == Keys.Right || e.KeyCode == (Keys)107 || e.KeyCode == (Keys)109)
@@ -33,31 +38,70 @@ namespace Lab4
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Up)  // Стрелка вверх
-                xRot -= 5.0f;
+            if (e.KeyCode == Keys.Down)
+                _rotateAngleX -= 2.0f;
 
-            if (e.KeyCode == Keys.Down)// Стрелка вниз
-                xRot += 5.0f;
+            if (e.KeyCode == Keys.Up)
+                _rotateAngleX += 2.0f;
 
-            if (e.KeyCode == Keys.Left)// Стрелка влево
-                yRot -= 5.0f;
+            if (e.KeyCode == Keys.Right)
+                _rotateAngleY += 2.0f;
 
-            if (e.KeyCode == Keys.Right)// Стрелка вправо
-                yRot += 5.0f;
-            if (e.KeyCode == (Keys) 107)
-                _size += 0.1f;
-            if (e.KeyCode == (Keys)109)
-                _size -= 0.1f;
+            if (e.KeyCode == Keys.Left)
+                _rotateAngleY -= 2.0f;
+        }
+
+        private void glWindow_MouseClick(object sender, MouseEventArgs e)
+        {
+            var calculatedLocation = new Point
+            {
+                X = e.X + Location.X + 20,
+                Y = e.Y + Location.Y + 20
+            };
+            if (e.Button == MouseButtons.Right)
+            {
+                ContextMenu.Show(calculatedLocation);
+            }
         }
 
         private Color color = Color.Red;
 
+        private void contextCone_Click(object sender, EventArgs e)
+        {
+            _currentFigure = FigureToDraw.Cone;
+        }
+
         public Form1()
         {
             InitializeComponent();
-            
+
             glWindow.InitializeContexts();
-            glWindow.Focus();
+        }
+
+        private void MenuItemDepth_Click(object sender, EventArgs e)
+        {
+            _isDepth = !_isDepth;
+
+            MenuItemDepth.BackColor = _isDepth ? SystemColors.ActiveCaption : SystemColors.Control;
+        }
+
+        private void MenuItemBackWall_Click(object sender, EventArgs e)
+        {
+            _isBackWall = !_isBackWall;
+
+            MenuItemBackWall.BackColor = _isBackWall ? SystemColors.ActiveCaption : SystemColors.Control;
+        }
+
+        private void MenuItemStar_Click(object sender, EventArgs e)
+        {
+            _currentFigure = FigureToDraw.Star;
+        }
+
+        private void MenuItemSelection_Click(object sender, EventArgs e)
+        {
+            _isSelection = !_isSelection;
+
+            MenuItemSelection.BackColor = _isSelection ? SystemColors.ActiveCaption : SystemColors.Control;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -75,7 +119,7 @@ namespace Lab4
             Glu.gluPerspective(45, (float)glWindow.Width / glWindow.Height, 0.1, 200);
             Gl.glMatrixMode(Gl.GL_MODELVIEW);
             Gl.glLoadIdentity();
-            Glu.gluLookAt(1,0,0,0,0,0,1,1,1);
+
             // настройка параметров OpenGL для визуализации 
             Gl.glEnable(Gl.GL_DEPTH_TEST);
             Gl.glEnable(Gl.GL_LIGHTING);
@@ -88,6 +132,18 @@ namespace Lab4
             Draw();
         }
 
+        private void MenuItemEdges_Click(object sender, EventArgs e)
+        {
+            _isEdge = _isEdge == 1 ? 0 : 1;
+
+            MenuItemEdges.BackColor = _isEdge == 1 ? SystemColors.ActiveCaption : SystemColors.Control;
+        }
+
+        private void MenuItemLinesStipple_Click(object sender, EventArgs e)
+        {
+            _currentFigure = FigureToDraw.LineSun;
+        }
+
         private void Draw()
         {
             // очистка буфера цвета и буфера глубины 
@@ -97,77 +153,215 @@ namespace Lab4
 
             Gl.glPushMatrix();
 
-            //Gl.glTranslated(_moveX, _moveY, _moveZ);
-
-            //Gl.glRotated(_rotateAngle, _osX, _osY, _osZ);
-
             Gl.glColor3ub(color.R, color.G, color.B);
 
+            Gl.glTranslated(_moveX, _moveY, _moveZ);
+            Gl.glRotated(_rotateAngleX, 1.0, 0.0, 0.0);
+            Gl.glRotated(_rotateAngleY, 0.0, 1.0, 0.0);
 
-            Gl.glRotatef(xRot, 1.0f, 0.0f, 0.0f);// Первое состояние матрицы вращения
-            Gl.glRotatef(yRot, 0.0f, 1.0f, 0.0f);// Следующее состояние
-
-            var sizes = new float[2];
-            var step = new float(); // Для определения диапазона и 
-            // шага изменения размеров точки
-            Gl.glGetFloatv(Gl.GL_POINT_SIZE_RANGE, sizes);// Получаем диапазон
-            float curSize = sizes[0]; // Сначала установим минимальный размер
-            Gl.glGetFloatv(Gl.GL_POINT_SIZE_GRANULARITY, new[]{step});  // Получаем шаг
-
-            // Задаем три оборота в радианах
-            float x, y, z, angle; // Переменные для координат и угла  
-            z = -50.0f;// Задаем начальную координату z
-
-            for (angle = 0.0f; angle <= 2.0f * Math.PI * 3.0f; angle += 0.1f)
+            switch (_currentFigure)
             {
-                // Вычисляем очередную точку на окружности
-                x = 10.0f * (float)Math.Sin(angle);
-                y = 10.0f * (float)Math.Cos(angle);
-
-                // Задаем размер точки перед указанием примитива
-                Gl.glPointSize(_size);
-
-                // Посылаем на визуализацию каждую точку по отдельности
-                Gl.glBegin(Gl.GL_POINTS);
-                // Задаем точку
-                Gl.glVertex3f(x, y, z);
-                Gl.glEnd(); // Закончили визуализацию
-
-                z += 0.1f; // Приближаем к зрителю
-                curSize += step; // Увеличиваем размер точки
+                case FigureToDraw.Cone:
+                    DrawCone();
+                    break;
+                case FigureToDraw.Star:
+                    DrawStar();
+                    break;
+                case FigureToDraw.LineSun:
+                    DrawSun();
+                    break;
             }
-            
-            // Восстанавливаем матрицу вращения в исходное состояние
+
             Gl.glPopMatrix();
-            // Восстанавливаем минимальный размер
-            
+
             Gl.glFlush();
 
             glWindow.Invalidate();
         }
 
-        private void Draw2()
+        private void DrawCone()
         {
-            // очистка буфера цвета и буфера глубины 
-            Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
-            Gl.glClearColor(0, 0, 0, 1);
-            Gl.glLoadIdentity();
+            float x, y, angle;    // Переменные для координат и угла
+            bool iColor = false;     // Флаг переключения цвета
 
+            // Устанавливаем неструктурированный цвет модели затенения
+            Gl.glShadeModel(Gl.GL_FLAT);
+
+            // Устанавливаем направление обхода по часовой стрелке
+            Gl.glFrontFace(Gl.GL_CW);
+
+            //// Очистить окно и буфер глубины
+            Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
+
+            // Включить/Выключить отбор
+            if (_isSelection)
+                Gl.glEnable(Gl.GL_CULL_FACE);
+            else
+                Gl.glDisable(Gl.GL_CULL_FACE);
+
+            // Включить/Выключить глубину
+            if (_isDepth)
+                Gl.glEnable(Gl.GL_DEPTH_TEST);
+            else
+                Gl.glDisable(Gl.GL_DEPTH_TEST);
+
+            // Включить/Выключить каркас задней стенки
+            if (_isBackWall)
+                Gl.glPolygonMode(Gl.GL_BACK, Gl.GL_LINE);
+            else
+                Gl.glPolygonMode(Gl.GL_BACK, Gl.GL_FILL);
+
+            // Запомнить первоначальное состояние матрицы вращения
             Gl.glPushMatrix();
 
-            Gl.glTranslated(_moveX, _moveY, _moveZ);
+            // Выполнить два последовательных поворота
+            // для будущей визуализации сцены
+            Gl.glRotatef(xRot, 1.0f, 0.0f, 0.0f);// Новое состояние матрицы вращения
+            Gl.glRotatef(yRot, 0.0f, 1.0f, 0.0f);// Следующее новое состояние
 
-            Gl.glRotated(_rotateAngle, _osX, _osY, _osZ);
+            //************  Рисовать конус  ***********************************
+            // Рисовать веер треугольников
+            Gl.glBegin(Gl.GL_TRIANGLE_FAN);
+            // Устанавливаем первую точку - вершину конуса ближе к наблюдателю
+            Gl.glVertex3f(0.0f, 0.0f, 50.0f);
 
-            Gl.glColor3ub(color.R, color.G, color.B);
+            // Проходим оборот в плоскости x0y
+            for (angle = 0.0f; angle <= 3.0f * Math.PI; angle += (float)Math.PI / 8.0f)
+            {
+                // Вычисляем очередную точку на окружности
+                x = 20.0f * (float)Math.Sin(angle);
+                y = 20.0f * (float)Math.Cos(angle);
 
-            Glut.glutSolidCube(2);
-               
+                // Чередуем цвета
+                if (iColor) // Деление по модулю
+                    Gl.glColor3f(0.0f, 1.0f, 0.0f);    // Зеленый
+                else
+                    Gl.glColor3f(0xFF, 0xFF, 0x00); // Желтый
+
+                iColor = !iColor; // Для переключения цвета
+
+                // Установливаем вычисленную точку на плоскости x0y
+                Gl.glVertex2f(x, y);
+            }
+
+            Gl.glEnd(); // Рисуем веер, имитирующий конус
+
+            //***********  Рисовать основание конуса  *************************
+            // Начинаем строить новый веер в плоскости x0y
+            // Имитирующий основание конуса в начале координат
+
+            Gl.glBegin(Gl.GL_TRIANGLE_FAN);
+            // Устанавливаем первую точку центра основания при z=0
+            Gl.glVertex2f(0.0f, 0.0f);
+
+            // Проходим оборот в плоскости x0y
+            for (angle = 0.0f; angle <= 3.0f * Math.PI; angle += (float)Math.PI / 10.0f)
+            {
+                // Вычисляем очередную точку на окружности
+                x = 20.0f * (float)Math.Sin(angle);
+                y = 20.0f * (float)Math.Cos(angle);
+
+                // Чередуем цвета
+                if (!(iColor))  // Деление по модулю
+                    Gl.glColor3f(0.0f, 0.0f, 1.0f);    // Синий
+                else
+                    Gl.glColor3f(1.0f, 0.0f, 0.0f);    // Красный
+
+                iColor = !iColor; // Для переключения цвета
+
+                // Установливаем вычисленную точку на плоскости x0y
+                Gl.glVertex2f(x, y);
+            }
+            Gl.glEnd(); // Рисуем веер, имитирующий основание
+
+            // Восстанавливаем измененные состояния в исходные значения
             Gl.glPopMatrix();
-            // завершаем рисование
-            Gl.glFlush();
-            // обновляем элемент 
-            glWindow.Invalidate();
+            Gl.glDisable(Gl.GL_CULL_FACE);
+            Gl.glDisable(Gl.GL_DEPTH_TEST);
+            Gl.glPolygonMode(Gl.GL_BACK, Gl.GL_FILL);
+            Gl.glColor3f(0.0f, 1.0f, 0.0f);	// Зеленый
+        }
+
+        private void DrawStar()
+        {
+            // Очистить окно просмотра
+            Gl.glClear(Gl.GL_COLOR_BUFFER_BIT);
+
+            // Включить каркасный режим для обеих сторон звезды
+            Gl.glPolygonMode(Gl.GL_FRONT_AND_BACK, Gl.GL_LINE);
+
+            // Запомнить первоначальное состояние матрицы вращения
+            Gl.glPushMatrix();
+
+            // Выполнить два последовательных поворота
+            // для будущей визуализации сцены
+            Gl.glRotatef(xRot, 1.0f, 0.0f, 0.0f);
+            Gl.glRotatef(yRot, 0.0f, 1.0f, 0.0f);
+
+            //************  Рисовать внутренние контуры звезды  *************
+            // Рисовать веер треугольников
+            Gl.glBegin(Gl.GL_TRIANGLES);
+            // Устанавливаем переключатель метки сторон
+            Gl.glEdgeFlag(_isEdge);
+
+            // Устанавливаем вершины
+            Gl.glVertex2f(0.0f, 0.0f); // Центр звезды
+            Gl.glVertex2f(-18.0f, 26.0f);
+            Gl.glVertex2f(18.0f, 26.0f);
+
+            Gl.glVertex2f(0.0f, 0.0f);
+            Gl.glVertex2f(18.0f, 26.0f);
+            Gl.glVertex2f(30.0f, -10.0f);
+
+            Gl.glVertex2f(0.0f, 0.0f);
+            Gl.glVertex2f(30.0f, -10.0f);
+            Gl.glVertex2f(0.0f, -32.0f);
+
+            Gl.glVertex2f(0.0f, 0.0f);
+            Gl.glVertex2f(0.0f, -32.0f);
+            Gl.glVertex2f(-30.0f, -10.0f);
+
+            Gl.glVertex2f(0.0f, 0.0f);
+            Gl.glVertex2f(-30.0f, -10.0f);
+            Gl.glVertex2f(-18.0f, 26.0f);
+            Gl.glEnd();
+
+            //***********  Рисовать внешние треугольники звезды **************
+            Gl.glBegin(Gl.GL_TRIANGLES);
+            Gl.glEdgeFlag(1);
+            Gl.glVertex2f(-18.0f, 26.0f);
+            Gl.glVertex2f(0.0f, 80.0f); Gl.glEdgeFlag(0);
+            Gl.glVertex2f(18.0f, 26.0f);
+
+            Gl.glEdgeFlag(1);
+            Gl.glVertex2f(18.0f, 26.0f);
+            Gl.glVertex2f(80.0f, 26.0f); Gl.glEdgeFlag(0);
+            Gl.glVertex2f(30.0f, -10.0f);
+
+            Gl.glEdgeFlag(1);
+            Gl.glVertex2f(30.0f, -10.0f);
+            Gl.glVertex2f(50.0f, -68.0f); Gl.glEdgeFlag(0);
+            Gl.glVertex2f(0.0f, -32.0f);
+
+            Gl.glEdgeFlag(1);
+            Gl.glVertex2f(0.0f, -32.0f);
+            Gl.glVertex2f(-50.0f, -68.0f); Gl.glEdgeFlag(0);
+            Gl.glVertex2f(-30.0f, -10.0f);
+
+            Gl.glEdgeFlag(1);
+            Gl.glVertex2f(-30.0f, -10.0f);
+            Gl.glVertex2f(-80.0f, 26.0f); Gl.glEdgeFlag(0);
+            Gl.glVertex2f(-18.0f, 26.0f);
+            Gl.glEnd();
+
+            // Восстанавливаем измененные состояния в исходные значения
+            Gl.glPopMatrix();
+            Gl.glPolygonMode(Gl.GL_BACK, Gl.GL_FILL);
+        }
+
+        private void DrawSun()
+        {
+
         }
     }
 }
