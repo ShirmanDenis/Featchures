@@ -39,6 +39,9 @@
             this.MenuItemBackWall = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemSelection = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemEdges = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemPointsZ = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemLinesW = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemPloygonStipple = new System.Windows.Forms.ToolStripMenuItem();
             this.ContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -72,9 +75,12 @@
             this.ContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuItemCone,
             this.MenuItemStar,
-            this.MenuItemLineStipple});
+            this.MenuItemLineStipple,
+            this.MenuItemPointsZ,
+            this.MenuItemLinesW,
+            this.MenuItemPloygonStipple});
             this.ContextMenu.Name = "ContextMenu";
-            this.ContextMenu.Size = new System.Drawing.Size(111, 70);
+            this.ContextMenu.Size = new System.Drawing.Size(153, 158);
             // 
             // MenuItemCone
             // 
@@ -100,7 +106,7 @@
             // 
             this.MenuItemLineStipple.Name = "MenuItemLineStipple";
             this.MenuItemLineStipple.Size = new System.Drawing.Size(152, 22);
-            this.MenuItemLineStipple.Text = "Лучи";
+            this.MenuItemLineStipple.Text = "Пунктир";
             this.MenuItemLineStipple.Click += new System.EventHandler(this.MenuItemLinesStipple_Click);
             // 
             // MenuItemDepth
@@ -131,6 +137,27 @@
             this.MenuItemEdges.Text = "Вершины";
             this.MenuItemEdges.Click += new System.EventHandler(this.MenuItemEdges_Click);
             // 
+            // MenuItemPointsZ
+            // 
+            this.MenuItemPointsZ.Name = "MenuItemPointsZ";
+            this.MenuItemPointsZ.Size = new System.Drawing.Size(152, 22);
+            this.MenuItemPointsZ.Text = "Пружина";
+            this.MenuItemPointsZ.Click += new System.EventHandler(this.MenuItemPointsZ_Click);
+            // 
+            // MenuItemLinesW
+            // 
+            this.MenuItemLinesW.Name = "MenuItemLinesW";
+            this.MenuItemLinesW.Size = new System.Drawing.Size(152, 22);
+            this.MenuItemLinesW.Text = "Линии";
+            this.MenuItemLinesW.Click += new System.EventHandler(this.MenuItemLinesW_Click);
+            // 
+            // MenuItemPloygonStipple
+            // 
+            this.MenuItemPloygonStipple.Name = "MenuItemPloygonStipple";
+            this.MenuItemPloygonStipple.Size = new System.Drawing.Size(152, 22);
+            this.MenuItemPloygonStipple.Text = "Полигоны";
+            this.MenuItemPloygonStipple.Click += new System.EventHandler(this.MenuItemPloygonStipple_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -158,6 +185,9 @@
         private System.Windows.Forms.ToolStripMenuItem MenuItemStar;
         private System.Windows.Forms.ToolStripMenuItem MenuItemEdges;
         private System.Windows.Forms.ToolStripMenuItem MenuItemLineStipple;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemPointsZ;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemLinesW;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemPloygonStipple;
     }
 }
 
