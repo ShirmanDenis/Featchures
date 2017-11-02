@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace FormattingOptionsDemo
 {
-    public partial class MainQueryCommon : UserControl
+    public partial class CommonTab : UserControl
     {
-        public MainQueryCommon()
+        public CommonTab()
         {
             InitializeComponent();
         }

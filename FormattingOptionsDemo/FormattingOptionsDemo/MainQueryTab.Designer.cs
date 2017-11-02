@@ -1,6 +1,6 @@
 ﻿namespace FormattingOptionsDemo
 {
-    partial class MainQuery
+    partial class MainQueryTab
     {
         /// <summary> 
         /// Обязательная переменная конструктора.

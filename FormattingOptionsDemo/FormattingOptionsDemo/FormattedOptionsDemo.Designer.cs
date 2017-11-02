@@ -1,6 +1,6 @@
 ﻿namespace FormattingOptionsDemo
 {
-    partial class Form1
+    partial class FormattedOptionsDemo
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -28,26 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Common");
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Expressions");
-            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("MainQuery", new System.Windows.Forms.TreeNode[] {
-            treeNode13,
-            treeNode14});
-            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Common");
-            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Expressions");
-            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Sub-Queries in expressions", new System.Windows.Forms.TreeNode[] {
-            treeNode16,
-            treeNode17});
-            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Common");
-            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Expressions");
-            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Derived tables", new System.Windows.Forms.TreeNode[] {
-            treeNode19,
-            treeNode20});
-            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Common");
-            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("Expressions");
-            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("Common table expressions", new System.Windows.Forms.TreeNode[] {
-            treeNode22,
-            treeNode23});
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Common");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Expressions");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("MainQuery", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2});
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Common");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Expressions");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Sub-Queries in expressions", new System.Windows.Forms.TreeNode[] {
+            treeNode4,
+            treeNode5});
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Common");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Expressions");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Derived tables", new System.Windows.Forms.TreeNode[] {
+            treeNode7,
+            treeNode8});
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Common");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Expressions");
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Common table expressions", new System.Windows.Forms.TreeNode[] {
+            treeNode10,
+            treeNode11});
             this.treeView = new System.Windows.Forms.TreeView();
             this.currentTabPanel = new System.Windows.Forms.Panel();
             this.SuspendLayout();
@@ -58,37 +58,38 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.treeView.Location = new System.Drawing.Point(12, 12);
             this.treeView.Name = "treeView";
-            treeNode13.Name = "common";
-            treeNode13.Text = "Common";
-            treeNode14.Name = "expression";
-            treeNode14.Text = "Expressions";
-            treeNode15.Name = "mainQuery";
-            treeNode15.Text = "MainQuery";
-            treeNode16.Name = "common";
-            treeNode16.Text = "Common";
-            treeNode17.Name = "expressions";
-            treeNode17.Text = "Expressions";
-            treeNode18.Name = "subQueryiesInExpressions";
-            treeNode18.Text = "Sub-Queries in expressions";
-            treeNode19.Name = "common";
-            treeNode19.Text = "Common";
-            treeNode20.Name = "expressions";
-            treeNode20.Text = "Expressions";
-            treeNode21.Name = "derivedTables";
-            treeNode21.Text = "Derived tables";
-            treeNode22.Name = "common";
-            treeNode22.Text = "Common";
-            treeNode23.Name = "expressions";
-            treeNode23.Text = "Expressions";
-            treeNode24.Name = "commonTableExpressions";
-            treeNode24.Text = "Common table expressions";
+            treeNode1.Name = "common";
+            treeNode1.Text = "Common";
+            treeNode2.Name = "expression";
+            treeNode2.Text = "Expressions";
+            treeNode3.Name = "mainQuery";
+            treeNode3.Text = "MainQuery";
+            treeNode4.Name = "common";
+            treeNode4.Text = "Common";
+            treeNode5.Name = "expressions";
+            treeNode5.Text = "Expressions";
+            treeNode6.Name = "subQueryiesInExpressions";
+            treeNode6.Text = "Sub-Queries in expressions";
+            treeNode7.Name = "common";
+            treeNode7.Text = "Common";
+            treeNode8.Name = "expressions";
+            treeNode8.Text = "Expressions";
+            treeNode9.Name = "derivedTables";
+            treeNode9.Text = "Derived tables";
+            treeNode10.Name = "common";
+            treeNode10.Text = "Common";
+            treeNode11.Name = "expressions";
+            treeNode11.Text = "Expressions";
+            treeNode12.Name = "commonTableExpressions";
+            treeNode12.Text = "Common table expressions";
             this.treeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode15,
-            treeNode18,
-            treeNode21,
-            treeNode24});
+            treeNode3,
+            treeNode6,
+            treeNode9,
+            treeNode12});
             this.treeView.Size = new System.Drawing.Size(187, 640);
             this.treeView.TabIndex = 0;
+            this.treeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView_NodeMouseClick);
             // 
             // currentTabPanel
             // 
@@ -99,14 +100,14 @@
             this.currentTabPanel.Size = new System.Drawing.Size(754, 377);
             this.currentTabPanel.TabIndex = 1;
             // 
-            // Form1
+            // FormattedOptionsDemo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(971, 664);
             this.Controls.Add(this.currentTabPanel);
             this.Controls.Add(this.treeView);
-            this.Name = "Form1";
+            this.Name = "FormattedOptionsDemo";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
