@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab_3", "Lab_3\Lab_3.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab4", "Lab4\Lab4.csproj", "{C5E82EFF-BFD4-4B41-A98C-2619792D914F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetItSnow", "LetItSnow\LetItSnow.csproj", "{969184A1-50FC-4C0D-8304-93915A6FD634}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{C5E82EFF-BFD4-4B41-A98C-2619792D914F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5E82EFF-BFD4-4B41-A98C-2619792D914F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5E82EFF-BFD4-4B41-A98C-2619792D914F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{969184A1-50FC-4C0D-8304-93915A6FD634}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{969184A1-50FC-4C0D-8304-93915A6FD634}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{969184A1-50FC-4C0D-8304-93915A6FD634}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{969184A1-50FC-4C0D-8304-93915A6FD634}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

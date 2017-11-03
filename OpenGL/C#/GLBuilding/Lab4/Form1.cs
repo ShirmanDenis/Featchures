@@ -19,6 +19,7 @@ namespace Lab4
     public partial class Form1 : Form
     {
         private FigureToDraw _currentFigure = FigureToDraw.Cone;
+        private Color color = Color.Red;
 
         private double _rotateAngleX = -110;
         private double _rotateAngleY = 0;
@@ -73,9 +74,6 @@ namespace Lab4
                 ContextMenu.Show(calculatedLocation);
             }
         }
-
-        private Color color = Color.Red;
-
         private void contextCone_Click(object sender, EventArgs e)
         {
             _currentFigure = FigureToDraw.Cone;
@@ -573,8 +571,8 @@ namespace Lab4
 
             // Настроить два последовательных поворота
             // для будущей визуализации сцены
-            Gl.glRotatef(xRot, 1.0f, 0.0f, 0.0f);// Первое состояние матрицы вращения
-            Gl.glRotatef(yRot, 0.0f, 1.0f, 0.0f);// Следующее состояние
+            Gl.glRotatef(250, 1.0f, 0.0f, 0.0f);// Первое состояние матрицы вращения
+            Gl.glRotatef(0, 0.0f, 1.0f, 0.0f);// Следующее состояние
 
             // Включить красный цвет рисования
             Gl.glColor3f(1.0f, 0.0f, 0.0f);
