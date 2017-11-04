@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab4", "Lab4\Lab4.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetItSnow", "LetItSnow\LetItSnow.csproj", "{969184A1-50FC-4C0D-8304-93915A6FD634}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CastleModel", "CastleModel\CastleModel.csproj", "{F2C44CAA-CC8D-4A71-BF50-726EC9E2D020}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{969184A1-50FC-4C0D-8304-93915A6FD634}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{969184A1-50FC-4C0D-8304-93915A6FD634}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{969184A1-50FC-4C0D-8304-93915A6FD634}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2C44CAA-CC8D-4A71-BF50-726EC9E2D020}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2C44CAA-CC8D-4A71-BF50-726EC9E2D020}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2C44CAA-CC8D-4A71-BF50-726EC9E2D020}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2C44CAA-CC8D-4A71-BF50-726EC9E2D020}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
