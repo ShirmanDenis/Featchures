@@ -24,6 +24,7 @@ namespace CastleModel
         private double _rotateAngleY = -2;
         private float xRot = 65, yRot = 215;
         private double _moveX, _moveY, _moveZ = -70;
+        private bool _ctrlPressed;
         private float size = 0;
 
         private void glWindow_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -35,31 +36,41 @@ namespace CastleModel
                 e.IsInputKey = true;
         }
 
+        private void glWindow_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Control)
+                _ctrlPressed = false;
+        }
+
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Down)
+            if (e.Control)
+                _ctrlPressed = true;
+
+            if (e.KeyCode == Keys.Down && _ctrlPressed)
+                _moveY -= 1.0;
+            if (e.KeyCode == Keys.Up && _ctrlPressed)
+                _moveY += 1.0;
+            if (e.KeyCode == Keys.Right && _ctrlPressed)
+                _moveX += 1.0;
+            if (e.KeyCode == Keys.Left && _ctrlPressed)
+                _moveX -= 1.0;
+
+            if (e.KeyCode == Keys.Down && !_ctrlPressed)
                 _rotateAngleX -= 2.0f;
-
-            if (e.KeyCode == Keys.Up)
+            if (e.KeyCode == Keys.Up && !_ctrlPressed)
                 _rotateAngleX += 2.0f;
-
-            if (e.KeyCode == Keys.Right)
+            if (e.KeyCode == Keys.Right && !_ctrlPressed)
                 _rotateAngleY += 2.0f;
-
-            if (e.KeyCode == Keys.Left)
+            if (e.KeyCode == Keys.Left && !_ctrlPressed)
                 _rotateAngleY -= 2.0f;
-
-            if (e.KeyCode == (Keys)107)
-                size += 0.5f;
-
-            if (e.KeyCode == (Keys)109)
-                size -= 0.5f;
         }
 
         public CastleForm()
         {
             InitializeComponent();
-
+            Height = 800;
+            Width = 1124;
             glWindow.InitializeContexts();
 
             MouseWheel += CastleForm_MouseWheel;
@@ -125,6 +136,8 @@ namespace CastleModel
                 LoadTexture();
             Draw();
         }
+
+
 
         private void Draw()
         {

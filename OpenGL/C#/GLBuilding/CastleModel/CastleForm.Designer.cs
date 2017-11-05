@@ -50,6 +50,7 @@
             this.glWindow.StencilBits = ((byte)(0));
             this.glWindow.TabIndex = 0;
             this.glWindow.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+            this.glWindow.KeyUp += new System.Windows.Forms.KeyEventHandler(this.glWindow_KeyUp);
             this.glWindow.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.glWindow_PreviewKeyDown);
             // 
             // timer1
@@ -66,6 +67,8 @@
             this.Name = "CastleForm";
             this.Text = "Castle";
             this.Load += new System.EventHandler(this.CastleForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.glWindow_KeyUp);
             this.ResumeLayout(false);
 
         }
