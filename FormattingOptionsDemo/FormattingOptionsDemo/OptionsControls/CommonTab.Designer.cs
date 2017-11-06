@@ -89,6 +89,7 @@
             0,
             0,
             0});
+            this.upDownPartIndent.ValueChanged += new System.EventHandler(this.upDownPartIndent_ValueChanged);
             // 
             // label1
             // 
@@ -108,6 +109,7 @@
             this.chBxInsertNewLineAfterPartKeywords.TabIndex = 1;
             this.chBxInsertNewLineAfterPartKeywords.Text = "Insert new line after part keywords";
             this.chBxInsertNewLineAfterPartKeywords.UseVisualStyleBackColor = true;
+            this.chBxInsertNewLineAfterPartKeywords.CheckedChanged += new System.EventHandler(this.chBxInsertNewLineAfterPartKeywords_CheckedChanged);
             // 
             // chBxStartPartsFromNewLines
             // 
@@ -118,6 +120,7 @@
             this.chBxStartPartsFromNewLines.TabIndex = 0;
             this.chBxStartPartsFromNewLines.Text = "Start parts from new lines";
             this.chBxStartPartsFromNewLines.UseVisualStyleBackColor = true;
+            this.chBxStartPartsFromNewLines.CheckedChanged += new System.EventHandler(this.chBxStartPartsFromNewLines_CheckedChanged);
             // 
             // groupBox2
             // 
@@ -154,6 +157,7 @@
             this.radButNewLineAfterComma.TabStop = true;
             this.radButNewLineAfterComma.Text = "New line after comma";
             this.radButNewLineAfterComma.UseVisualStyleBackColor = true;
+            this.radButNewLineAfterComma.CheckedChanged += new System.EventHandler(this.radButNewLineAfterComma_CheckedChanged);
             // 
             // radButNewLineBeforeComma
             // 
@@ -165,6 +169,7 @@
             this.radButNewLineBeforeComma.TabStop = true;
             this.radButNewLineBeforeComma.Text = "New line before comma";
             this.radButNewLineBeforeComma.UseVisualStyleBackColor = true;
+            this.radButNewLineBeforeComma.CheckedChanged += new System.EventHandler(this.radButNewLineBeforeComma_CheckedChanged);
             // 
             // chBxStartSelectListItemsOnNewLines
             // 
@@ -175,6 +180,7 @@
             this.chBxStartSelectListItemsOnNewLines.TabIndex = 0;
             this.chBxStartSelectListItemsOnNewLines.Text = "Start select list items on new lines";
             this.chBxStartSelectListItemsOnNewLines.UseVisualStyleBackColor = true;
+            this.chBxStartSelectListItemsOnNewLines.CheckedChanged += new System.EventHandler(this.chBxStartSelectListItemsOnNewLines_CheckedChanged);
             // 
             // groupBox3
             // 
@@ -210,6 +216,7 @@
             this.chBxStartJoinConditionsOnNewLines.TabIndex = 2;
             this.chBxStartJoinConditionsOnNewLines.Text = "Start join conditions on new lines";
             this.chBxStartJoinConditionsOnNewLines.UseVisualStyleBackColor = true;
+            this.chBxStartJoinConditionsOnNewLines.CheckedChanged += new System.EventHandler(this.chBxStartJoinConditionsOnNewLines_CheckedChanged);
             // 
             // radButStartJoinKeywordsFromNewLines
             // 
@@ -221,6 +228,7 @@
             this.radButStartJoinKeywordsFromNewLines.TabStop = true;
             this.radButStartJoinKeywordsFromNewLines.Text = "Start \"JOIN\" keywords from new lines";
             this.radButStartJoinKeywordsFromNewLines.UseVisualStyleBackColor = true;
+            this.radButStartJoinKeywordsFromNewLines.CheckedChanged += new System.EventHandler(this.radButStartJoinKeywordsFromNewLines_CheckedChanged);
             // 
             // radButStartDataSourcesFromNewLines
             // 
@@ -232,6 +240,7 @@
             this.radButStartDataSourcesFromNewLines.TabStop = true;
             this.radButStartDataSourcesFromNewLines.Text = "Start datasources from new lines";
             this.radButStartDataSourcesFromNewLines.UseVisualStyleBackColor = true;
+            this.radButStartDataSourcesFromNewLines.CheckedChanged += new System.EventHandler(this.radButStartDataSourcesFromNewLines_CheckedChanged);
             // 
             // CommonTab
             // 

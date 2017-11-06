@@ -14,10 +14,12 @@ namespace FormattingOptionsDemo
     public partial class FormattedOptionsDemo : Form
     {
         private UserControl _currentOptionsControl;
+        private readonly FormattedSQLBuilder _builder;
 
         public FormattedOptionsDemo()
         {
             InitializeComponent();
+            _builder = new FormattedSQLBuilder(sqlQuery1.SqlFormattingOptions);
 
             sqlContext1.MetadataContainer.ImportFromXML("Northwind.xml");
 
@@ -29,6 +31,7 @@ namespace FormattingOptionsDemo
                             "  (store.manager_staff_id BETWEEN 10 AND 20))))\r\nORDER BY\r\n  rental.return_date";
 
             sqlQuery1.SqlFormattingOptions.Updated += SqlFormattingOptions_Updated;
+            _builder.Updated += _builder_Updated;
 
             treeView.ExpandAll();
         }
@@ -36,21 +39,21 @@ namespace FormattingOptionsDemo
         private void Form1_Load(object sender, EventArgs e)
         {
             // MainQuery options
-            treeView.Nodes[0].Tag = new MainQueryTab(sqlQuery1.SqlFormattingOptions){Dock = DockStyle.Fill};
-            treeView.Nodes[0].Nodes[0].Tag = new CommonTab(sqlQuery1.SqlFormattingOptions) { Dock = DockStyle.Fill };
-            treeView.Nodes[0].Nodes[1].Tag = new ExpressionsTab(sqlQuery1.SqlFormattingOptions) { Dock = DockStyle.Fill };
+            treeView.Nodes[0].Tag = new MainQueryTab(_builder){Dock = DockStyle.Fill};
+            treeView.Nodes[0].Nodes[0].Tag = new CommonTab(_builder, sqlQuery1.SqlFormattingOptions.MainQueryFormat) { Dock = DockStyle.Fill };
+            treeView.Nodes[0].Nodes[1].Tag = new ExpressionsTab(sqlQuery1.SqlFormattingOptions.MainQueryFormat) { Dock = DockStyle.Fill };
             // SubQuery in expression options
-            treeView.Nodes[1].Tag = new SubQueryTab(sqlQuery1.SqlFormattingOptions, "Sub-query") { Dock = DockStyle.Fill };
-            treeView.Nodes[1].Nodes[0].Tag = new CommonTab(sqlQuery1.SqlFormattingOptions) { Dock = DockStyle.Fill };
-            treeView.Nodes[1].Nodes[1].Tag = new ExpressionsTab(sqlQuery1.SqlFormattingOptions) { Dock = DockStyle.Fill };
+            treeView.Nodes[1].Tag = new SubQueryTab(sqlQuery1.SqlFormattingOptions) { Dock = DockStyle.Fill };
+            treeView.Nodes[1].Nodes[0].Tag = new CommonTab(_builder, sqlQuery1.SqlFormattingOptions.ExpressionSubQueryFormat) { Dock = DockStyle.Fill };
+            treeView.Nodes[1].Nodes[1].Tag = new ExpressionsTab(sqlQuery1.SqlFormattingOptions.ExpressionSubQueryFormat) { Dock = DockStyle.Fill };
             // Derived tables options
             treeView.Nodes[2].Tag = new SubQueryTab(sqlQuery1.SqlFormattingOptions, "Derived Tables") { Dock = DockStyle.Fill };
-            treeView.Nodes[2].Nodes[0].Tag = new CommonTab(sqlQuery1.SqlFormattingOptions) { Dock = DockStyle.Fill };
-            treeView.Nodes[2].Nodes[1].Tag = new ExpressionsTab(sqlQuery1.SqlFormattingOptions) { Dock = DockStyle.Fill };
+            treeView.Nodes[2].Nodes[0].Tag = new CommonTab(_builder, sqlQuery1.SqlFormattingOptions.DerivedQueryFormat) { Dock = DockStyle.Fill };
+            treeView.Nodes[2].Nodes[1].Tag = new ExpressionsTab(sqlQuery1.SqlFormattingOptions.ExpressionSubQueryFormat) { Dock = DockStyle.Fill };
             // Common table expression options
             treeView.Nodes[3].Tag = new SubQueryTab(sqlQuery1.SqlFormattingOptions, "CTE") { Dock = DockStyle.Fill };
-            treeView.Nodes[3].Nodes[0].Tag = new CommonTab(sqlQuery1.SqlFormattingOptions) { Dock = DockStyle.Fill };
-            treeView.Nodes[3].Nodes[1].Tag = new ExpressionsTab(sqlQuery1.SqlFormattingOptions) { Dock = DockStyle.Fill };
+            treeView.Nodes[3].Nodes[0].Tag = new CommonTab(_builder, sqlQuery1.SqlFormattingOptions.CTESubQueryFormat) { Dock = DockStyle.Fill };
+            treeView.Nodes[3].Nodes[1].Tag = new ExpressionsTab(sqlQuery1.SqlFormattingOptions.ExpressionSubQueryFormat) { Dock = DockStyle.Fill };
 
             currentTabPanel.Controls.Add((UserControl)treeView.Nodes[0].Tag);        
         }
@@ -73,7 +76,7 @@ namespace FormattingOptionsDemo
 
         private void sqlQuery1_SQLUpdated(object sender, EventArgs e)
         {
-            sqlTextEditor1.Text = sqlQuery1.FormattedSQL;
+            sqlTextEditor1.Text = _builder.GetSQL(sqlQuery1.QueryRoot);
         }
 
         private void sqlTextEditor1_Validating(object sender, CancelEventArgs e)
@@ -84,7 +87,12 @@ namespace FormattingOptionsDemo
 
         private void SqlFormattingOptions_Updated(object sender, EventArgs e)
         {
-            sqlTextEditor1.Text = sqlQuery1.FormattedSQL;
+            sqlTextEditor1.Text = _builder.GetSQL(sqlQuery1.QueryRoot);
+        }
+
+        private void _builder_Updated(object sender, EventArgs e)
+        {
+            sqlTextEditor1.Text = _builder.GetSQL(sqlQuery1.QueryRoot);
         }
     }
 }

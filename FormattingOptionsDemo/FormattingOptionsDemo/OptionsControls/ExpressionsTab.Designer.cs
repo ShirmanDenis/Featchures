@@ -45,7 +45,7 @@
             this.chBxBranchResultExprsFromNewLines = new System.Windows.Forms.CheckBox();
             this.chBxResultKwrdsFromNewLinesThen = new System.Windows.Forms.CheckBox();
             this.chBxBranchConditionExprFromNewLines = new System.Windows.Forms.CheckBox();
-            this.chBxBranchConditionKerdsFromNewLinesWhen = new System.Windows.Forms.CheckBox();
+            this.chBxBranchConditionKeyWrdsFromNewLinesWhen = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UpDownIndentForNestedConditions)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -79,6 +79,7 @@
             this.UpDownIndentForNestedConditions.Size = new System.Drawing.Size(85, 20);
             this.UpDownIndentForNestedConditions.TabIndex = 7;
             this.UpDownIndentForNestedConditions.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.UpDownIndentForNestedConditions.ValueChanged += new System.EventHandler(this.UpDownIndentForNestedConditions_ValueChanged);
             // 
             // radButEndLines
             // 
@@ -90,6 +91,7 @@
             this.radButEndLines.TabStop = true;
             this.radButEndLines.Text = "end lines";
             this.radButEndLines.UseVisualStyleBackColor = true;
+            this.radButEndLines.CheckedChanged += new System.EventHandler(this.radButEndLines_CheckedChanged);
             // 
             // radButStartLines
             // 
@@ -101,6 +103,7 @@
             this.radButStartLines.TabStop = true;
             this.radButStartLines.Text = "start lines";
             this.radButStartLines.UseVisualStyleBackColor = true;
+            this.radButStartLines.CheckedChanged += new System.EventHandler(this.radButStartLines_CheckedChanged);
             // 
             // label3
             // 
@@ -140,6 +143,7 @@
             this.chBxStartAllLogicExprFromNewLines.TabIndex = 1;
             this.chBxStartAllLogicExprFromNewLines.Text = "Start all logical expressions from new lines";
             this.chBxStartAllLogicExprFromNewLines.UseVisualStyleBackColor = true;
+            this.chBxStartAllLogicExprFromNewLines.CheckedChanged += new System.EventHandler(this.chBxStartAllLogicExprFromNewLines_CheckedChanged);
             // 
             // chBxUpperLvlLogicExprFromNewLines
             // 
@@ -150,6 +154,7 @@
             this.chBxUpperLvlLogicExprFromNewLines.TabIndex = 0;
             this.chBxUpperLvlLogicExprFromNewLines.Text = "Start the upper-level logical expressions from new lines";
             this.chBxUpperLvlLogicExprFromNewLines.UseVisualStyleBackColor = true;
+            this.chBxUpperLvlLogicExprFromNewLines.CheckedChanged += new System.EventHandler(this.chBxUpperLvlLogicExprFromNewLines_CheckedChanged);
             // 
             // groupBox2
             // 
@@ -163,7 +168,7 @@
             this.groupBox2.Controls.Add(this.chBxBranchResultExprsFromNewLines);
             this.groupBox2.Controls.Add(this.chBxResultKwrdsFromNewLinesThen);
             this.groupBox2.Controls.Add(this.chBxBranchConditionExprFromNewLines);
-            this.groupBox2.Controls.Add(this.chBxBranchConditionKerdsFromNewLinesWhen);
+            this.groupBox2.Controls.Add(this.chBxBranchConditionKeyWrdsFromNewLinesWhen);
             this.groupBox2.Location = new System.Drawing.Point(3, 143);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(583, 172);
@@ -178,6 +183,7 @@
             this.UpDownExprsIndent.Size = new System.Drawing.Size(87, 20);
             this.UpDownExprsIndent.TabIndex = 7;
             this.UpDownExprsIndent.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.UpDownExprsIndent.ValueChanged += new System.EventHandler(this.UpDownExprsIndent_ValueChanged);
             // 
             // UpDownBranchKeyWrdsIndent
             // 
@@ -186,6 +192,7 @@
             this.UpDownBranchKeyWrdsIndent.Size = new System.Drawing.Size(87, 20);
             this.UpDownBranchKeyWrdsIndent.TabIndex = 6;
             this.UpDownBranchKeyWrdsIndent.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.UpDownBranchKeyWrdsIndent.ValueChanged += new System.EventHandler(this.UpDownBranchKeyWrdsIndent_ValueChanged);
             // 
             // label5
             // 
@@ -214,6 +221,7 @@
             this.chBxBranchResultExprsFromNewLines.TabIndex = 3;
             this.chBxBranchResultExprsFromNewLines.Text = "Branch reslut expressions from new lines";
             this.chBxBranchResultExprsFromNewLines.UseVisualStyleBackColor = true;
+            this.chBxBranchResultExprsFromNewLines.CheckedChanged += new System.EventHandler(this.chBxBranchResultExprsFromNewLines_CheckedChanged);
             // 
             // chBxResultKwrdsFromNewLinesThen
             // 
@@ -224,6 +232,7 @@
             this.chBxResultKwrdsFromNewLinesThen.TabIndex = 2;
             this.chBxResultKwrdsFromNewLinesThen.Text = "Branch result keywords from new lines (THEN, ELSE)";
             this.chBxResultKwrdsFromNewLinesThen.UseVisualStyleBackColor = true;
+            this.chBxResultKwrdsFromNewLinesThen.CheckedChanged += new System.EventHandler(this.chBxResultKwrdsFromNewLinesThen_CheckedChanged);
             // 
             // chBxBranchConditionExprFromNewLines
             // 
@@ -234,16 +243,18 @@
             this.chBxBranchConditionExprFromNewLines.TabIndex = 1;
             this.chBxBranchConditionExprFromNewLines.Text = "Branch condition expressions from new lines";
             this.chBxBranchConditionExprFromNewLines.UseVisualStyleBackColor = true;
+            this.chBxBranchConditionExprFromNewLines.CheckedChanged += new System.EventHandler(this.chBxBranchConditionExprFromNewLines_CheckedChanged);
             // 
-            // chBxBranchConditionKerdsFromNewLinesWhen
+            // chBxBranchConditionKeyWrdsFromNewLinesWhen
             // 
-            this.chBxBranchConditionKerdsFromNewLinesWhen.AutoSize = true;
-            this.chBxBranchConditionKerdsFromNewLinesWhen.Location = new System.Drawing.Point(9, 19);
-            this.chBxBranchConditionKerdsFromNewLinesWhen.Name = "chBxBranchConditionKerdsFromNewLinesWhen";
-            this.chBxBranchConditionKerdsFromNewLinesWhen.Size = new System.Drawing.Size(267, 17);
-            this.chBxBranchConditionKerdsFromNewLinesWhen.TabIndex = 0;
-            this.chBxBranchConditionKerdsFromNewLinesWhen.Text = "Branch condition keywords from new lines (WHEN)";
-            this.chBxBranchConditionKerdsFromNewLinesWhen.UseVisualStyleBackColor = true;
+            this.chBxBranchConditionKeyWrdsFromNewLinesWhen.AutoSize = true;
+            this.chBxBranchConditionKeyWrdsFromNewLinesWhen.Location = new System.Drawing.Point(9, 19);
+            this.chBxBranchConditionKeyWrdsFromNewLinesWhen.Name = "chBxBranchConditionKeyWrdsFromNewLinesWhen";
+            this.chBxBranchConditionKeyWrdsFromNewLinesWhen.Size = new System.Drawing.Size(267, 17);
+            this.chBxBranchConditionKeyWrdsFromNewLinesWhen.TabIndex = 0;
+            this.chBxBranchConditionKeyWrdsFromNewLinesWhen.Text = "Branch condition keywords from new lines (WHEN)";
+            this.chBxBranchConditionKeyWrdsFromNewLinesWhen.UseVisualStyleBackColor = true;
+            this.chBxBranchConditionKeyWrdsFromNewLinesWhen.CheckedChanged += new System.EventHandler(this.chBxBranchConditionKeyWrdsFromNewLinesWhen_CheckedChanged);
             // 
             // ExpressionsTab
             // 
@@ -284,6 +295,6 @@
         private System.Windows.Forms.CheckBox chBxBranchResultExprsFromNewLines;
         private System.Windows.Forms.CheckBox chBxResultKwrdsFromNewLinesThen;
         private System.Windows.Forms.CheckBox chBxBranchConditionExprFromNewLines;
-        private System.Windows.Forms.CheckBox chBxBranchConditionKerdsFromNewLinesWhen;
+        private System.Windows.Forms.CheckBox chBxBranchConditionKeyWrdsFromNewLinesWhen;
     }
 }

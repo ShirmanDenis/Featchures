@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.UpDownSubQueryIndent = new System.Windows.Forms.NumericUpDown();
-            this.label2 = new System.Windows.Forms.Label();
-            this.chBxSubQueriesFromNewlInes = new System.Windows.Forms.CheckBox();
             this.chBxSameFormatAsMainQuery = new System.Windows.Forms.CheckBox();
+            this.chBxSubQueriesFromNewLines = new System.Windows.Forms.CheckBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.UpDownSubQueryIndent = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UpDownSubQueryIndent)).BeginInit();
             this.SuspendLayout();
@@ -44,7 +44,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.chBxSameFormatAsMainQuery);
-            this.groupBox1.Controls.Add(this.chBxSubQueriesFromNewlInes);
+            this.groupBox1.Controls.Add(this.chBxSubQueriesFromNewLines);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.UpDownSubQueryIndent);
             this.groupBox1.Controls.Add(this.label1);
@@ -55,22 +55,27 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Sub-queries format options";
             // 
-            // label1
+            // chBxSameFormatAsMainQuery
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 28);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(90, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Sub-query indent:";
+            this.chBxSameFormatAsMainQuery.AutoSize = true;
+            this.chBxSameFormatAsMainQuery.Location = new System.Drawing.Point(9, 109);
+            this.chBxSameFormatAsMainQuery.Name = "chBxSameFormatAsMainQuery";
+            this.chBxSameFormatAsMainQuery.Size = new System.Drawing.Size(241, 17);
+            this.chBxSameFormatAsMainQuery.TabIndex = 4;
+            this.chBxSameFormatAsMainQuery.Text = "Use the same formatting as for the main query";
+            this.chBxSameFormatAsMainQuery.UseVisualStyleBackColor = true;
+            this.chBxSameFormatAsMainQuery.CheckedChanged += new System.EventHandler(this.chBxSameFormatAsMainQuery_CheckedChanged);
             // 
-            // UpDownSubQueryIndent
+            // chBxSubQueriesFromNewLines
             // 
-            this.UpDownSubQueryIndent.Location = new System.Drawing.Point(143, 21);
-            this.UpDownSubQueryIndent.Name = "UpDownSubQueryIndent";
-            this.UpDownSubQueryIndent.Size = new System.Drawing.Size(80, 20);
-            this.UpDownSubQueryIndent.TabIndex = 1;
-            this.UpDownSubQueryIndent.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.chBxSubQueriesFromNewLines.AutoSize = true;
+            this.chBxSubQueriesFromNewLines.Location = new System.Drawing.Point(9, 76);
+            this.chBxSubQueriesFromNewLines.Name = "chBxSubQueriesFromNewLines";
+            this.chBxSubQueriesFromNewLines.Size = new System.Drawing.Size(172, 17);
+            this.chBxSubQueriesFromNewLines.TabIndex = 3;
+            this.chBxSubQueriesFromNewLines.Text = "Start subqueries from new lines";
+            this.chBxSubQueriesFromNewLines.UseVisualStyleBackColor = true;
+            this.chBxSubQueriesFromNewLines.CheckedChanged += new System.EventHandler(this.chBxSubQueriesFromNewLines_CheckedChanged);
             // 
             // label2
             // 
@@ -83,33 +88,31 @@
             this.label2.Text = "Sub-Queries format options determine the layout of sub-queries used in expression" +
     "s of query.";
             // 
-            // chBxSubQueriesFromNewlInes
+            // UpDownSubQueryIndent
             // 
-            this.chBxSubQueriesFromNewlInes.AutoSize = true;
-            this.chBxSubQueriesFromNewlInes.Location = new System.Drawing.Point(9, 76);
-            this.chBxSubQueriesFromNewlInes.Name = "chBxSubQueriesFromNewlInes";
-            this.chBxSubQueriesFromNewlInes.Size = new System.Drawing.Size(172, 17);
-            this.chBxSubQueriesFromNewlInes.TabIndex = 3;
-            this.chBxSubQueriesFromNewlInes.Text = "Start subqueries from new lines";
-            this.chBxSubQueriesFromNewlInes.UseVisualStyleBackColor = true;
+            this.UpDownSubQueryIndent.Location = new System.Drawing.Point(143, 21);
+            this.UpDownSubQueryIndent.Name = "UpDownSubQueryIndent";
+            this.UpDownSubQueryIndent.Size = new System.Drawing.Size(80, 20);
+            this.UpDownSubQueryIndent.TabIndex = 1;
+            this.UpDownSubQueryIndent.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.UpDownSubQueryIndent.ValueChanged += new System.EventHandler(this.UpDownSubQueryIndent_ValueChanged);
             // 
-            // chBxSameFormatAsMainQuery
+            // label1
             // 
-            this.chBxSameFormatAsMainQuery.AutoSize = true;
-            this.chBxSameFormatAsMainQuery.Location = new System.Drawing.Point(9, 109);
-            this.chBxSameFormatAsMainQuery.Name = "chBxSameFormatAsMainQuery";
-            this.chBxSameFormatAsMainQuery.Size = new System.Drawing.Size(241, 17);
-            this.chBxSameFormatAsMainQuery.TabIndex = 4;
-            this.chBxSameFormatAsMainQuery.Text = "Use the same formatting as for the main query";
-            this.chBxSameFormatAsMainQuery.UseVisualStyleBackColor = true;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 28);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(90, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Sub-query indent:";
             // 
-            // SubQueriesInExpr
+            // SubQueryTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.groupBox1);
-            this.Name = "SubQueriesInExpr";
+            this.Name = "SubQueryTab";
             this.Size = new System.Drawing.Size(763, 180);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -122,7 +125,7 @@
 
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox chBxSameFormatAsMainQuery;
-        private System.Windows.Forms.CheckBox chBxSubQueriesFromNewlInes;
+        private System.Windows.Forms.CheckBox chBxSubQueriesFromNewLines;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown UpDownSubQueryIndent;
         private System.Windows.Forms.Label label1;

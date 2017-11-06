@@ -13,13 +13,67 @@ namespace FormattingOptionsDemo
 {
     public partial class ExpressionsTab : UserControl
     {
-        private SQLFormattingOptions _sqlFormattingOptions;
+        private SQLBuilderSelectFormat _options;
 
-        public ExpressionsTab(SQLFormattingOptions sqlFormattingOptions)
+        public ExpressionsTab(SQLBuilderSelectFormat options)
         {
             InitializeComponent();
+            _options = options;
+        }
 
-            _sqlFormattingOptions = sqlFormattingOptions;
+        private void chBxUpperLvlLogicExprFromNewLines_CheckedChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void chBxStartAllLogicExprFromNewLines_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radButStartLines_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radButEndLines_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void UpDownIndentForNestedConditions_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chBxBranchConditionKeyWrdsFromNewLinesWhen_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chBxBranchConditionExprFromNewLines_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chBxResultKwrdsFromNewLinesThen_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chBxBranchResultExprsFromNewLines_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void UpDownBranchKeyWrdsIndent_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void UpDownExprsIndent_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

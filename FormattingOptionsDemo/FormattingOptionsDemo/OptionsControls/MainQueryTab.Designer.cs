@@ -36,13 +36,13 @@
             this.chBxEnableDynamicRightMargin = new System.Windows.Forms.CheckBox();
             this.chBxEnableDynamicIndents = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.cmbBoxKeyWordsCase = new System.Windows.Forms.ComboBox();
+            this.upDownMaxCharsInLine = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.chBxEnableWordWrap = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownMaxCharsInLine)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -57,8 +57,8 @@
             this.groupBox1.Controls.Add(this.chBxEnableDynamicRightMargin);
             this.groupBox1.Controls.Add(this.chBxEnableDynamicIndents);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.comboBox1);
-            this.groupBox1.Controls.Add(this.numericUpDown1);
+            this.groupBox1.Controls.Add(this.cmbBoxKeyWordsCase);
+            this.groupBox1.Controls.Add(this.upDownMaxCharsInLine);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.chBxEnableWordWrap);
@@ -96,6 +96,7 @@
             this.chBxParenthesizeEachSingleCondition.TabIndex = 9;
             this.chBxParenthesizeEachSingleCondition.Text = "Parenthesize each single condition";
             this.chBxParenthesizeEachSingleCondition.UseVisualStyleBackColor = true;
+            this.chBxParenthesizeEachSingleCondition.CheckedChanged += new System.EventHandler(this.chBxParenthesizeEachSingleCondition_CheckedChanged);
             // 
             // chBxParenthesizeConditionsWithinAndOperators
             // 
@@ -106,6 +107,7 @@
             this.chBxParenthesizeConditionsWithinAndOperators.TabIndex = 8;
             this.chBxParenthesizeConditionsWithinAndOperators.Text = "Parenthesize conditions within AND operators";
             this.chBxParenthesizeConditionsWithinAndOperators.UseVisualStyleBackColor = true;
+            this.chBxParenthesizeConditionsWithinAndOperators.CheckedChanged += new System.EventHandler(this.chBxParenthesizeConditionsWithinAndOperators_CheckedChanged);
             // 
             // chBxEnableDynamicRightMargin
             // 
@@ -116,6 +118,7 @@
             this.chBxEnableDynamicRightMargin.TabIndex = 7;
             this.chBxEnableDynamicRightMargin.Text = "Enable dynamic right margin";
             this.chBxEnableDynamicRightMargin.UseVisualStyleBackColor = true;
+            this.chBxEnableDynamicRightMargin.CheckedChanged += new System.EventHandler(this.chBxEnableDynamicRightMargin_CheckedChanged);
             // 
             // chBxEnableDynamicIndents
             // 
@@ -126,6 +129,7 @@
             this.chBxEnableDynamicIndents.TabIndex = 6;
             this.chBxEnableDynamicIndents.Text = "Enable dynamic indents";
             this.chBxEnableDynamicIndents.UseVisualStyleBackColor = true;
+            this.chBxEnableDynamicIndents.CheckedChanged += new System.EventHandler(this.chBxEnableDynamicIndents_CheckedChanged);
             // 
             // label3
             // 
@@ -137,36 +141,38 @@
             this.label3.TabIndex = 5;
             this.label3.Text = "These options affect on whole SQL query text (main query and sub-queries)";
             // 
-            // comboBox1
+            // cmbBoxKeyWordsCase
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.cmbBoxKeyWordsCase.FormattingEnabled = true;
+            this.cmbBoxKeyWordsCase.Items.AddRange(new object[] {
             "First Upper",
             "UpperCase",
             "LowerCase"});
-            this.comboBox1.Location = new System.Drawing.Point(171, 76);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(120, 21);
-            this.comboBox1.TabIndex = 4;
-            this.comboBox1.Text = "UpperCase";
+            this.cmbBoxKeyWordsCase.Location = new System.Drawing.Point(171, 76);
+            this.cmbBoxKeyWordsCase.Name = "cmbBoxKeyWordsCase";
+            this.cmbBoxKeyWordsCase.Size = new System.Drawing.Size(120, 21);
+            this.cmbBoxKeyWordsCase.TabIndex = 4;
+            this.cmbBoxKeyWordsCase.Text = "UpperCase";
+            this.cmbBoxKeyWordsCase.SelectedIndexChanged += new System.EventHandler(this.cmbBoxKeyWordsCase_SelectedIndexChanged);
             // 
-            // numericUpDown1
+            // upDownMaxCharsInLine
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(171, 45);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
+            this.upDownMaxCharsInLine.Location = new System.Drawing.Point(171, 45);
+            this.upDownMaxCharsInLine.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDown1.TabIndex = 3;
-            this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numericUpDown1.Value = new decimal(new int[] {
+            this.upDownMaxCharsInLine.Name = "upDownMaxCharsInLine";
+            this.upDownMaxCharsInLine.Size = new System.Drawing.Size(120, 20);
+            this.upDownMaxCharsInLine.TabIndex = 3;
+            this.upDownMaxCharsInLine.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.upDownMaxCharsInLine.Value = new decimal(new int[] {
             120,
             0,
             0,
             0});
+            this.upDownMaxCharsInLine.ValueChanged += new System.EventHandler(this.upDownMaxCharsInLine_ValueChanged);
             // 
             // label2
             // 
@@ -209,7 +215,7 @@
             this.Size = new System.Drawing.Size(728, 400);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownMaxCharsInLine)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -224,8 +230,8 @@
         private System.Windows.Forms.CheckBox chBxEnableDynamicRightMargin;
         private System.Windows.Forms.CheckBox chBxEnableDynamicIndents;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.ComboBox cmbBoxKeyWordsCase;
+        private System.Windows.Forms.NumericUpDown upDownMaxCharsInLine;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox chBxEnableWordWrap;
