@@ -117,4 +117,33 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="sqlQuery1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="sqlContext1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>124, 17</value>
+  </metadata>
+  <metadata name="mssqlSyntaxProvider1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>240, 17</value>
+  </metadata>
+  <data name="metadataStructure1.XML" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;structure load_metadata_children="True"&gt;
+	&lt;filter&gt;
+		&lt;filter_item&gt;
+			&lt;exclude&gt;False&lt;/exclude&gt;
+			&lt;object_types&gt;UserQuery&lt;/object_types&gt;
+			&lt;user_objects&gt;True&lt;/user_objects&gt;
+			&lt;system_objects&gt;False&lt;/system_objects&gt;
+			&lt;server&gt;%&lt;/server&gt;
+			&lt;database&gt;%&lt;/database&gt;
+			&lt;schema&gt;%&lt;/schema&gt;
+			&lt;package&gt;%&lt;/package&gt;
+			&lt;name&gt;%&lt;/name&gt;
+			&lt;field&gt;%&lt;/field&gt;
+			&lt;case_sensitive&gt;False&lt;/case_sensitive&gt;
+		&lt;/filter_item&gt;
+	&lt;/filter&gt;
+&lt;/structure&gt;</value>
+  </data>
 </root>

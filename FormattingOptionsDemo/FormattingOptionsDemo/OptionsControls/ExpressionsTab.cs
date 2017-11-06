@@ -7,14 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ActiveQueryBuilder.Core;
 
 namespace FormattingOptionsDemo
 {
-    public partial class SubQueryTab : UserControl
+    public partial class ExpressionsTab : UserControl
     {
-        public SubQueryTab()
+        private SQLFormattingOptions _sqlFormattingOptions;
+
+        public ExpressionsTab(SQLFormattingOptions sqlFormattingOptions)
         {
             InitializeComponent();
+
+            _sqlFormattingOptions = sqlFormattingOptions;
         }
     }
 }

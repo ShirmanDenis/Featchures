@@ -7,14 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ActiveQueryBuilder.Core;
 
 namespace FormattingOptionsDemo
 {
     public partial class CommonTab : UserControl
     {
-        public CommonTab()
+        private SQLFormattingOptions _sqlFormattingOptions;
+
+        public CommonTab(SQLFormattingOptions sqlFormattingOptions)
         {
             InitializeComponent();
+
+            _sqlFormattingOptions = sqlFormattingOptions;
         }
     }
 }

@@ -50,42 +50,42 @@
     <Compile Include="FormattedOptionsDemo.Designer.cs">
       <DependentUpon>FormattedOptionsDemo.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainQueryTab.cs">
+    <Compile Include="OptionsControls\MainQueryTab.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="MainQueryTab.Designer.cs">
+    <Compile Include="OptionsControls\MainQueryTab.Designer.cs">
       <DependentUpon>MainQueryTab.cs</DependentUpon>
     </Compile>
-    <Compile Include="CommonTab.cs">
+    <Compile Include="OptionsControls\CommonTab.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CommonTab.Designer.cs">
+    <Compile Include="OptionsControls\CommonTab.Designer.cs">
       <DependentUpon>CommonTab.cs</DependentUpon>
     </Compile>
-    <Compile Include="ExpressionsTab.cs">
+    <Compile Include="OptionsControls\ExpressionsTab.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ExpressionsTab.Designer.cs">
+    <Compile Include="OptionsControls\ExpressionsTab.Designer.cs">
       <DependentUpon>ExpressionsTab.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SubQueryTab.cs">
+    <Compile Include="OptionsControls\SubQueryTab.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="SubQueryTab.Designer.cs">
+    <Compile Include="OptionsControls\SubQueryTab.Designer.cs">
       <DependentUpon>SubQueryTab.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="FormattedOptionsDemo.resx">
       <DependentUpon>FormattedOptionsDemo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainQueryTab.resx">
+    <EmbeddedResource Include="OptionsControls\MainQueryTab.resx">
       <DependentUpon>MainQueryTab.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CommonTab.resx">
+    <EmbeddedResource Include="OptionsControls\CommonTab.resx">
       <DependentUpon>CommonTab.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ExpressionsTab.resx">
+    <EmbeddedResource Include="OptionsControls\ExpressionsTab.resx">
       <DependentUpon>ExpressionsTab.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -97,7 +97,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="SubQueryTab.resx">
+    <EmbeddedResource Include="OptionsControls\SubQueryTab.resx">
       <DependentUpon>SubQueryTab.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
@@ -112,6 +112,29 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="D:\aqb\MetadataProviders\MSSQLMetadataProvider\MsSqlMetadataProvider.csproj">
+      <Project>{c1e81f68-f527-4f06-a61a-2606b02aed8a}</Project>
+      <Name>MsSqlMetadataProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\aqb\QueryBuilder.Core\QueryBuilder.Core.csproj">
+      <Project>{d571fc40-8ef7-4c6f-925a-4aae76e157a0}</Project>
+      <Name>QueryBuilder.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\aqb\QueryBuilder.View.WinForms\QueryBuilder.View.WinForms.csproj">
+      <Project>{7128d76a-0ff3-4782-9448-1d412357cde9}</Project>
+      <Name>QueryBuilder.View.WinForms</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\aqb\QueryBuilder.View\QueryBuilder.View.csproj">
+      <Project>{05768013-1b6a-46b9-bd03-d5487a8fcc53}</Project>
+      <Name>QueryBuilder.View</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Northwind.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
