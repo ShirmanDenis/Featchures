@@ -5,10 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FormParser
+namespace FormParser.ControlsDescriptions
 {
     class LabelSpec : BaseSpec
     {
-
+        public override Control CreateControl()
+        {
+            var label = new Label();
+            LoadOptionsOnControl(label);
+            return label;
+        }
     }
 }

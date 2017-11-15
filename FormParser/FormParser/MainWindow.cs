@@ -32,11 +32,15 @@ namespace FormParser
 
         private void buttonShow_Click(object sender, EventArgs e)
         {
-            var xmlSerializer = new XmlSerializer();
-            var formSpec = new FormSpec();
-            formSpec.LoadOptions(this);
+            var f = new FormSpec();
 
-            var xml =  xmlSerializer.SerializeObject(formSpec);
+            f.LoadOptionsFromControl(this);
+
+            var json = JsonConvert.SerializeObject(f);
+
+            var fs = JsonConvert.DeserializeObject<FormSpec>(json);
+
+            fs.CreateControl().Show();
         }
     }
 }

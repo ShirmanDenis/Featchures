@@ -5,10 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FormParser
+namespace FormParser.ControlsDescriptions
 {
     class ButtonSpec : BaseSpec
     {
-
+        public override Control CreateControl()
+        {
+            var button = new Button();
+            LoadOptionsOnControl(button);
+            return button;
+        }
     }
 }

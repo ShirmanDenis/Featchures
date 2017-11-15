@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,24 +10,44 @@ using FormParser.Attributes;
 
 namespace FormParser
 {
-    abstract class BaseSpec
+    public class BaseSpec
     {
-        public string Text { get; private set; }
-        public string Name { get; private set; }
-        public Size ClientSize { get; private set; }    
-        public Point Location { get; private set; }
+        public string Text { get; set; }
+        public string Name { get; set; }
+        public Size ClientSize { get; set; }    
+        public Point Location { get; set; }
 
-        [IgnoreSerialization]
-        public bool IsOptionsLoad { get; protected set; }
-
-        public virtual void LoadOptions(Control control)
+        public virtual void LoadOptionsFromControl(Control control)
         {
-            Name = control.Name;
             Text = control.Text;
+            Name = control.Name;
             ClientSize = control.ClientSize;
             Location = control.Location;
-
-            IsOptionsLoad = true;
         }
+
+        public virtual Control CreateControl()
+        {
+            var control = new Control();
+            LoadOptionsOnControl(control);
+            return control;
+        }
+
+        protected virtual void LoadOptionsOnControl(Control control)
+        {
+            control.Text = Text;
+            control.Name = Name;
+            control.ClientSize = ClientSize;
+            control.Location = Location;
+        }
+
+        //public void LoadFromXml(string xml)
+        //{
+        //    new XmlSerializer().DeserializeObject(xml, this);
+        //}
+
+        //public string WriteToXml()
+        //{
+        //    return new XmlSerializer().SerializeObject(this);
+        //}
     }
 }

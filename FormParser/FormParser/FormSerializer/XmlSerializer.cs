@@ -2,11 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
+using System.Xml.Linq;
+using System.Xml.Schema;
 
 namespace FormParser
 {
@@ -112,20 +115,15 @@ namespace FormParser
             return string.IsNullOrEmpty(reader.Value) ? reader.ReadString() : reader.Value;
         }
 
-        public object GetObjectProperty(object description, string propertyName, params object[] tags)
+        public int? GetIntProperty(object description, string propertyName)
         {
-            throw new NotImplementedException();
-        }
-
-        public int? GetIntProperty(object description, string propertyName, params object[] tags)
-        {
-            var strValue = GetStringProperty(description, propertyName, tags);
+            var strValue = GetStringProperty(description, propertyName);
             return strValue != null ? (int?)int.Parse(strValue) : null;
         }
 
-        public long? GetLongProperty(object description, string propertyName, params object[] tags)
+        public long? GetLongProperty(object description, string propertyName)
         {
-            var strValue = GetStringProperty(description, propertyName, tags);
+            var strValue = GetStringProperty(description, propertyName);
             return strValue != null ? (long?)long.Parse(strValue) : null;
         }
 
@@ -133,94 +131,26 @@ namespace FormParser
         {
             var strValue = GetStringProperty(description, propertyName);
             double returnValue;
-            return double.TryParse(strValue, out returnValue) ? (double?)returnValue : null;
+            return double.TryParse(strValue, out returnValue)? (double?)returnValue : null;
         }
 
-        public string GetStringProperty(object description, string propertyName, params object[] tags)
+        public string GetStringProperty(object description, string propertyName)
         {
             var reader = (XmlReader)description;
 
             return reader.NodeType == XmlNodeType.Attribute ? reader.Value : reader.ReadString();
         }
 
-        public T GetEnumProperty<T>(object description, string propertyName, params object[] tags)
+        public T GetEnumProperty<T>(object description, string propertyName)
         {
-            var strValue = GetStringProperty(description, propertyName, tags);
+            var strValue = GetStringProperty(description, propertyName);
             return strValue != null ? (T)Enum.Parse(typeof(T), strValue) : default(T);
         }
 
-        public bool? GetBoolProperty(object description, string propertyName, params object[] tags)
+        public bool? GetBoolProperty(object description, string propertyName)
         {
-            var strValue = GetStringProperty(description, propertyName, tags);
+            var strValue = GetStringProperty(description, propertyName);
             return strValue != null ? (bool?)bool.Parse(strValue) : null;
-        }
-
-        public IEnumerable GetArrayProperty(object description, string propertyName, params object[] tags)
-        {
-            var reader = (XmlReader)description;
-            if (reader.EOF) yield break;
-
-            if (tags.Length == 2 && !string.IsNullOrEmpty(propertyName))
-            {
-                //var objDecodeActions = (Dictionary<string, MetadataDeserializationService.ObjectDecoder>) tags[1];
-                Reader.Read();
-
-                //MetadataDeserializationService.ObjectDecoder arrayObjectInitMethod;
-                //var isMethodFound = objDecodeActions.TryGetValue(reader.LocalName, out arrayObjectInitMethod);
-                //Debug.Assert(isMethodFound, "Missing decode xml part");
-
-                //arrayObjectInitMethod(description, tags[0]);
-
-                yield break;
-            }
-
-            Debug.Assert(tags.Length != 0, "Tags must have");
-            var arrayItemTypes = (List<string>)tags[0];
-
-            XmlReader inner;
-            if (reader.NodeType == XmlNodeType.EndElement)
-            {
-                reader.Read();
-                inner = reader.ReadSubtree();
-                inner.Read();
-            }
-            else if (arrayItemTypes.Contains(reader.LocalName) && reader.NodeType == XmlNodeType.Element)
-            {
-                var name = reader.LocalName;
-                reader.MoveToContent();
-
-                inner = reader.ReadSubtree();
-                inner.ReadToDescendant(name);
-
-                var innerDeth = inner.Depth;
-                while (arrayItemTypes.Contains(inner.Name) && inner.Depth == innerDeth)
-                {
-                    yield return inner;
-                    inner.Read();
-                }
-                inner.Close();
-
-                yield break;
-            }
-            else
-            {
-                reader.MoveToElement();
-                inner = reader.ReadSubtree();
-                inner.ReadStartElement(reader.Name);
-            }
-
-            var deth = inner.Depth;
-            while (arrayItemTypes.Contains(inner.Name) && inner.Depth == deth)
-            {
-                var itemSubTree = inner.ReadSubtree();
-
-                itemSubTree.Read();
-                yield return itemSubTree;
-                itemSubTree.Close();
-
-                inner.Read();
-            }
-            inner.Close();
         }
 
         public void ReadProperties(object description, object target, Dictionary<string, PropertyDecoder> propDecoders)
@@ -273,8 +203,7 @@ namespace FormParser
                         subReader.Read();
                         decoder(subReader, target, propName);
                         subReader.Close();
-                    }
-                    else if (propDecoders.ContainsKey(""))
+                    } else if (propDecoders.ContainsKey(""))
                     {
                         var subReader = reader.ReadSubtree();
                         subReader.Read();
@@ -286,15 +215,37 @@ namespace FormParser
                 }
             }
         }
-
-        IEnumerable IDescriptionAdapter.GetArrayProperty(object description, string propertyName, params object[] tags)
-        {
-            throw new NotImplementedException();
-        }
     }
 
     public class XmlSerializer
     {
+        public bool SerializeDefaultValues { get; set; }
+        
+        #region Deserialization
+
+        public void DeserializeObject(Stream stream, object obj)
+        {
+            var adapter = new XmlAdapter(stream);
+            var service = new OptionsDeserializationService(adapter);
+
+            adapter.Reader.ReadToFollowing(obj.GetType().Name);
+
+            service.DecodeObject(adapter.Reader, obj);
+        }
+
+        public void DeserializeObject(string xml, object obj)
+        {
+            var buffer = Encoding.UTF8.GetBytes(xml);
+            using (var memoryStream = new MemoryStream(buffer))
+            {
+                DeserializeObject(memoryStream, obj);
+            }
+        }
+
+        #endregion
+
+        #region Serialization
+
         public void SerializeObject(Stream stream, object obj)
         {
             using (var builder = new XmlDescriptionBuilder(stream))
@@ -322,23 +273,6 @@ namespace FormParser
             }
         }
 
-        public void DeserializeObject(Stream stream, object obj)
-        {
-            var adapter = new XmlAdapter(stream);
-            var service = new OptionsDeserializationService(adapter);
-
-            adapter.Reader.ReadToFollowing(obj.GetType().Name);
-
-            service.DecodeObject(adapter.Reader, obj);
-        }
-
-        public void DeserializeObject(string xml, object obj)
-        {
-            var buffer = Encoding.UTF8.GetBytes(xml);
-            using (var memoryStream = new MemoryStream(buffer))
-            {
-                DeserializeObject(memoryStream, obj);
-            }
-        }
+        #endregion
     }
 }

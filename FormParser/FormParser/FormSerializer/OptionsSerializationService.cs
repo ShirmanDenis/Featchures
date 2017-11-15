@@ -25,6 +25,8 @@ namespace FormParser
 
         public void EncodeObject(object handle, object objToEncode)
         {
+            Builder.WriteProperty(handle, "ClassName", objToEncode.GetType().Name);
+
             var properties = objToEncode
                 .GetType()
                     .GetProperties(BindingFlags.Instance | BindingFlags.Public)
@@ -55,6 +57,18 @@ namespace FormParser
                 else if (propertyInfo.PropertyType.IsArray)
                 {
                     var array = (Array)propertyValue;
+                    foreach (var item in array)
+                    {
+                        var arrayHandle = Builder.BeginObjectProperty(handle, propertyInfo.Name);
+                        {
+                            EncodeObject(arrayHandle, item);
+                        }
+                        Builder.EndObjectProperty(arrayHandle);
+                    }
+                }
+                else if (propertyInfo.PropertyType.GetInterfaces().Contains(typeof(IEnumerable)))
+                {
+                    var array = (IEnumerable)propertyValue;
                     foreach (var item in array)
                     {
                         var arrayHandle = Builder.BeginObjectProperty(handle, propertyInfo.Name);
