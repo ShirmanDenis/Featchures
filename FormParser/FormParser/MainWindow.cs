@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FormParser.ControlFabric;
 using Newtonsoft.Json;
 
 namespace FormParser
@@ -32,15 +33,13 @@ namespace FormParser
 
         private void buttonShow_Click(object sender, EventArgs e)
         {
-            var f = new FormSpec();
+            var json = File.ReadAllText(openFileDialog1.FileName);
 
-            f.LoadOptionsFromControl(this);
+            var formParser = new FormParser(new ControlSpecFabric());
 
-            var json = JsonConvert.SerializeObject(f);
+            var control = formParser.ParseFromJson(json);
 
-            var fs = JsonConvert.DeserializeObject<FormSpec>(json);
-
-            fs.CreateControl().Show();
+            control.Show();
         }
     }
 }

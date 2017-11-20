@@ -1,22 +1,25 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using FormParser.Attributes;
 
 namespace FormParser
 {
-    public class BaseSpec
+    public abstract class BaseSpec
     {
+        public abstract string ControlType { get; }
         public string Text { get; set; }
         public string Name { get; set; }
         public Size ClientSize { get; set; }    
         public Point Location { get; set; }
-
+        
         public virtual void LoadOptionsFromControl(Control control)
         {
             Text = control.Text;
@@ -25,12 +28,7 @@ namespace FormParser
             Location = control.Location;
         }
 
-        public virtual Control CreateControl()
-        {
-            var control = new Control();
-            LoadOptionsOnControl(control);
-            return control;
-        }
+        public abstract Control CreateControl();
 
         protected virtual void LoadOptionsOnControl(Control control)
         {
@@ -40,14 +38,59 @@ namespace FormParser
             control.Location = Location;
         }
 
-        //public void LoadFromXml(string xml)
+        public Dictionary<string, object> GetDescription()
+        {
+            var properties = GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public);
+
+            return properties.ToDictionary(property => property.Name, property => property.GetValue(this));
+        }
+
+        public void SetDescription(Dictionary<string, object> description)
+        {
+            var type = GetType();
+
+            foreach (var pair in description)
+            {
+                var property = type.GetProperty(pair.Key);
+
+                Debug.Assert(property != null);
+
+                if (property.SetMethod == null) continue;
+
+                var value = description[pair.Key];
+                property.SetValue(this, value);
+            }
+        }
+
+        //public virtual IDictionary<string, object> GetDescription()
         //{
-        //    new XmlSerializer().DeserializeObject(xml, this);
+        //    var description = new Dictionary<string, object>
+        //    {
+        //        {"ClassName", GetType().Name },
+        //        {"Text", Text},
+        //        {"Name", Name },
+        //        {"ClientSize", ClientSize },
+        //        {"Location", Location }
+        //    };
+
+        //    return description;
         //}
 
-        //public string WriteToXml()
+        //public virtual void SetDescription(IDictionary<string, object> description)
         //{
-        //    return new XmlSerializer().SerializeObject(this);
+        //    object text;
+        //    if (description.TryGetValue("Text", out text))
+        //        Text = text.ToString();
+
+        //    object name;
+        //    if (description.TryGetValue("Name", out name))
+        //        Name = name.ToString();
+
+        //    object clientSize;
+        //    if (description.TryGetValue("ClientSize", out clientSize))
+        //        ClientSize = (Size) clientSize;
+
+        //    Location = (Point)description["Location"];
         //}
     }
 }

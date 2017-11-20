@@ -9,6 +9,8 @@ namespace FormParser.ControlsDescriptions
 {
     class ButtonSpec : BaseSpec
     {
+        public override string ControlType { get { return typeof(Button).Name; } }
+
         public override Control CreateControl()
         {
             var button = new Button();

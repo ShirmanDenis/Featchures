@@ -13,10 +13,6 @@ namespace FormParser
 {
     class FormSpec : BaseSpec
     {
-        public readonly List<TextBoxSpec> TextBoxesSpecs  = new List<TextBoxSpec>();
-        public readonly List<ButtonSpec>  ButtonSpecs = new List<ButtonSpec>();
-        public readonly List<LabelSpec>   LabelSpecs = new List<LabelSpec>();
-
         public SizeF AutoScaleDimensions { get; set; }
         public AutoScaleMode AutoScaleMode { get; set; }
 
@@ -33,6 +29,8 @@ namespace FormParser
             return form;
         }
 
+        public override string ControlType { get { return typeof(Form).Name; } }
+
         public override void LoadOptionsFromControl(Control control)
         {
             base.LoadOptionsFromControl(control);
@@ -42,32 +40,6 @@ namespace FormParser
             {
                 AutoScaleDimensions = form.AutoScaleDimensions;
                 AutoScaleMode = form.AutoScaleMode;
-            }
-
-            foreach (Control innerControl in control.Controls)
-            {
-                BaseSpec spec = null;
-
-                if (innerControl is TextBox)
-                {
-                    spec = new TextBoxSpec();
-                    TextBoxesSpecs.Add((TextBoxSpec)spec);
-                }
-                if (innerControl is Label)
-                {
-                    spec = new LabelSpec();
-                    LabelSpecs.Add((LabelSpec)spec);
-                }
-                if (innerControl is Button)
-                {
-                    spec = new ButtonSpec();
-                    ButtonSpecs.Add((ButtonSpec)spec);
-                }
-
-                if (spec != null)
-                {
-                    spec.LoadOptionsFromControl(innerControl); 
-                }
             }
         }
 
@@ -80,15 +52,6 @@ namespace FormParser
             {
                 form.AutoScaleDimensions = AutoScaleDimensions;
                 form.AutoScaleMode = AutoScaleMode;
-
-                foreach (var buttonSpec in ButtonSpecs)
-                    form.Controls.Add(buttonSpec.CreateControl());
-
-                foreach (var labelSpec in LabelSpecs)
-                    form.Controls.Add(labelSpec.CreateControl());
-
-                foreach (var textBoxSpec in TextBoxesSpecs)
-                    form.Controls.Add(textBoxSpec.CreateControl());
             }
         }
     }
