@@ -7,9 +7,9 @@ using System.Windows.Forms;
 
 namespace FormParser.ControlsDescriptions
 {
-    class TextBoxSpec : BaseSpec
+    public class TextBoxSpec : BaseSpec
     {
-        public override string ControlType { get { return typeof(TextBox).Name; } }
+        public override string ControlType => typeof(TextBox).Name;
 
         public override Control CreateControl()
         {

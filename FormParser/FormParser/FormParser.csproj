@@ -48,14 +48,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ControlFabric\ControlSpecFabric.cs" />
-    <Compile Include="ControlFabric\IControlSpecFabric.cs" />
     <Compile Include="ControlsDescriptions\BaseSpec.cs" />
     <Compile Include="ControlsDescriptions\ButtonSpec.cs" />
     <Compile Include="ControlsDescriptions\FormSpec.cs" />
     <Compile Include="ControlsDescriptions\LabelSpec.cs" />
     <Compile Include="ControlsDescriptions\TextBoxSpec.cs" />
-    <Compile Include="FormParser\FormParser.cs" />
+    <Compile Include="Parser\FormParser.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,6 +96,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ControlFabric\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

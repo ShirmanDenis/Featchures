@@ -1,15 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using FormParser.ControlFabric;
-using Newtonsoft.Json;
 
 namespace FormParser
 {
@@ -33,13 +24,6 @@ namespace FormParser
 
         private void buttonShow_Click(object sender, EventArgs e)
         {
-            var json = File.ReadAllText(openFileDialog1.FileName);
-
-            var formParser = new FormParser(new ControlSpecFabric());
-
-            var control = formParser.ParseFromJson(json);
-
-            control.Show();
         }
     }
 }

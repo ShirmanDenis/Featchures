@@ -29,7 +29,7 @@ namespace FormParser
             return form;
         }
 
-        public override string ControlType { get { return typeof(Form).Name; } }
+        public override string ControlType => typeof(Form).Name;
 
         public override void LoadOptionsFromControl(Control control)
         {

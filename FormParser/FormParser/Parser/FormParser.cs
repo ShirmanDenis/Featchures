@@ -5,19 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using FormParser.ControlFabric;
 using Newtonsoft.Json;
 
 namespace FormParser
 {
-    class FormParser
+    public class FormParser
     {
-        private readonly IControlSpecFabric SpecFabric;
-
-        public FormParser(IControlSpecFabric specFabric)
-        {
-            SpecFabric = specFabric;
-        }
+        private readonly Dictionary<string, Func<BaseSpec>> _specCreators = new Dictionary<string, Func<BaseSpec>>();
 
         public Control ParseFromJson(string json)
         {
@@ -28,17 +22,16 @@ namespace FormParser
 
         private Control ParseFromDescription(Dictionary<string, object> description)
         {
-            object type;
-            if (!description.TryGetValue("ControlType", out type)) throw new Exception("Missing property ControlType");
+            if (!description.TryGetValue("ControlType", out object type)) throw new Exception("Missing property ControlType");
 
-            var controlSpec = SpecFabric.CreateControlSpec(type.ToString());
+            if (!_specCreators.TryGetValue(type.ToString(), out Func<BaseSpec> specCreator)) throw new Exception($"Creator for type \"{type}\" does not exists");
 
+            var controlSpec = specCreator();
             controlSpec.SetDescription(description);
 
             var control = controlSpec.CreateControl();
 
-            object children;
-            if (!description.TryGetValue("Children", out children))
+            if (!description.TryGetValue("Children", out object children))
                 return control;
 
             foreach (var childDescription in (IEnumerable<Dictionary<string, object>>)children)
@@ -53,7 +46,7 @@ namespace FormParser
 
         public string ConvertToJson(Form form, bool indent = false)
         {
-            var controlSpec = SpecFabric.CreateControlSpec("Form");
+            var controlSpec = _specCreators["Form"]();
 
             controlSpec.LoadOptionsFromControl(form);
 
@@ -63,11 +56,9 @@ namespace FormParser
         private string BuildChildDescription(Dictionary<string, object> parentDescription, Control parentControl, bool indent)
         {
             var children = new List<Dictionary<string, object>>();
-
             foreach (Control innerControl in parentControl.Controls)
             {
-                var innerSpec = SpecFabric.CreateControlSpec(innerControl.GetType().Name);
-
+                var innerSpec = _specCreators[innerControl.GetType().Name]();
                 innerSpec.LoadOptionsFromControl(innerControl);
 
                 var childDescription = innerSpec.GetDescription();
@@ -76,10 +67,19 @@ namespace FormParser
 
                 children.Add(childDescription);
             }
-
             parentDescription.Add("Children", children);
 
             return JsonConvert.SerializeObject(parentDescription, indent ? Formatting.Indented : Formatting.None);
+        }
+
+        public void RegisterControlSpec(string controlType, Func<BaseSpec> controlSpecCreator)
+        {
+            _specCreators.Add(controlType, controlSpecCreator);
+        }
+
+        public bool IsControlRegistered(string controlType)
+        {
+            return _specCreators.ContainsKey(controlType);
         }
     }
 }
