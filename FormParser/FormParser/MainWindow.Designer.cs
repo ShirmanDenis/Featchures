@@ -28,23 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.filePathTextBox = new System.Windows.Forms.TextBox();
+            this.jsonTextBox = new System.Windows.Forms.TextBox();
             this.openFileButton = new System.Windows.Forms.Button();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.jsonFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.buttonShow = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.luaFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.luaTextBox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.luaButtonOpen = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // filePathTextBox
+            // jsonTextBox
             // 
-            this.filePathTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.jsonTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.filePathTextBox.Location = new System.Drawing.Point(12, 25);
-            this.filePathTextBox.Name = "filePathTextBox";
-            this.filePathTextBox.ReadOnly = true;
-            this.filePathTextBox.Size = new System.Drawing.Size(260, 20);
-            this.filePathTextBox.TabIndex = 0;
+            this.jsonTextBox.Location = new System.Drawing.Point(12, 25);
+            this.jsonTextBox.Name = "jsonTextBox";
+            this.jsonTextBox.ReadOnly = true;
+            this.jsonTextBox.Size = new System.Drawing.Size(260, 20);
+            this.jsonTextBox.TabIndex = 0;
             // 
             // openFileButton
             // 
@@ -56,23 +60,14 @@
             this.openFileButton.UseVisualStyleBackColor = true;
             this.openFileButton.Click += new System.EventHandler(this.openFileButton_Click);
             // 
-            // openFileDialog1
+            // jsonFileDialog1
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBar1.Location = new System.Drawing.Point(12, 99);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(260, 23);
-            this.progressBar1.TabIndex = 2;
+            this.jsonFileDialog1.FileName = "openFileDialog1";
             // 
             // buttonShow
             // 
             this.buttonShow.Enabled = false;
-            this.buttonShow.Location = new System.Drawing.Point(12, 128);
+            this.buttonShow.Location = new System.Drawing.Point(197, 226);
             this.buttonShow.Name = "buttonShow";
             this.buttonShow.Size = new System.Drawing.Size(75, 23);
             this.buttonShow.TabIndex = 3;
@@ -85,34 +80,85 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(54, 13);
+            this.label1.Size = new System.Drawing.Size(48, 13);
             this.label1.TabIndex = 4;
-            this.label1.Text = "FileName:";
+            this.label1.Text = "Json file:";
+            // 
+            // luaFileDialog1
+            // 
+            this.luaFileDialog1.FileName = "openFileDialog1";
+            // 
+            // luaTextBox
+            // 
+            this.luaTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.luaTextBox.Location = new System.Drawing.Point(12, 120);
+            this.luaTextBox.Name = "luaTextBox";
+            this.luaTextBox.ReadOnly = true;
+            this.luaTextBox.Size = new System.Drawing.Size(260, 20);
+            this.luaTextBox.TabIndex = 5;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 104);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(44, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Lua file:";
+            // 
+            // luaButtonOpen
+            // 
+            this.luaButtonOpen.Location = new System.Drawing.Point(12, 146);
+            this.luaButtonOpen.Name = "luaButtonOpen";
+            this.luaButtonOpen.Size = new System.Drawing.Size(75, 23);
+            this.luaButtonOpen.TabIndex = 7;
+            this.luaButtonOpen.Text = "Open File";
+            this.luaButtonOpen.UseVisualStyleBackColor = true;
+            this.luaButtonOpen.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(116, 226);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "Execute lua";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.luaButtonOpen);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.luaTextBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonShow);
-            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.openFileButton);
-            this.Controls.Add(this.filePathTextBox);
+            this.Controls.Add(this.jsonTextBox);
             this.Name = "MainWindow";
             this.Text = "Form parser";
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion
 
-        private System.Windows.Forms.TextBox filePathTextBox;
+        private System.Windows.Forms.TextBox jsonTextBox;
         private System.Windows.Forms.Button openFileButton;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.OpenFileDialog jsonFileDialog1;
         private System.Windows.Forms.Button buttonShow;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.OpenFileDialog luaFileDialog1;
+        private System.Windows.Forms.TextBox luaTextBox;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button luaButtonOpen;
+        private System.Windows.Forms.Button button1;
     }
 }
 

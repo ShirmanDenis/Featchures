@@ -7,9 +7,9 @@ using System.Windows.Forms;
 
 namespace FormParser.ControlsDescriptions
 {
-    class ButtonSpec : BaseSpec
+    public class ButtonSpec : BaseSpec
     {
-        public override string ControlType => typeof(Button).Name;
+        public override string ControlType { get { return typeof(Button).Name; } }
 
         public override Control CreateControl()
         {

@@ -40,28 +40,32 @@
       "Text": "",
       "Name": "textBox4",
       "ClientSize": "96, 16",
-      "Location": "268, 111"
+      "Location": "268, 111",
+      "CanInputNumbers": "false"
     },
     {
       "ControlType": "TextBox",
       "Text": "",
       "Name": "textBox3",
       "ClientSize": "96, 16",
-      "Location": "152, 111"
+      "Location": "152, 111",
+      "CanInputNumbers": "true"
     },
     {
       "ControlType": "TextBox",
       "Text": "",
       "Name": "textBox2",
       "ClientSize": "96, 16",
-      "Location": "139, 160"
+      "Location": "139, 160",
+      "CanInputNumbers": "true"
     },
     {
       "ControlType": "TextBox",
       "Text": "",
       "Name": "textBox1",
       "ClientSize": "96, 16",
-      "Location": "25, 111"
+      "Location": "25, 111",
+      "CanInputNumbers": "true"
     },
     {
       "ControlType": "Button",

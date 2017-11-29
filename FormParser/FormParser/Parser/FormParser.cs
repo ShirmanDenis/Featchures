@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace FormParser
 {
@@ -22,22 +23,25 @@ namespace FormParser
 
         private Control ParseFromDescription(Dictionary<string, object> description)
         {
-            if (!description.TryGetValue("ControlType", out object type)) throw new Exception("Missing property ControlType");
+            object type;
+            if (!description.TryGetValue("ControlType", out type)) throw new Exception("Missing property ControlType");
 
-            if (!_specCreators.TryGetValue(type.ToString(), out Func<BaseSpec> specCreator)) throw new Exception($"Creator for type \"{type}\" does not exists");
+            Func<BaseSpec> specCreator;
+            if (!_specCreators.TryGetValue(type.ToString(), out specCreator)) throw new Exception(string.Format("Creator for type \"{0}\" does not exists", type.ToString()));
 
             var controlSpec = specCreator();
             controlSpec.SetDescription(description);
 
             var control = controlSpec.CreateControl();
 
-            if (!description.TryGetValue("Children", out object children))
+            object children;
+            if (!description.TryGetValue("Children", out children))
                 return control;
 
-            foreach (var childDescription in (IEnumerable<Dictionary<string, object>>)children)
+            foreach (var childDescription in (IEnumerable<JToken>)description["Children"])
             {
-                var childControl = ParseFromDescription(childDescription);
-
+                var dict = childDescription.ToObject<Dictionary<string, object>>();
+                var childControl = ParseFromDescription(dict);
                 control.Controls.Add(childControl);
             }
 

@@ -11,7 +11,7 @@ using FormParser.ControlsDescriptions;
 
 namespace FormParser
 {
-    class FormSpec : BaseSpec
+    public class FormSpec : BaseSpec
     {
         public SizeF AutoScaleDimensions { get; set; }
         public AutoScaleMode AutoScaleMode { get; set; }
@@ -29,7 +29,7 @@ namespace FormParser
             return form;
         }
 
-        public override string ControlType => typeof(Form).Name;
+        public override string ControlType { get { return typeof(Form).Name; } }
 
         public override void LoadOptionsFromControl(Control control)
         {

@@ -1,0 +1,92 @@
+{
+  "AutoScaleDimensions": "6, 13",
+  "AutoScaleMode": 1,
+  "ControlType": "Form",
+  "Text": "TestForm1",
+  "Name": "TestForm1",
+  "ClientSize": "378, 341",
+  "Location": "0, 0",
+  "Children": [
+    {
+      "ControlType": "Label",
+      "Text": "label4",
+      "Name": "label4",
+      "ClientSize": "35, 13",
+      "Location": "299, 245"
+    },
+    {
+      "ControlType": "Label",
+      "Text": "label3",
+      "Name": "label3",
+      "ClientSize": "35, 13",
+      "Location": "217, 245"
+    },
+    {
+      "ControlType": "Label",
+      "Text": "label2",
+      "Name": "label2",
+      "ClientSize": "35, 13",
+      "Location": "149, 245"
+    },
+    {
+      "ControlType": "Label",
+      "Text": "label1",
+      "Name": "label1",
+      "ClientSize": "35, 13",
+      "Location": "47, 245"
+    },
+    {
+      "ControlType": "TextBox",
+      "Text": "",
+      "Name": "textBox4",
+      "ClientSize": "96, 16",
+      "Location": "268, 111",
+      "CanInputNumbers": "false"
+    },
+    {
+      "ControlType": "TextBox",
+      "Text": "",
+      "Name": "textBox3",
+      "ClientSize": "96, 16",
+      "Location": "152, 111",
+      "CanInputNumbers": "true"
+    },
+    {
+      "ControlType": "TextBox",
+      "Text": "",
+      "Name": "textBox2",
+      "ClientSize": "96, 16",
+      "Location": "139, 160",
+      "CanInputNumbers": "true"
+    },
+    {
+      "ControlType": "TextBox",
+      "Text": "",
+      "Name": "textBox1",
+      "ClientSize": "96, 16",
+      "Location": "25, 111",
+      "CanInputNumbers": "true"
+    },
+    {
+      "ControlType": "Button",
+      "Text": "button3",
+      "Name": "button3",
+      "ClientSize": "75, 23",
+      "Location": "268, 50"
+    },
+    {
+      "ControlType": "Button",
+      "Text": "button2",
+      "Name": "button2",
+      "ClientSize": "75, 23",
+      "Location": "152, 50"
+    },
+    {
+      "ControlType": "Button",
+      "Text": "button1",
+      "Name": "button1",
+      "ClientSize": "75, 23",
+      "Location": "50, 50"
+    }
+  ]
+}

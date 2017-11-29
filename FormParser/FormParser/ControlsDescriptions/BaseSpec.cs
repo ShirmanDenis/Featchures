@@ -45,52 +45,27 @@ namespace FormParser
             return properties.ToDictionary(property => property.Name, property => property.GetValue(this));
         }
 
-        public void SetDescription(Dictionary<string, object> description)
+        public virtual void SetDescription(IDictionary<string, object> description)
         {
-            var type = GetType();
+            object text;
+            if (description.TryGetValue("Text", out text))
+                Text = text.ToString();
 
-            foreach (var pair in description)
+            object name;
+            if (description.TryGetValue("Name", out name))
+                Name = name.ToString();
+
+            object clientSize;
+            if (description.TryGetValue("ClientSize", out clientSize))
             {
-                var property = type.GetProperty(pair.Key);
+                var values = clientSize.ToString().Split(',').Select(i => i.Trim(' ')).ToList();
 
-                Debug.Assert(property != null);
-
-                if (property.SetMethod == null) continue;
-
-                var value = description[pair.Key];
-                property.SetValue(this, value);
+                ClientSize = new Size(int.Parse(values[0]), int.Parse(values[1]));
             }
+
+            var strPoint = description["Location"];
+            var pointValues = strPoint.ToString().Trim('{', '}').Split(',').Select(i => i.Trim(' ')).ToList();
+            Location = new Point(int.Parse(pointValues[0]), int.Parse(pointValues[1]));
         }
-
-        //public virtual IDictionary<string, object> GetDescription()
-        //{
-        //    var description = new Dictionary<string, object>
-        //    {
-        //        {"ClassName", GetType().Name },
-        //        {"Text", Text},
-        //        {"Name", Name },
-        //        {"ClientSize", ClientSize },
-        //        {"Location", Location }
-        //    };
-
-        //    return description;
-        //}
-
-        //public virtual void SetDescription(IDictionary<string, object> description)
-        //{
-        //    object text;
-        //    if (description.TryGetValue("Text", out text))
-        //        Text = text.ToString();
-
-        //    object name;
-        //    if (description.TryGetValue("Name", out name))
-        //        Name = name.ToString();
-
-        //    object clientSize;
-        //    if (description.TryGetValue("ClientSize", out clientSize))
-        //        ClientSize = (Size) clientSize;
-
-        //    Location = (Point)description["Location"];
-        //}
     }
 }

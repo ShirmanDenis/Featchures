@@ -7,14 +7,15 @@ using System.Windows.Forms;
 
 namespace FormParser.ControlsDescriptions
 {
-    class LabelSpec : BaseSpec
+    public class LabelSpec : BaseSpec
     {
-        public override string ControlType => typeof(Label).Name;
+        public override string ControlType { get { return typeof(Label).Name; } }
 
         public override Control CreateControl()
         {
             var label = new Label();
             LoadOptionsOnControl(label);
+
             return label;
         }
     }
