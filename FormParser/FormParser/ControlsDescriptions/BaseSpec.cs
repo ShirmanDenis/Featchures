@@ -19,7 +19,9 @@ namespace FormParser
         public string Name { get; set; }
         public Size ClientSize { get; set; }    
         public Point Location { get; set; }
-        
+
+        public string OnClickScriptName { get; set; }
+
         public virtual void LoadOptionsFromControl(Control control)
         {
             Text = control.Text;
@@ -63,9 +65,34 @@ namespace FormParser
                 ClientSize = new Size(int.Parse(values[0]), int.Parse(values[1]));
             }
 
-            var strPoint = description["Location"];
-            var pointValues = strPoint.ToString().Trim('{', '}').Split(',').Select(i => i.Trim(' ')).ToList();
+            object onClickScriptName;
+            if (description.TryGetValue("OnClickScriptName", out onClickScriptName)){
+                OnClickScriptName = onClickScriptName.ToString();
+            }
+
+            object location;
+            if (!description.TryGetValue("Location", out location))
+                throw new Exception("Missing property Location");
+
+            var pointValues = location.ToString().Trim('{', '}').Split(',').Select(i => i.Trim(' ')).ToList();
             Location = new Point(int.Parse(pointValues[0]), int.Parse(pointValues[1]));
+        }
+
+        public virtual void SetEvents(Control control, NLua.Lua lua)
+        {
+            object objFunc;
+            try
+            {
+                objFunc = lua[OnClickScriptName];
+            }
+            catch (Exception ex)
+            { return; }
+
+            var func = objFunc as NLua.LuaFunction;
+            if (func != null)
+            {
+                control.MouseClick += (s, e) => { func.Call(control); };
+            }
         }
     }
 }

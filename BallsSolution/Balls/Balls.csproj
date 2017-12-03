@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AD5E54C6-1C84-4871-9170-F2934ED38D5E}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Balls</RootNamespace>
+    <AssemblyName>Balls</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MathNet.Numerics, Version=3.20.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MathNet.Numerics.3.20.0\lib\net40\MathNet.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AddBallDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddBallDialog.Designer.cs">
+      <DependentUpon>AddBallDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BallEditor\BallEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BallEditor\BallEditor.Designer.cs">
+      <DependentUpon>BallEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GameDev.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GameDev.Designer.cs">
+      <DependentUpon>GameDev.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logic\Ball.cs" />
+    <Compile Include="Logic\BallSystem.cs" />
+    <Compile Include="Logic\PhysicBall.cs" />
+    <Compile Include="Logic\PhysSystem.cs" />
+    <Compile Include="Phys.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Phys.Designer.cs">
+      <DependentUpon>Phys.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AddBallDialog.resx">
+      <DependentUpon>AddBallDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BallEditor\BallEditor.resx">
+      <DependentUpon>BallEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GameDev.resx">
+      <DependentUpon>GameDev.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Phys.resx">
+      <DependentUpon>Phys.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -9,12 +9,24 @@ namespace FormParser
 {
     public partial class MainWindow : Form
     {
+        private readonly FormParser _parser = new FormParser();
         private readonly Lua _lua = new Lua();
         private LuaFunction _luaFunction;
+        
         public MainWindow()
         {
             InitializeComponent();
-            buttonShow.Enabled = true;
+
+            var directory = Directory.GetCurrentDirectory();
+
+            _lua.LoadCLRPackage();
+            jsonFileDialog1.InitialDirectory = directory;
+            luaFileDialog1.InitialDirectory = directory;
+
+            _parser.RegisterControlSpec("Button", () => new ButtonSpec());
+            _parser.RegisterControlSpec("TextBox", () => new TextBoxSpec());
+            _parser.RegisterControlSpec("Label", () => new LabelSpec());
+            _parser.RegisterControlSpec("Form", () => new FormSpec());
         }
 
         private void openFileButton_Click(object sender, EventArgs e)
@@ -24,48 +36,44 @@ namespace FormParser
             if (dialogResult == DialogResult.OK)
             {
                 jsonTextBox.Text = jsonFileDialog1.SafeFileName;
-                buttonShow.Enabled = true;
-                luaButtonOpen.Enabled = true;
+                buttonExecute.Enabled = true;
             }
         }
 
-        private void buttonShow_Click(object sender, EventArgs e)
+        private void buttonExecute_Click(object sender, EventArgs e)
         {
-            var filePath = "testForm1.json";
+            if (_lua == null)
+            {
+                MessageBox.Show("The lua is not loaded");
+                return;
+            }
 
-            var json = File.ReadAllText(filePath);
+            var json = File.ReadAllText(jsonFileDialog1.FileName);
 
-            var parser = new FormParser();
-            parser.RegisterControlSpec("Button", () => new ButtonSpec());
-            parser.RegisterControlSpec("TextBox", () => new TextBoxSpec());
-            parser.RegisterControlSpec("Label", () => new LabelSpec());
-            parser.RegisterControlSpec("Form", () => new FormSpec());
-
-            var control = parser.ParseFromJson(json);
+            Control control;
+            try
+            {
+                control = _parser.ParseFromJson(json, _lua);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+                return;
+            }
 
             control.Show();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void luaButtonOpen_Click(object sender, EventArgs e)
         {
             var dialogResult = luaFileDialog1.ShowDialog();
 
             if (dialogResult == DialogResult.OK)
             {
-                jsonTextBox.Text = luaFileDialog1.SafeFileName;
-                _luaFunction = _lua.LoadFile(luaFileDialog1.FileName);
+                luaTextBox.Text = luaFileDialog1.SafeFileName;
+                _lua.DoFile(luaFileDialog1.FileName);
+                openFileButton.Enabled = true;
             }
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            if (_luaFunction == null)
-            {
-                MessageBox.Show("The lua function is not loaded");
-                return;
-            }
-
-            _luaFunction.Call();
         }
     }
 }

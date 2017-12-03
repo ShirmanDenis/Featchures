@@ -104,6 +104,9 @@
     <EmbeddedResource Include="TestForm1.resx">
       <DependentUpon>TestForm1.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="JsonLua\LuaScript.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -114,19 +117,21 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="testForm1.json">
+    <None Include="JsonLua\testForm1.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ControlFabric\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
-xcopy /s /y "C:\Users\uwowb\Desktop\FormParser\packages\NLua.1.3.2.1\lib\native\*.*" "$(TargetDir)"</PostBuildEvent>
+xcopy /s /y "C:\Users\uwowb\Desktop\FormParser\packages\NLua.1.3.2.1\lib\native\*.*" "$(TargetDir)"
+xcopy /s /y "W:\4 курс\lua + c#\FormParser\packages\NLua.1.3.2.1\lib\native\*.*" "$(TargetDir)"
+xcopy /s /y "W:\4 курс\FormParser\packages\NLua.1.3.2.1\lib\native\*.*" "$(TargetDir)"
+xcopy /s /y "\\fserv\shirman-dk-4\4 курс\FormParser\packages\NLua.1.3.2.1\lib\native\*.*" "$(TargetDir)"
+xcopy /s /y "C:\Users\uwowb\OneDrive\C#\Featchures\FormParser\packages\NLua.1.3.2.1\lib\native\*.*" "$(TargetDir)"</PostBuildEvent>
   </PropertyGroup>
 </Project>

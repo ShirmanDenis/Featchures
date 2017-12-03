@@ -127,7 +127,6 @@ namespace CastleModel
             Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_POSITION, position);
             Gl.glLightModelfv(Gl.GL_LIGHT_MODEL_AMBIENT, lmodel_ambient);
             Gl.glLightModelfv(Gl.GL_LIGHT_MODEL_LOCAL_VIEWER, local_view);
-
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -136,8 +135,6 @@ namespace CastleModel
                 LoadTexture();
             Draw();
         }
-
-
 
         private void Draw()
         {

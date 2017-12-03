@@ -12,7 +12,7 @@
       "Text": "label4",
       "Name": "label4",
       "ClientSize": "35, 13",
-      "Location": "299, 245"
+      "Location": "500, 245"
     },
     {
       "ControlType": "Label",
@@ -79,7 +79,8 @@
       "Text": "button2",
       "Name": "button2",
       "ClientSize": "75, 23",
-      "Location": "152, 50"
+      "Location": "152, 50",
+      "OnClickScriptName" :  "Button2_OnClick"
     },
     {
       "ControlType": "Button",

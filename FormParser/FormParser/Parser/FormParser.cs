@@ -14,25 +14,30 @@ namespace FormParser
     {
         private readonly Dictionary<string, Func<BaseSpec>> _specCreators = new Dictionary<string, Func<BaseSpec>>();
 
-        public Control ParseFromJson(string json)
+        public Control ParseFromJson(string json, NLua.Lua lua)
         {
             var description = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
-
-            return ParseFromDescription(description);
+            return ParseFromDescription(description, lua);
         }
 
-        private Control ParseFromDescription(Dictionary<string, object> description)
+        private Control ParseFromDescription(Dictionary<string, object> description, NLua.Lua lua)
         {
             object type;
-            if (!description.TryGetValue("ControlType", out type)) throw new Exception("Missing property ControlType");
-
+            if (!description.TryGetValue("ControlType", out type))
+                throw new Exception("Missing property ControlType");
+            
             Func<BaseSpec> specCreator;
-            if (!_specCreators.TryGetValue(type.ToString(), out specCreator)) throw new Exception(string.Format("Creator for type \"{0}\" does not exists", type.ToString()));
+            if (!_specCreators.TryGetValue(type.ToString(), out specCreator))
+                throw new Exception(string.Format("Creator for type \"{0}\" does not exists", type));
 
             var controlSpec = specCreator();
             controlSpec.SetDescription(description);
 
             var control = controlSpec.CreateControl();
+
+            lua[controlSpec.Name] = control;
+
+            controlSpec.SetEvents(control, lua);
 
             object children;
             if (!description.TryGetValue("Children", out children))
@@ -41,7 +46,8 @@ namespace FormParser
             foreach (var childDescription in (IEnumerable<JToken>)description["Children"])
             {
                 var dict = childDescription.ToObject<Dictionary<string, object>>();
-                var childControl = ParseFromDescription(dict);
+                var childControl = ParseFromDescription(dict, lua);
+
                 control.Controls.Add(childControl);
             }
 
