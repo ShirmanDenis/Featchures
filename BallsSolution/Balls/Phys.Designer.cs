@@ -33,8 +33,8 @@
             this.renderTimer = new System.Windows.Forms.Timer(this.components);
             this.StopButton = new System.Windows.Forms.Button();
             this.StartButton = new System.Windows.Forms.Button();
-            this.ballEditor1 = new Balls.BallEditor.BallEditor();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ballEditor1 = new Balls.BallEditor.BallEditor();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -80,14 +80,6 @@
             this.StartButton.UseVisualStyleBackColor = true;
             this.StartButton.Click += new System.EventHandler(this.StartButton_Click);
             // 
-            // ballEditor1
-            // 
-            this.ballEditor1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ballEditor1.Location = new System.Drawing.Point(0, 1);
-            this.ballEditor1.Name = "ballEditor1";
-            this.ballEditor1.Size = new System.Drawing.Size(334, 137);
-            this.ballEditor1.TabIndex = 3;
-            // 
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -99,13 +91,21 @@
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             // 
+            // ballEditor1
+            // 
+            this.ballEditor1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ballEditor1.Location = new System.Drawing.Point(12, 16);
+            this.ballEditor1.Name = "ballEditor1";
+            this.ballEditor1.Size = new System.Drawing.Size(336, 116);
+            this.ballEditor1.TabIndex = 5;
+            // 
             // Phys
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(741, 591);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.ballEditor1);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.pictureBox1);
             this.Name = "Phys";
             this.Text = "Phys";
@@ -121,7 +121,7 @@
         private System.Windows.Forms.Timer renderTimer;
         private System.Windows.Forms.Button StopButton;
         private System.Windows.Forms.Button StartButton;
-        private BallEditor.BallEditor ballEditor1;
         private System.Windows.Forms.GroupBox groupBox1;
+        private BallEditor.BallEditor ballEditor1;
     }
 }

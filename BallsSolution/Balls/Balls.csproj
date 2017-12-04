@@ -68,6 +68,7 @@
     </Compile>
     <Compile Include="Logic\Ball.cs" />
     <Compile Include="Logic\BallSystem.cs" />
+    <Compile Include="Logic\Helper.cs" />
     <Compile Include="Logic\PhysicBall.cs" />
     <Compile Include="Logic\PhysSystem.cs" />
     <Compile Include="Phys.cs">

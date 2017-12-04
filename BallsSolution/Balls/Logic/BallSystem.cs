@@ -49,8 +49,8 @@ namespace Balls.Logic
             {
                 for (int j = i + 1; j < Balls.Count; j++)
                 {
-                    var p1 = Balls[i].Location;
-                    var p2 = Balls[j].Location;
+                    var p1 = Balls[i].Location.Clone() + Balls[i].Radius;
+                    var p2 = Balls[j].Location.Clone() + Balls[i].Radius;
                     if (Distance.Euclidean(p1, p2) < Balls[i].Radius + Balls[j].Radius)
                         // расстояние между центрами шаров меньше
                         // суммы их радиусов -> они пересекаются

@@ -9,14 +9,6 @@ using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.LinearAlgebra.Single;
 namespace Balls.Logic
 {
-    static class Helper
-    {
-        public static Point FromVector2(Vector<float> vector)
-        {
-            return new Point((int)vector[0], (int)vector[1]);
-        }
-    }
-
     class Ball
     {
         private readonly Timer _bounceTimer = new Timer();
@@ -60,7 +52,7 @@ namespace Balls.Logic
         {
             using (var pen = new Pen(Color, LineWidth))
             {
-                var rect = new Rectangle(Helper.FromVector2(Location), new Size(Radius * 2, Radius * 2));
+                var rect = new RectangleF(Helper.FromVector2(Location), new Size(Radius * 2, Radius * 2));
 
                 graphics.DrawEllipse(pen, rect);
             }

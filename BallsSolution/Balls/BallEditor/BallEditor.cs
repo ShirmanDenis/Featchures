@@ -14,13 +14,11 @@ namespace Balls.BallEditor
 {
     public partial class BallEditor : UserControl
     {
-        private PhysicBall _ball;
+        public PhysicBall _ball = new PhysicBall();
 
         public BallEditor()
         {
             InitializeComponent();
-            upDownLocationX.Maximum = int.MaxValue;
-            upDownLocationY.Maximum = int.MaxValue;
 
             CollectColors();
 
@@ -41,12 +39,12 @@ namespace Balls.BallEditor
         private void SetBallsPropertiesToEditor()
         {
             upDownWidth.Value = _ball.LineWidth;
-            upDownRadius.Value = _ball.Radius;
-            upDownMass.Value = (decimal) _ball.Mass;
-            upDownLocationX.Value = (decimal) _ball.Location[0];
-            upDownLocationY.Value = (decimal) _ball.Location[1];
-            upDownSpeedX.Value = (decimal) _ball.Speed[0];
-            upDownSpeedY.Value = (decimal) _ball.Speed[0];
+            txBxRadius.Text = _ball.Radius.ToString("###.###");
+            txBxMass.Text =  _ball.Mass.ToString("###.###"); 
+            txBxLocationX.Text = _ball.Location[0].ToString("###.###"); 
+            txBxLocationY.Text = _ball.Location[1].ToString("###.###");
+            txBxSpeedX.Text = _ball.Speed[0].ToString("###.###");
+            txBxSpeedY.Text = _ball.Speed[1].ToString("###.###");
             var index = cmBxColor.Items.IndexOf(_ball.Color.Name);
             cmBxColor.SelectedIndex = index;
         }
@@ -128,34 +126,34 @@ namespace Balls.BallEditor
             _ball.LineWidth = (int) upDownWidth.Value;
         }
 
-        private void upDownRadius_ValueChanged(object sender, EventArgs e)
+        private void txBxMass_Validated(object sender, EventArgs e)
         {
-            _ball.Radius = (int) upDownRadius.Value;
+            _ball.Mass = float.Parse(txBxMass.Text);
         }
 
-        private void upDownLocationX_ValueChanged(object sender, EventArgs e)
+        private void txBxRadius_Validated(object sender, EventArgs e)
         {
-            _ball.Location[0] = (float) upDownLocationX.Value;
+            _ball.Radius = float.Parse(txBxRadius.Text);
         }
 
-        private void upDownLocationY_ValueChanged(object sender, EventArgs e)
+        private void txBxLocationX_Validated(object sender, EventArgs e)
         {
-            _ball.Location[1] = (float) upDownLocationY.Value;
+            _ball.Location[0] = float.Parse(txBxLocationX.Text);
         }
 
-        private void upDownSpeedX_ValueChanged(object sender, EventArgs e)
+        private void txBxLocationY_Validated(object sender, EventArgs e)
         {
-            _ball.Speed[0] = (float) upDownSpeedX.Value;
+            _ball.Location[1] = float.Parse(txBxLocationY.Text);
         }
 
-        private void upDownSpeedY_ValueChanged(object sender, EventArgs e)
+        private void txBxSpeedX_Validated(object sender, EventArgs e)
         {
-            _ball.Speed[1] = (float) upDownSpeedY.Value;
+            _ball.Speed[0] = float.Parse(txBxSpeedX.Text);
         }
 
-        private void upDownMass_ValueChanged(object sender, EventArgs e)
+        private void txBxSpeedY_Validated(object sender, EventArgs e)
         {
-            _ball.Mass = (float) upDownMass.Value;
+            _ball.Speed[1] = float.Parse(txBxSpeedY.Text);
         }
     }
 }

@@ -19,13 +19,12 @@ namespace Balls.Logic
         public event EventHandler SpeedChanged;
         public event EventHandler Changed;
 
-
         private Color _color = Color.Red;
         private int _lineWidth = 1;
         private float _mass = 1;
-        private int _radius = 1;
+        private float _radius = 1;
 
-        public Rectangle Bounds => GetBounds();
+        public RectangleF Bounds => GetBounds();
 
         public Color Color
         {
@@ -60,7 +59,7 @@ namespace Balls.Logic
             }
         }
 
-        public int Radius
+        public float Radius
         {
             get { return _radius; }
             set
@@ -68,6 +67,36 @@ namespace Balls.Logic
                 _radius = value;
                 RadiusChanged?.Invoke(this, EventArgs.Empty);
                 Changed?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        public Vector<float> Location { get; private set; }
+
+        public Vector<float> Speed { get; private set; }
+
+        public PhysicBall()
+        {
+            Location = CreateVector.Dense<float>(2);
+            Speed = CreateVector.Dense<float>(2);
+        }
+
+        public void Move(float dt)
+        {
+            Location += Speed * dt;
+
+            LocationChanged?.Invoke(this, EventArgs.Empty);
+            Changed?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void Draw(Graphics graphics)
+        {
+            using (var pen = new Pen(Color, LineWidth))
+            {
+                var topLeft = Helper.FromVector2(Location - Radius);
+
+                var rect = new RectangleF(topLeft, new SizeF(Radius * 2, Radius * 2));
+
+                graphics.DrawEllipse(pen, rect);
             }
         }
 
@@ -87,38 +116,10 @@ namespace Balls.Logic
             Changed?.Invoke(this, EventArgs.Empty);
         }
 
-        public Vector<float> Location { get; private set; }
-        public Vector<float> Speed { get; private set; }
-
-        public PhysicBall()
+        private RectangleF GetBounds()
         {
-            Location = CreateVector.Dense<float>(2);
-            Speed = CreateVector.Dense<float>(2);
-        }
-
-        public void Move(float dt)
-        {
-            var acceleration = (Speed * dt - Speed) / dt;
-            Location = Location + Speed * Location + acceleration * dt * dt / 2;
-
-            LocationChanged?.Invoke(this, EventArgs.Empty);
-            Changed?.Invoke(this, EventArgs.Empty);
-        }
-
-        public void Draw(Graphics graphics)
-        {
-            using (var pen = new Pen(Color, LineWidth))
-            {
-                var rect = new Rectangle(Helper.FromVector2(Location), new Size(Radius * 2, Radius * 2));
-
-                graphics.DrawEllipse(pen, rect);
-            }
-        }
-
-        private Rectangle GetBounds()
-        {
-            return new Rectangle(Helper.FromVector2(Location),
-                new Size(Radius * 2, Radius * 2));
+            return new RectangleF(Helper.FromVector2(Location - Radius),
+                new SizeF(Radius * 2, Radius * 2));
         }
     }
 }

@@ -24,6 +24,8 @@ namespace Balls
             InitializeComponent();
 
             canvas = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+
+            KeyPreview = true;
         }
 
         private void renderTimer_Tick(object sender, EventArgs e)
@@ -34,7 +36,8 @@ namespace Balls
 
                 system.DrawSystem(graph);
             }                
-
+            if (moveEnabled)
+                system.Move(1);
             pictureBox1.Image = canvas;
         }
 
@@ -49,6 +52,7 @@ namespace Balls
 
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
         {
+            //pictureBox1.Focus();
             var existingBall = system.GetBallAt(e.Location);
             if (existingBall != null)
             {
@@ -83,14 +87,17 @@ namespace Balls
 
         private void StartButton_Click(object sender, EventArgs e)
         {
-            if (!renderTimer.Enabled)
-                renderTimer.Start();
+            moveEnabled = true;
         }
 
         private void StopButton_Click(object sender, EventArgs e)
         {
-            if (renderTimer.Enabled)
-                renderTimer.Stop();
+            moveEnabled = false;
+        }
+
+        private void buttonMove_Click(object sender, EventArgs e)
+        {
+            //system.Move(1);
         }
     }
 }
