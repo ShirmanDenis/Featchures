@@ -40,14 +40,14 @@
             this.cmBxRoles.FormattingEnabled = true;
             this.cmBxRoles.Location = new System.Drawing.Point(12, 34);
             this.cmBxRoles.Name = "cmBxRoles";
-            this.cmBxRoles.Size = new System.Drawing.Size(169, 21);
+            this.cmBxRoles.Size = new System.Drawing.Size(344, 21);
             this.cmBxRoles.TabIndex = 0;
             // 
             // buttonLogin
             // 
-            this.buttonLogin.Location = new System.Drawing.Point(12, 139);
+            this.buttonLogin.Location = new System.Drawing.Point(249, 120);
             this.buttonLogin.Name = "buttonLogin";
-            this.buttonLogin.Size = new System.Drawing.Size(75, 23);
+            this.buttonLogin.Size = new System.Drawing.Size(107, 23);
             this.buttonLogin.TabIndex = 1;
             this.buttonLogin.Text = "Login";
             this.buttonLogin.UseVisualStyleBackColor = false;
@@ -57,7 +57,7 @@
             this.txBxPassword.Location = new System.Drawing.Point(12, 81);
             this.txBxPassword.Name = "txBxPassword";
             this.txBxPassword.PasswordChar = '*';
-            this.txBxPassword.Size = new System.Drawing.Size(169, 20);
+            this.txBxPassword.Size = new System.Drawing.Size(344, 20);
             this.txBxPassword.TabIndex = 2;
             // 
             // label1
@@ -82,7 +82,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(411, 228);
+            this.ClientSize = new System.Drawing.Size(368, 165);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txBxPassword);

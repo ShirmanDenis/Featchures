@@ -21,6 +21,16 @@ namespace AviaSalesApp.View
             InitializeComponent();
 
             _controller = new LoginController(this);
+            _controller.LoggingValidated += _controller_LoggingValidated;
+        }
+
+        private void _controller_LoggingValidated(bool success, string msg)
+        {
+            if (!success)
+            {
+                MessageBox.Show(msg);
+                return;
+            }
         }
 
         public event EventHandler Logged

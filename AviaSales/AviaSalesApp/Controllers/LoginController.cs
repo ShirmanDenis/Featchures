@@ -7,12 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AviaSalesApp.Common;
+using NLog;
 
 namespace AviaSalesApp.Controllers
 {
+    public delegate void LoggingValidatedEventHandler(bool success, string msg);
+
     class LoginController
     {
+        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
+
         private readonly AviaSalesConnection aviaSales = new AviaSalesConnection();
+
+        public event LoggingValidatedEventHandler LoggingValidated;
 
         public ILoginView View { get; set; }
         
@@ -21,10 +28,10 @@ namespace AviaSalesApp.Controllers
             View = view;
             View.Logged += View_Logged;
             View.RoleSelected += View_RoleSelected;
-            SetAppRoles();
+            SetAppRolesOnView();
         }
 
-        public void SetAppRoles()
+        public void SetAppRolesOnView()
         {
             View.SetRoles(Enum.GetNames(typeof(AppRoles)));   
         }
@@ -50,6 +57,8 @@ namespace AviaSalesApp.Controllers
 
         private void SetAppRole()
         {
+            var success = true;
+            var msg = "";
             var conn = aviaSales.Database.Connection;
             var initialState = conn.State;
             try
@@ -59,7 +68,7 @@ namespace AviaSalesApp.Controllers
                 using (DbCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = "sp_setapprole";
-                    cmd.Parameters.Add(new SqlParameter("@rolename", View.Role));
+                    cmd.Parameters.Add(new SqlParameter("@rolename", View.Role.ToString()));
                     cmd.Parameters.Add(new SqlParameter("@password", View.Password));
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.ExecuteNonQuery();
@@ -67,10 +76,14 @@ namespace AviaSalesApp.Controllers
             }
             catch (Exception ex)
             {
-                //Console.WriteLine(ex);
+                logger.ConditionalDebug(ex.Message);
+
+                success = false;
+                msg = ex.Message;
             }
             finally
             {
+                LoggingValidated?.Invoke(success, msg);
                 if (initialState != ConnectionState.Open)
                     conn.Close();
             }
