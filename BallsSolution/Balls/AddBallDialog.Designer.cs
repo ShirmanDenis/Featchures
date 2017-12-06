@@ -125,6 +125,11 @@
             this.upDownMass.Name = "upDownMass";
             this.upDownMass.Size = new System.Drawing.Size(39, 20);
             this.upDownMass.TabIndex = 10;
+            this.upDownMass.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // buttonOk
             // 

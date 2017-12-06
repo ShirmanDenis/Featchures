@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -39,12 +40,12 @@ namespace Balls.BallEditor
         private void SetBallsPropertiesToEditor()
         {
             upDownWidth.Value = _ball.LineWidth;
-            txBxRadius.Text = _ball.Radius.ToString("###.###");
-            txBxMass.Text =  _ball.Mass.ToString("###.###"); 
-            txBxLocationX.Text = _ball.Location[0].ToString("###.###"); 
-            txBxLocationY.Text = _ball.Location[1].ToString("###.###");
-            txBxSpeedX.Text = _ball.Speed[0].ToString("###.###");
-            txBxSpeedY.Text = _ball.Speed[1].ToString("###.###");
+            txBxRadius.Text = _ball.Radius.ToString("0.###");
+            txBxMass.Text =  _ball.Mass.ToString("0.###"); 
+            txBxLocationX.Text = _ball.Location[0].ToString("0.###"); 
+            txBxLocationY.Text = _ball.Location[1].ToString("0.###");
+            txBxSpeedX.Text = _ball.Speed[0].ToString("0.###");
+            txBxSpeedY.Text = _ball.Speed[1].ToString("0.###");
             var index = cmBxColor.Items.IndexOf(_ball.Color.Name);
             cmBxColor.SelectedIndex = index;
         }
@@ -128,32 +129,32 @@ namespace Balls.BallEditor
 
         private void txBxMass_Validated(object sender, EventArgs e)
         {
-            _ball.Mass = float.Parse(txBxMass.Text);
+            _ball.Mass = float.Parse(txBxMass.Text, NumberStyles.Any);
         }
 
         private void txBxRadius_Validated(object sender, EventArgs e)
         {
-            _ball.Radius = float.Parse(txBxRadius.Text);
+            _ball.Radius = float.Parse(txBxRadius.Text, NumberStyles.Any);
         }
 
         private void txBxLocationX_Validated(object sender, EventArgs e)
         {
-            _ball.Location[0] = float.Parse(txBxLocationX.Text);
+            _ball.Location[0] = float.Parse(txBxLocationX.Text, NumberStyles.Any);
         }
 
         private void txBxLocationY_Validated(object sender, EventArgs e)
         {
-            _ball.Location[1] = float.Parse(txBxLocationY.Text);
+            _ball.Location[1] = float.Parse(txBxLocationY.Text, NumberStyles.Any);
         }
 
         private void txBxSpeedX_Validated(object sender, EventArgs e)
         {
-            _ball.Speed[0] = float.Parse(txBxSpeedX.Text);
+            _ball.Speed[0] = float.Parse(txBxSpeedX.Text, NumberStyles.Any);
         }
 
         private void txBxSpeedY_Validated(object sender, EventArgs e)
         {
-            _ball.Speed[1] = float.Parse(txBxSpeedY.Text);
+            _ball.Speed[1] = float.Parse(txBxSpeedY.Text, NumberStyles.Any);
         }
     }
 }

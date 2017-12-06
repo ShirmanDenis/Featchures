@@ -22,7 +22,7 @@ namespace Balls
         public Phys()
         {
             InitializeComponent();
-
+            
             canvas = new Bitmap(pictureBox1.Width, pictureBox1.Height);
 
             KeyPreview = true;
@@ -33,11 +33,13 @@ namespace Balls
             using (var graph = Graphics.FromImage(canvas))
             {
                 graph.Clear(Color.AliceBlue);
-
+                DrawNet(graph);
                 system.DrawSystem(graph);
-            }                
+            }
+            
             if (moveEnabled)
                 system.Move(1);
+
             pictureBox1.Image = canvas;
         }
 
@@ -52,7 +54,6 @@ namespace Balls
 
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
         {
-            //pictureBox1.Focus();
             var existingBall = system.GetBallAt(e.Location);
             if (existingBall != null)
             {
@@ -87,17 +88,29 @@ namespace Balls
 
         private void StartButton_Click(object sender, EventArgs e)
         {
+            ballEditor1.Enabled = false;
             moveEnabled = true;
         }
 
         private void StopButton_Click(object sender, EventArgs e)
         {
+            ballEditor1.Enabled = true;
             moveEnabled = false;
         }
 
-        private void buttonMove_Click(object sender, EventArgs e)
+        private void DrawNet(Graphics g)
         {
-            //system.Move(1);
+            var cellWidth = 25;
+            var cellHeight = 25;
+
+            using (var pen = new Pen(Color.LightGray))
+            {
+                for (var i = 0; i < pictureBox1.Width / cellWidth + 1; i++)
+                    g.DrawLine(pen, i * cellWidth, 0, i * cellWidth, pictureBox1.Height);
+
+                for (var i = 0; i < pictureBox1.Height / cellHeight + 1; i++)
+                    g.DrawLine(pen, 0, i * cellHeight, pictureBox1.Width, i * cellHeight);
+            }
         }
     }
 }

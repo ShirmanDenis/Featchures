@@ -57,7 +57,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(169, 80);
+            this.label2.Location = new System.Drawing.Point(141, 79);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(58, 13);
             this.label2.TabIndex = 1;
@@ -66,7 +66,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(169, 11);
+            this.label3.Location = new System.Drawing.Point(141, 11);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(48, 13);
             this.label3.TabIndex = 2;
@@ -75,7 +75,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(169, 48);
+            this.label4.Location = new System.Drawing.Point(141, 44);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(38, 13);
             this.label4.TabIndex = 3;
@@ -87,14 +87,14 @@
             this.cmBxColor.FormattingEnabled = true;
             this.cmBxColor.Location = new System.Drawing.Point(49, 43);
             this.cmBxColor.Name = "cmBxColor";
-            this.cmBxColor.Size = new System.Drawing.Size(94, 21);
+            this.cmBxColor.Size = new System.Drawing.Size(81, 21);
             this.cmBxColor.TabIndex = 4;
             this.cmBxColor.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmBxColor_DrawItem);
             this.cmBxColor.SelectedIndexChanged += new System.EventHandler(this.cmBxColor_SelectedIndexChanged);
             // 
             // upDownWidth
             // 
-            this.upDownWidth.Location = new System.Drawing.Point(251, 77);
+            this.upDownWidth.Location = new System.Drawing.Point(266, 72);
             this.upDownWidth.Name = "upDownWidth";
             this.upDownWidth.Size = new System.Drawing.Size(67, 20);
             this.upDownWidth.TabIndex = 5;
@@ -122,7 +122,7 @@
             // 
             this.txBxRadius.Location = new System.Drawing.Point(49, 77);
             this.txBxRadius.Name = "txBxRadius";
-            this.txBxRadius.Size = new System.Drawing.Size(94, 20);
+            this.txBxRadius.Size = new System.Drawing.Size(81, 20);
             this.txBxRadius.TabIndex = 12;
             this.txBxRadius.Validated += new System.EventHandler(this.txBxRadius_Validated);
             // 
@@ -130,39 +130,39 @@
             // 
             this.txBxMass.Location = new System.Drawing.Point(49, 8);
             this.txBxMass.Name = "txBxMass";
-            this.txBxMass.Size = new System.Drawing.Size(94, 20);
+            this.txBxMass.Size = new System.Drawing.Size(81, 20);
             this.txBxMass.TabIndex = 13;
             this.txBxMass.Validated += new System.EventHandler(this.txBxMass_Validated);
             // 
             // txBxLocationX
             // 
-            this.txBxLocationX.Location = new System.Drawing.Point(223, 8);
+            this.txBxLocationX.Location = new System.Drawing.Point(195, 8);
             this.txBxLocationX.Name = "txBxLocationX";
-            this.txBxLocationX.Size = new System.Drawing.Size(40, 20);
+            this.txBxLocationX.Size = new System.Drawing.Size(68, 20);
             this.txBxLocationX.TabIndex = 14;
             this.txBxLocationX.Validated += new System.EventHandler(this.txBxLocationX_Validated);
             // 
             // txBxLocationY
             // 
-            this.txBxLocationY.Location = new System.Drawing.Point(278, 8);
+            this.txBxLocationY.Location = new System.Drawing.Point(269, 8);
             this.txBxLocationY.Name = "txBxLocationY";
-            this.txBxLocationY.Size = new System.Drawing.Size(40, 20);
+            this.txBxLocationY.Size = new System.Drawing.Size(64, 20);
             this.txBxLocationY.TabIndex = 15;
             this.txBxLocationY.Validated += new System.EventHandler(this.txBxLocationY_Validated);
             // 
             // txBxSpeedX
             // 
-            this.txBxSpeedX.Location = new System.Drawing.Point(223, 44);
+            this.txBxSpeedX.Location = new System.Drawing.Point(195, 44);
             this.txBxSpeedX.Name = "txBxSpeedX";
-            this.txBxSpeedX.Size = new System.Drawing.Size(40, 20);
+            this.txBxSpeedX.Size = new System.Drawing.Size(68, 20);
             this.txBxSpeedX.TabIndex = 16;
             this.txBxSpeedX.Validated += new System.EventHandler(this.txBxSpeedX_Validated);
             // 
             // txBxSpeedY
             // 
-            this.txBxSpeedY.Location = new System.Drawing.Point(278, 45);
+            this.txBxSpeedY.Location = new System.Drawing.Point(269, 45);
             this.txBxSpeedY.Name = "txBxSpeedY";
-            this.txBxSpeedY.Size = new System.Drawing.Size(40, 20);
+            this.txBxSpeedY.Size = new System.Drawing.Size(64, 20);
             this.txBxSpeedY.TabIndex = 17;
             this.txBxSpeedY.Validated += new System.EventHandler(this.txBxSpeedY_Validated);
             // 

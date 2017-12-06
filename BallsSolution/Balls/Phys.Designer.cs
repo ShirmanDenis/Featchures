@@ -93,8 +93,7 @@
             // 
             // ballEditor1
             // 
-            this.ballEditor1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ballEditor1.Location = new System.Drawing.Point(12, 16);
+            this.ballEditor1.Location = new System.Drawing.Point(12, 12);
             this.ballEditor1.Name = "ballEditor1";
             this.ballEditor1.Size = new System.Drawing.Size(336, 116);
             this.ballEditor1.TabIndex = 5;

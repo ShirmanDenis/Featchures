@@ -19,6 +19,9 @@ namespace Balls.Logic
         public event EventHandler SpeedChanged;
         public event EventHandler Changed;
 
+        public Vector<float> DeltaLocation { get; set; }
+        public Vector<float> Acceleration { get; private set; }
+
         private Color _color = Color.Red;
         private int _lineWidth = 1;
         private float _mass = 1;
@@ -78,11 +81,15 @@ namespace Balls.Logic
         {
             Location = CreateVector.Dense<float>(2);
             Speed = CreateVector.Dense<float>(2);
+            Acceleration = DenseVector.OfArray(new float[] { 1, 1 });
+            DeltaLocation = CreateVector.Dense<float>(2);
         }
 
         public void Move(float dt)
         {
+            var prevLoc = Location;
             Location += Speed * dt;
+            DeltaLocation += Location - prevLoc;
 
             LocationChanged?.Invoke(this, EventArgs.Empty);
             Changed?.Invoke(this, EventArgs.Empty);
@@ -98,6 +105,12 @@ namespace Balls.Logic
 
                 graphics.DrawEllipse(pen, rect);
             }
+        }
+
+        public void Push(Vector<float> delta)
+        {
+            Location += delta;
+            DeltaLocation += delta;
         }
 
         public void SetLocation(Point location)
