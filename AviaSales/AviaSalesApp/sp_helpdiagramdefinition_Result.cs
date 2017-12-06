@@ -10,20 +10,10 @@
 namespace AviaSalesApp
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class FlightState
+    public partial class sp_helpdiagramdefinition_Result
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public FlightState()
-        {
-            this.Schedules = new HashSet<Schedule>();
-        }
-    
-        public int FlightState_ID { get; set; }
-        public string StateName { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Schedule> Schedules { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace AviaSalesApp
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Rout()
         {
-            this.Flight = new HashSet<Flight>();
+            this.Schedules = new HashSet<Schedule>();
         }
     
         public int Rout_ID { get; set; }
@@ -27,6 +27,6 @@ namespace AviaSalesApp
         public virtual Airport Airport { get; set; }
         public virtual Airport Airport1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Flight> Flight { get; set; }
+        public virtual ICollection<Schedule> Schedules { get; set; }
     }
 }

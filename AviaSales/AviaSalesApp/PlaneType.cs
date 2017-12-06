@@ -17,16 +17,19 @@ namespace AviaSalesApp
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PlaneType()
         {
-            this.Flight = new HashSet<Flight>();
-            this.PlaneSeat = new HashSet<PlaneSeat>();
+            this.PlaneSeats = new HashSet<PlaneSeat>();
+            this.Schedules = new HashSet<Schedule>();
+            this.Prices = new HashSet<Price>();
         }
     
         public int PlaneType_ID { get; set; }
         public string PlaneTypeName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Flight> Flight { get; set; }
+        public virtual ICollection<PlaneSeat> PlaneSeats { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PlaneSeat> PlaneSeat { get; set; }
+        public virtual ICollection<Schedule> Schedules { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Price> Prices { get; set; }
     }
 }

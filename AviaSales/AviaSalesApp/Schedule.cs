@@ -12,24 +12,22 @@ namespace AviaSalesApp
     using System;
     using System.Collections.Generic;
     
-    public partial class Price
+    public partial class Schedule
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Price()
-        {
-            this.Tickets = new HashSet<Ticket>();
-        }
-    
-        public long Price_ID { get; set; }
+        public long Schedule_ID { get; set; }
+        public long Flight_ID { get; set; }
         public int Company_ID { get; set; }
         public int PlaneType_ID { get; set; }
-        public long SeatClass_ID { get; set; }
-        public decimal Cost { get; set; }
+        public System.TimeSpan Delay { get; set; }
+        public System.DateTime DepartureDate { get; set; }
+        public System.DateTime ArrivalDate { get; set; }
+        public int Rout_ID { get; set; }
+        public int State_ID { get; set; }
     
         public virtual Company Company { get; set; }
+        public virtual Flight Flight { get; set; }
+        public virtual FlightState FlightState { get; set; }
         public virtual PlaneType PlaneType { get; set; }
-        public virtual SeatClass SeatClass { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ticket> Tickets { get; set; }
+        public virtual Rout Rout { get; set; }
     }
 }

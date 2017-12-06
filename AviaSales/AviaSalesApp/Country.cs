@@ -17,13 +17,13 @@ namespace AviaSalesApp
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Country()
         {
-            this.City = new HashSet<City>();
+            this.Cities = new HashSet<City>();
         }
     
         public int Country_ID { get; set; }
         public string CountryName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<City> City { get; set; }
+        public virtual ICollection<City> Cities { get; set; }
     }
 }

@@ -14,12 +14,6 @@ namespace AviaSalesApp
     
     public partial class Ticket
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Ticket()
-        {
-            this.Price = new HashSet<Price>();
-        }
-    
         public long Ticket_ID { get; set; }
         public long Flight_ID { get; set; }
         public Nullable<long> PlaneSeat_ID { get; set; }
@@ -29,8 +23,6 @@ namespace AviaSalesApp
         public virtual Flight Flight { get; set; }
         public virtual Passenger Passenger { get; set; }
         public virtual PlaneSeat PlaneSeat { get; set; }
-        public virtual PlaneSeat PlaneSeat1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Price> Price { get; set; }
+        public virtual Price Price { get; set; }
     }
 }

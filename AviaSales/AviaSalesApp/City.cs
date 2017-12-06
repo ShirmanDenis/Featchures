@@ -17,7 +17,7 @@ namespace AviaSalesApp
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public City()
         {
-            this.Airport = new HashSet<Airport>();
+            this.Airports = new HashSet<Airport>();
         }
     
         public int City_ID { get; set; }
@@ -25,7 +25,7 @@ namespace AviaSalesApp
         public string CityName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Airport> Airport { get; set; }
+        public virtual ICollection<Airport> Airports { get; set; }
         public virtual Country Country { get; set; }
     }
 }
