@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AviaSalesApp.Common;
 using AviaSalesApp.View;
 
 namespace AviaSalesApp
@@ -17,7 +18,7 @@ namespace AviaSalesApp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LoginForm());
+            Application.Run((Form)WinFormsControlFactory.Instance.CreateLoginView());
         }
     }
 }

@@ -9,17 +9,24 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AviaSalesApp.Common;
 using AviaSalesApp.Controllers;
+using AppContext = AviaSalesApp.Common.AppContext;
 
 namespace AviaSalesApp.View
 {
     public partial class LoginForm : Form, ILoginView
     {
-        private LoginController _controller;
+        private readonly LoginController _controller;
+        private readonly AppContext _context;
+
+        public IControlFactory Factory => WinFormsControlFactory.Instance;
+
+        public AppContext Context { get; }
 
         public LoginForm()
         {
             InitializeComponent();
-
+            SetRoles(Enum.GetNames(typeof(AppRoles)));
+            cmBxRoles.SelectedIndex = 1;
             _controller = new LoginController(this);
             _controller.LoggingValidated += _controller_LoggingValidated;
         }
@@ -29,7 +36,6 @@ namespace AviaSalesApp.View
             if (!success)
             {
                 MessageBox.Show(msg);
-                return;
             }
         }
 

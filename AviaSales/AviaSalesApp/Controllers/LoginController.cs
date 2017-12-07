@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AviaSalesApp.Common;
 using NLog;
+using AppContext = AviaSalesApp.Common.AppContext;
 
 namespace AviaSalesApp.Controllers
 {
@@ -15,30 +16,37 @@ namespace AviaSalesApp.Controllers
 
     class LoginController
     {
-        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
-
-        private readonly AviaSalesConnection aviaSales = new AviaSalesConnection();
-
+        private AppContext _context;
+        private AviaSalesConnectionProvider _provider;
         public event LoggingValidatedEventHandler LoggingValidated;
 
         public ILoginView View { get; set; }
-        
+        public AviaSalesConnectionProvider ConnectionProvider { get { return _provider; } }
+
         public LoginController(ILoginView view)
         {
             View = view;
             View.Logged += View_Logged;
             View.RoleSelected += View_RoleSelected;
-            SetAppRolesOnView();
         }
-
-        public void SetAppRolesOnView()
-        {
-            View.SetRoles(Enum.GetNames(typeof(AppRoles)));   
-        }
-
         private void View_Logged(object sender, EventArgs e)
         {
-            SetAppRole();
+            var succes = false;
+            var msg = "";
+            try
+            {
+                _context = new AppContext(View.Role);
+                _provider = new AviaSalesConnectionProvider(_context);
+                succes = ConnectionProvider.SetAppRole(View.Role, View.Password);
+            }
+            catch (Exception ex)
+            {
+                msg = ex.Message;
+            }
+            LoggingValidated?.Invoke(succes, msg);
+
+            if (_context.AppRole == AppRoles.Client)
+                View.Factory.CreateScheduleView(_provider).Show();
         }
 
         private void View_RoleSelected(object sender, EventArgs e)
@@ -52,40 +60,6 @@ namespace AviaSalesApp.Controllers
             {
                 View.PasswordEnabled = true;
                 View.Password = "";
-            }
-        }
-
-        private void SetAppRole()
-        {
-            var success = true;
-            var msg = "";
-            var conn = aviaSales.Database.Connection;
-            var initialState = conn.State;
-            try
-            {
-                if (initialState != ConnectionState.Open)
-                    conn.Open();
-                using (DbCommand cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = "sp_setapprole";
-                    cmd.Parameters.Add(new SqlParameter("@rolename", View.Role.ToString()));
-                    cmd.Parameters.Add(new SqlParameter("@password", View.Password));
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.ExecuteNonQuery();
-                }
-            }
-            catch (Exception ex)
-            {
-                logger.ConditionalDebug(ex.Message);
-
-                success = false;
-                msg = ex.Message;
-            }
-            finally
-            {
-                LoggingValidated?.Invoke(success, msg);
-                if (initialState != ConnectionState.Open)
-                    conn.Close();
             }
         }
     }
