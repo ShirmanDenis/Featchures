@@ -20,26 +20,30 @@ namespace AviaSalesApp.Controllers
             _provider = provider;
             _view = scheduleView;
             _provider.AviaSalesConnection.Schedules.Load();
-            _provider.AviaSalesConnection.ScheduleViews.Load();
         }
 
-        public BindingList<ScheduleView> GetSchedule()
+        public BindingList<Schedule> GetSchedule()
         {
-            return _provider.AviaSalesConnection.ScheduleViews.Local.ToBindingList();
+            return _provider.AviaSalesConnection.Schedules.Local.ToBindingList();
         }
 
-        public List<Schedule> GetSchedule(GeoPath from, GeoPath to, DateTime dateFrom, DateTime dateTo)
+        public List<GetSchedule_Result> GetSchedule(GeoPath from, GeoPath to, DateTime dateFrom, DateTime dateTo)
         {
-            var localCollection = _provider
+            _provider.AviaSalesConnection.Airports.Load();
+
+            var airportFromId =
+                _provider
+                    .AviaSalesConnection
+                    .Airports
+                    .Local.Where(airport => airport.AirportName == from.Airport &&
+                                            airport.City.CityName == from.City).Select(i => i.Airport_ID).FirstOrDefault();
+            var airportToId = _provider
                 .AviaSalesConnection
-                .Schedules
-                .Local.Where(schedule =>
-                                schedule.Flight.FlightDate.Between(dateFrom, dateTo) &&
-                                schedule.Rout.AirportFrom.AirportName == from.Airport &&
-                                schedule.Rout.AirportTo.AirportName == to.Airport
-                            ).ToList();
+                .Airports
+                .Local.Where(airport => airport.AirportName == to.Airport &&
+                                        airport.City.CityName == to.City).Select(i => i.Airport_ID).FirstOrDefault();
 
-            return localCollection;
+            return _provider.AviaSalesConnection.GetSchedule(airportFromId, airportToId, dateFrom, dateTo).ToList();
         }
 
         public List<GeoPath> GetAirplanesPath()

@@ -79,6 +79,8 @@
       <DependentUpon>AviaSalesModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Common\GeoPath.cs" />
+    <Compile Include="Common\Helper.cs" />
+    <Compile Include="Common\ScheduleViewProxy.cs" />
     <Compile Include="Common\WinFormsControlFactory.cs" />
     <Compile Include="Common\Enums.cs" />
     <Compile Include="Common\AppContext.cs" />
@@ -91,10 +93,16 @@
     <Compile Include="Country.cs">
       <DependentUpon>AviaSalesModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="C__MigrationHistory.cs">
+      <DependentUpon>AviaSalesModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Flight.cs">
       <DependentUpon>AviaSalesModel.tt</DependentUpon>
     </Compile>
     <Compile Include="FlightState.cs">
+      <DependentUpon>AviaSalesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetSchedule_Result.cs">
       <DependentUpon>AviaSalesModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IAviaSalesView.cs" />
@@ -121,9 +129,6 @@
     <Compile Include="Schedule.cs">
       <DependentUpon>AviaSalesModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ScheduleView.cs">
-      <DependentUpon>AviaSalesModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="SeatClass.cs">
       <DependentUpon>AviaSalesModel.tt</DependentUpon>
     </Compile>
@@ -131,6 +136,9 @@
       <DependentUpon>AviaSalesModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Ticket.cs">
+      <DependentUpon>AviaSalesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tourist.cs">
       <DependentUpon>AviaSalesModel.tt</DependentUpon>
     </Compile>
     <Compile Include="View\BuyTicketForm.cs">

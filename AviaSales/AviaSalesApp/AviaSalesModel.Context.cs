@@ -12,6 +12,8 @@ namespace AviaSalesApp
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class AviaSalesConnection : DbContext
     {
@@ -25,6 +27,7 @@ namespace AviaSalesApp
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public virtual DbSet<Airport> Airports { get; set; }
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<Company> Companies { get; set; }
@@ -40,6 +43,27 @@ namespace AviaSalesApp
         public virtual DbSet<SeatClass> SeatClasses { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Ticket> Tickets { get; set; }
-        public virtual DbSet<ScheduleView> ScheduleViews { get; set; }
+        public virtual DbSet<Tourist> Tourists { get; set; }
+    
+        public virtual ObjectResult<GetSchedule_Result> GetSchedule(Nullable<int> airportFrom_ID, Nullable<int> airportTo_ID, Nullable<System.DateTime> dateFrom, Nullable<System.DateTime> dateTo)
+        {
+            var airportFrom_IDParameter = airportFrom_ID.HasValue ?
+                new ObjectParameter("AirportFrom_ID", airportFrom_ID) :
+                new ObjectParameter("AirportFrom_ID", typeof(int));
+    
+            var airportTo_IDParameter = airportTo_ID.HasValue ?
+                new ObjectParameter("AirportTo_ID", airportTo_ID) :
+                new ObjectParameter("AirportTo_ID", typeof(int));
+    
+            var dateFromParameter = dateFrom.HasValue ?
+                new ObjectParameter("DateFrom", dateFrom) :
+                new ObjectParameter("DateFrom", typeof(System.DateTime));
+    
+            var dateToParameter = dateTo.HasValue ?
+                new ObjectParameter("DateTo", dateTo) :
+                new ObjectParameter("DateTo", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSchedule_Result>("GetSchedule", airportFrom_IDParameter, airportTo_IDParameter, dateFromParameter, dateToParameter);
+        }
     }
 }

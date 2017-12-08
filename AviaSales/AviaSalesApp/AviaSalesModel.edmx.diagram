@@ -4,7 +4,8 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c1d0bd51785c4fb39382e4b3733737e7" Name="Diagram1">
+      <Diagram DiagramId="873022592ac64bd4a943fe86d9c68489" Name="Diagram1">
+        <EntityTypeShape EntityType="AviaSalesModel.C__MigrationHistory" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AviaSalesModel.Airport" Width="1.5" PointX="1.5" PointY="16.875" IsExpanded="true" />
         <EntityTypeShape EntityType="AviaSalesModel.City" Width="1.5" PointX="1.5" PointY="20" IsExpanded="true" />
         <EntityTypeShape EntityType="AviaSalesModel.Company" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
@@ -18,9 +19,9 @@
         <EntityTypeShape EntityType="AviaSalesModel.Rout" Width="1.5" PointX="0.75" PointY="13.875" IsExpanded="true" />
         <EntityTypeShape EntityType="AviaSalesModel.Schedule" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="AviaSalesModel.SeatClass" Width="1.5" PointX="3.75" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="AviaSalesModel.sysdiagram" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AviaSalesModel.sysdiagram" Width="1.5" PointX="5.75" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AviaSalesModel.Ticket" Width="1.5" PointX="8.25" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="AviaSalesModel.ScheduleView" Width="1.5" PointX="5.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AviaSalesModel.Tourist" Width="1.5" PointX="7.75" PointY="9.75" IsExpanded="true" />
         <AssociationConnector Association="AviaSalesModel.FK_Airport_City" ManuallyRouted="false" />
         <AssociationConnector Association="AviaSalesModel.FK_Rout_AirportFrom" ManuallyRouted="false" />
         <AssociationConnector Association="AviaSalesModel.FK_Rout_AirportTo" ManuallyRouted="false" />

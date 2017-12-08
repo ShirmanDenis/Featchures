@@ -10,7 +10,12 @@ namespace AviaSalesApp.Common
     {
         public static bool Between(this DateTime instance, DateTime lhs, DateTime rhs)
         {
-            return lhs <= instance && instance >= rhs;
+            return lhs.Day <= instance.Day &&
+                   lhs.Month <= instance.Month &&
+                   lhs.Year <= instance.Year &&
+                   rhs.Day >= instance.Day &&
+                   rhs.Month >= instance.Month &&
+                   rhs.Year >= instance.Year;
         }
     }
 

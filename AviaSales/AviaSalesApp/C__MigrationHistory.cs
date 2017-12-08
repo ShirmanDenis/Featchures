@@ -12,12 +12,11 @@ namespace AviaSalesApp
     using System;
     using System.Collections.Generic;
     
-    public partial class ScheduleView
+    public partial class C__MigrationHistory
     {
-        public string FlightName { get; set; }
-        public string CompanyName { get; set; }
-        public string PlaneTypeName { get; set; }
-        public System.TimeSpan DepartureTime { get; set; }
-        public System.DateTime ArrivalDate { get; set; }
+        public string MigrationId { get; set; }
+        public string ContextKey { get; set; }
+        public byte[] Model { get; set; }
+        public string ProductVersion { get; set; }
     }
 }

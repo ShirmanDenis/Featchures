@@ -5,6 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="Хранилище AviaSalesModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
         <EntityType Name="Airport">
           <Key>
             <PropertyRef Name="Airport_ID" />
@@ -134,21 +144,13 @@
           <Property Name="Passanger_ID" Type="bigint" Nullable="false" />
           <Property Name="Price_ID" Type="bigint" Nullable="false" />
         </EntityType>
-        <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "shirman-414.dbo.ScheduleView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
-        <EntityType Name="ScheduleView">
+        <EntityType Name="Tourist">
           <Key>
-            <PropertyRef Name="FlightName" />
-            <PropertyRef Name="CompanyName" />
-            <PropertyRef Name="PlaneTypeName" />
-            <PropertyRef Name="DepartureTime" />
-            <PropertyRef Name="ArrivalDate" />
+            <PropertyRef Name="Tourist_ID" />
           </Key>
-          <Property Name="FlightName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="CompanyName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="PlaneTypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="DepartureTime" Type="time" Precision="1" Nullable="false" />
-          <Property Name="ArrivalDate" Type="smalldatetime" Nullable="false" />
+          <Property Name="Tourist_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Age" Type="smallint" Nullable="false" />
         </EntityType>
         <Association Name="FK_Airport_City">
           <End Role="City" Type="Self.City" Multiplicity="1" />
@@ -366,7 +368,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="GetSchedule" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AirportFrom_ID" Type="int" Mode="In" />
+          <Parameter Name="AirportTo_ID" Type="int" Mode="In" />
+          <Parameter Name="DateFrom" Type="date" Mode="In" />
+          <Parameter Name="DateTo" Type="date" Mode="In" />
+        </Function>
         <EntityContainer Name="Хранилище AviaSalesModelContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Airport" EntityType="Self.Airport" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
@@ -382,15 +391,7 @@
           <EntitySet Name="SeatClass" EntityType="Self.SeatClass" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ScheduleView" EntityType="Self.ScheduleView" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [ScheduleView].[FlightName] AS [FlightName], 
-    [ScheduleView].[CompanyName] AS [CompanyName], 
-    [ScheduleView].[PlaneTypeName] AS [PlaneTypeName], 
-    [ScheduleView].[DepartureTime] AS [DepartureTime], 
-    [ScheduleView].[ArrivalDate] AS [ArrivalDate]
-    FROM [dbo].[ScheduleView] AS [ScheduleView]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="Tourist" EntityType="Self.Tourist" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Airport_City" Association="Self.FK_Airport_City">
             <End Role="City" EntitySet="City" />
             <End Role="Airport" EntitySet="Airport" />
@@ -469,6 +470,16 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AviaSalesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
         <EntityType Name="Airport">
           <Key>
             <PropertyRef Name="Airport_ID" />
@@ -477,8 +488,8 @@
           <Property Name="City_ID" Type="Int32" Nullable="false" />
           <Property Name="AirportName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="City" Relationship="Self.FK_Airport_City" FromRole="Airport" ToRole="City" />
-          <NavigationProperty Name="Routs" Relationship="Self.FK_Rout_AirportFrom" FromRole="Airport" ToRole="Rout" />
-          <NavigationProperty Name="Routs1" Relationship="Self.FK_Rout_AirportTo" FromRole="Airport" ToRole="Rout" />
+          <NavigationProperty Name="RoutsFrom" Relationship="Self.FK_Rout_AirportFrom" FromRole="Airport" ToRole="Rout" />
+          <NavigationProperty Name="RoutsTo" Relationship="Self.FK_Rout_AirportTo" FromRole="Airport" ToRole="Rout" />
         </EntityType>
         <EntityType Name="City">
           <Key>
@@ -634,19 +645,13 @@
           <NavigationProperty Name="PlaneSeat" Relationship="Self.FK_Ticket_PlaneSeat" FromRole="Ticket" ToRole="PlaneSeat" />
           <NavigationProperty Name="Price" Relationship="Self.FK_Ticket_Price" FromRole="Ticket" ToRole="Price" />
         </EntityType>
-        <EntityType Name="ScheduleView">
+        <EntityType Name="Tourist">
           <Key>
-            <PropertyRef Name="FlightName" />
-            <PropertyRef Name="CompanyName" />
-            <PropertyRef Name="PlaneTypeName" />
-            <PropertyRef Name="DepartureTime" />
-            <PropertyRef Name="ArrivalDate" />
+            <PropertyRef Name="Tourist_ID" />
           </Key>
-          <Property Name="FlightName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PlaneTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="DepartureTime" Type="Time" Nullable="false" Precision="1" />
-          <Property Name="ArrivalDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Tourist_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Age" Type="Int16" Nullable="false" />
         </EntityType>
         <Association Name="FK_Airport_City">
           <End Role="City" Type="Self.City" Multiplicity="1" />
@@ -865,6 +870,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="AviaSalesConnection" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
           <EntitySet Name="Airports" EntityType="Self.Airport" />
           <EntitySet Name="Cities" EntityType="Self.City" />
           <EntitySet Name="Companies" EntityType="Self.Company" />
@@ -880,7 +886,7 @@
           <EntitySet Name="SeatClasses" EntityType="Self.SeatClass" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Tickets" EntityType="Self.Ticket" />
-          <EntitySet Name="ScheduleViews" EntityType="Self.ScheduleView" />
+          <EntitySet Name="Tourists" EntityType="Self.Tourist" />
           <AssociationSet Name="FK_Airport_City" Association="Self.FK_Airport_City">
             <End Role="City" EntitySet="Cities" />
             <End Role="Airport" EntitySet="Airports" />
@@ -953,13 +959,36 @@
             <End Role="Rout" EntitySet="Routs" />
             <End Role="Schedule" EntitySet="Schedules" />
           </AssociationSet>
+          <FunctionImport Name="GetSchedule" ReturnType="Collection(AviaSalesModel.GetSchedule_Result)">
+            <Parameter Name="AirportFrom_ID" Mode="In" Type="Int32" />
+            <Parameter Name="AirportTo_ID" Mode="In" Type="Int32" />
+            <Parameter Name="DateFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="DateTo" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="GetSchedule_Result">
+          <Property Type="String" Name="FlightName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="CompanyName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="PlaneTypeName" Nullable="false" MaxLength="50" />
+          <Property Type="Time" Name="DepartureTime" Nullable="false" />
+          <Property Type="DateTime" Name="ArrivalDate" Nullable="false" Precision="16" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Хранилище AviaSalesModelContainer" CdmEntityContainer="AviaSalesConnection">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="AviaSalesModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Airports">
             <EntityTypeMapping TypeName="AviaSalesModel.Airport">
               <MappingFragment StoreEntitySet="Airport">
@@ -1104,17 +1133,26 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ScheduleViews">
-            <EntityTypeMapping TypeName="AviaSalesModel.ScheduleView">
-              <MappingFragment StoreEntitySet="ScheduleView">
+          <EntitySetMapping Name="Tourists">
+            <EntityTypeMapping TypeName="AviaSalesModel.Tourist">
+              <MappingFragment StoreEntitySet="Tourist">
+                <ScalarProperty Name="Tourist_ID" ColumnName="Tourist_ID" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetSchedule" FunctionName="Хранилище AviaSalesModel.GetSchedule">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AviaSalesModel.GetSchedule_Result">
                 <ScalarProperty Name="FlightName" ColumnName="FlightName" />
                 <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
                 <ScalarProperty Name="PlaneTypeName" ColumnName="PlaneTypeName" />
                 <ScalarProperty Name="DepartureTime" ColumnName="DepartureTime" />
                 <ScalarProperty Name="ArrivalDate" ColumnName="ArrivalDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

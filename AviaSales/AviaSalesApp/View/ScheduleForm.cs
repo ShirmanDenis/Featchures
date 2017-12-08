@@ -48,7 +48,7 @@ namespace AviaSalesApp.View
 
             _controller = new ScheduleController(provider, this);
 
-            dataView.DataSource = _controller.GetSchedule();
+            //dataView.DataSource = _controller.GetSchedule();
 
             InitToFromCollections();          
         }
@@ -69,6 +69,11 @@ namespace AviaSalesApp.View
         public new void Show()
         {
             base.Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var s = _controller.GetSchedule(PathFrom, PathTo, DateFrom, DateTo);
         }
     }
 }
