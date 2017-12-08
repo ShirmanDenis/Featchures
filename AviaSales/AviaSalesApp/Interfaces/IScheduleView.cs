@@ -15,5 +15,7 @@ namespace AviaSalesApp
         
         GeoPath PathFrom { get; set; }
         GeoPath PathTo { get; set; }
+
+        event EventHandler TicketBuy;
     }
 }

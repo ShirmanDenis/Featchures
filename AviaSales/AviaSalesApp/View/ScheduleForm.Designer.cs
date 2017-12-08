@@ -43,7 +43,7 @@
             this.schedulePanel = new System.Windows.Forms.Panel();
             this.dataView = new System.Windows.Forms.DataGridView();
             this.additionalDataControls = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
+            this.buttonBuyTicket = new System.Windows.Forms.Button();
             this.filterPanel.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -237,20 +237,20 @@
             // 
             this.additionalDataControls.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.additionalDataControls.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.additionalDataControls.Controls.Add(this.button2);
+            this.additionalDataControls.Controls.Add(this.buttonBuyTicket);
             this.additionalDataControls.Dock = System.Windows.Forms.DockStyle.Right;
             this.additionalDataControls.Location = new System.Drawing.Point(906, 0);
             this.additionalDataControls.Name = "additionalDataControls";
             this.additionalDataControls.Size = new System.Drawing.Size(224, 576);
             this.additionalDataControls.TabIndex = 0;
             // 
-            // button2
+            // buttonBuyTicket
             // 
-            this.button2.Location = new System.Drawing.Point(4, 4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(213, 23);
-            this.button2.TabIndex = 0;
-            this.button2.UseVisualStyleBackColor = true;
+            this.buttonBuyTicket.Location = new System.Drawing.Point(4, 4);
+            this.buttonBuyTicket.Name = "buttonBuyTicket";
+            this.buttonBuyTicket.Size = new System.Drawing.Size(213, 23);
+            this.buttonBuyTicket.TabIndex = 0;
+            this.buttonBuyTicket.UseVisualStyleBackColor = true;
             // 
             // ScheduleForm
             // 
@@ -290,6 +290,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DateTimePicker dateTimeTo;
         private System.Windows.Forms.DateTimePicker dateTimeFrom;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button buttonBuyTicket;
     }
 }

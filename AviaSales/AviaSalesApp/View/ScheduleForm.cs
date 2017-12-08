@@ -43,6 +43,12 @@ namespace AviaSalesApp.View
             set => cmBxTo.SelectedItem = value;
         }
 
+        public event EventHandler TicketBuy
+        {
+            add => buttonBuyTicket.Click += value;
+            remove => buttonBuyTicket.Click -= value;
+        }
+
         public ScheduleForm(AviaSalesConnectionProvider provider)
         {
             InitializeComponent();
@@ -73,11 +79,6 @@ namespace AviaSalesApp.View
         public new void Show()
         {
             base.Show();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            var s = _controller.GetSchedule(PathFrom, PathTo, DateFrom, DateTo);
         }
 
         private void buttonSwap_Click(object sender, EventArgs e)
