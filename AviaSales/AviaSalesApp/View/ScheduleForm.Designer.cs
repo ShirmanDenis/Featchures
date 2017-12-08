@@ -150,7 +150,7 @@
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(761, 27);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(761, 29);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
             // buttonSwap
@@ -158,12 +158,12 @@
             this.buttonSwap.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSwap.Location = new System.Drawing.Point(354, 3);
+            this.buttonSwap.Location = new System.Drawing.Point(369, 3);
             this.buttonSwap.Name = "buttonSwap";
-            this.buttonSwap.Size = new System.Drawing.Size(75, 21);
+            this.buttonSwap.Size = new System.Drawing.Size(45, 23);
             this.buttonSwap.TabIndex = 5;
-            this.buttonSwap.Text = "button1";
             this.buttonSwap.UseVisualStyleBackColor = true;
+            this.buttonSwap.Click += new System.EventHandler(this.buttonSwap_Click);
             // 
             // cmBxFrom
             // 
@@ -171,7 +171,7 @@
             this.cmBxFrom.FormattingEnabled = true;
             this.cmBxFrom.Location = new System.Drawing.Point(74, 3);
             this.cmBxFrom.Name = "cmBxFrom";
-            this.cmBxFrom.Size = new System.Drawing.Size(274, 21);
+            this.cmBxFrom.Size = new System.Drawing.Size(289, 21);
             this.cmBxFrom.TabIndex = 2;
             // 
             // labelFrom
@@ -182,7 +182,7 @@
             this.labelFrom.Location = new System.Drawing.Point(3, 1);
             this.labelFrom.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.labelFrom.Name = "labelFrom";
-            this.labelFrom.Size = new System.Drawing.Size(65, 25);
+            this.labelFrom.Size = new System.Drawing.Size(65, 27);
             this.labelFrom.TabIndex = 0;
             this.labelFrom.Text = "From:";
             // 
@@ -190,9 +190,9 @@
             // 
             this.cmBxTo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmBxTo.FormattingEnabled = true;
-            this.cmBxTo.Location = new System.Drawing.Point(484, 3);
+            this.cmBxTo.Location = new System.Drawing.Point(469, 3);
             this.cmBxTo.Name = "cmBxTo";
-            this.cmBxTo.Size = new System.Drawing.Size(274, 21);
+            this.cmBxTo.Size = new System.Drawing.Size(289, 21);
             this.cmBxTo.TabIndex = 3;
             // 
             // label1
@@ -200,10 +200,10 @@
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Font = new System.Drawing.Font("Courier New", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(435, 1);
+            this.label1.Location = new System.Drawing.Point(420, 1);
             this.label1.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 25);
+            this.label1.Size = new System.Drawing.Size(43, 27);
             this.label1.TabIndex = 1;
             this.label1.Text = "To:";
             // 
@@ -250,9 +250,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(213, 23);
             this.button2.TabIndex = 0;
-            this.button2.Text = "Buy ticket";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // ScheduleForm
             // 

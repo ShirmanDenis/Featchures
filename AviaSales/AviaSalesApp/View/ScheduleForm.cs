@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AviaSalesApp.Common;
 using AviaSalesApp.Controllers;
+using AviaSalesApp.Properties;
 
 namespace AviaSalesApp.View
 {
@@ -50,6 +51,9 @@ namespace AviaSalesApp.View
 
             //dataView.DataSource = _controller.GetSchedule();
 
+            buttonSwap.BackgroundImage = Resources.SWAP;
+            buttonSwap.BackgroundImageLayout = ImageLayout.Stretch;
+            
             InitToFromCollections();          
         }
 
@@ -74,6 +78,13 @@ namespace AviaSalesApp.View
         private void button2_Click(object sender, EventArgs e)
         {
             var s = _controller.GetSchedule(PathFrom, PathTo, DateFrom, DateTo);
+        }
+
+        private void buttonSwap_Click(object sender, EventArgs e)
+        {
+            var temp = PathFrom;
+            PathFrom = PathTo;
+            PathTo = temp;
         }
     }
 }
