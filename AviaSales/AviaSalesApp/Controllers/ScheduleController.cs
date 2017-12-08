@@ -19,13 +19,27 @@ namespace AviaSalesApp.Controllers
         {
             _provider = provider;
             _view = scheduleView;
+            _provider.AviaSalesConnection.Schedules.Load();
+            _provider.AviaSalesConnection.ScheduleViews.Load();
         }
 
         public BindingList<ScheduleView> GetSchedule()
         {
-            _provider.AviaSalesConnection.ScheduleViews.Load();
-
             return _provider.AviaSalesConnection.ScheduleViews.Local.ToBindingList();
+        }
+
+        public List<Schedule> GetSchedule(GeoPath from, GeoPath to, DateTime dateFrom, DateTime dateTo)
+        {
+            var localCollection = _provider
+                .AviaSalesConnection
+                .Schedules
+                .Local.Where(schedule =>
+                                schedule.Flight.FlightDate.Between(dateFrom, dateTo) &&
+                                schedule.Rout.AirportFrom.AirportName == from.Airport &&
+                                schedule.Rout.AirportTo.AirportName == to.Airport
+                            ).ToList();
+
+            return localCollection;
         }
 
         public List<GeoPath> GetAirplanesPath()

@@ -24,8 +24,8 @@ namespace AviaSalesApp
         public int AirportFrom_ID { get; set; }
         public int AirportTo_ID { get; set; }
     
-        public virtual Airport Airport { get; set; }
-        public virtual Airport Airport1 { get; set; }
+        public virtual Airport AirportFrom { get; set; }
+        public virtual Airport AirportTo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Schedule> Schedules { get; set; }
     }

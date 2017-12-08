@@ -16,7 +16,6 @@ namespace AviaSalesApp.View
 {
     public partial class ScheduleForm : Form, IScheduleView
     {
-        private readonly Timer timer1 = new Timer();
         private readonly ScheduleController _controller;
 
         public DateTime DateFrom
@@ -65,7 +64,6 @@ namespace AviaSalesApp.View
 
             cmBxFrom.AutoCompleteMode = AutoCompleteMode.Suggest;
             cmBxFrom.AutoCompleteSource = AutoCompleteSource.ListItems;
-
         }
 
         public new void Show()

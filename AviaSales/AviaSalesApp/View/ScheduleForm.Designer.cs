@@ -221,11 +221,15 @@
             // 
             // dataView
             // 
+            this.dataView.AllowUserToAddRows = false;
+            this.dataView.AllowUserToDeleteRows = false;
+            this.dataView.AllowUserToOrderColumns = true;
             this.dataView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataView.Location = new System.Drawing.Point(0, 0);
             this.dataView.Name = "dataView";
+            this.dataView.ReadOnly = true;
             this.dataView.Size = new System.Drawing.Size(906, 576);
             this.dataView.TabIndex = 1;
             // 

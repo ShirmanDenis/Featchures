@@ -578,8 +578,8 @@
           <Property Name="Rout_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AirportFrom_ID" Type="Int32" Nullable="false" />
           <Property Name="AirportTo_ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Airport" Relationship="Self.FK_Rout_AirportFrom" FromRole="Rout" ToRole="Airport" />
-          <NavigationProperty Name="Airport1" Relationship="Self.FK_Rout_AirportTo" FromRole="Rout" ToRole="Airport" />
+          <NavigationProperty Name="AirportFrom" Relationship="Self.FK_Rout_AirportFrom" FromRole="Rout" ToRole="Airport" />
+          <NavigationProperty Name="AirportTo" Relationship="Self.FK_Rout_AirportTo" FromRole="Rout" ToRole="Airport" />
           <NavigationProperty Name="Schedules" Relationship="Self.FK_Flight_Rout" FromRole="Rout" ToRole="Schedule" />
         </EntityType>
         <EntityType Name="Schedule">
