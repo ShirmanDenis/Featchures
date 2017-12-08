@@ -29,6 +29,13 @@ namespace AviaSalesApp.View
             cmBxRoles.SelectedIndex = 1;
             _controller = new LoginController(this);
             _controller.LoggingValidated += _controller_LoggingValidated;
+
+            Closing += LoginForm_Closing;
+        }
+
+        private void LoginForm_Closing(object sender, CancelEventArgs e)
+        {
+            _controller.Dispose();
         }
 
         private void _controller_LoggingValidated(bool success, string msg)

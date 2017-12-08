@@ -14,7 +14,7 @@ namespace AviaSalesApp.Controllers
 {
     public delegate void LoggingValidatedEventHandler(bool success, string msg);
 
-    class LoginController
+    class LoginController : IDisposable
     {
         private AppContext _context;
         private AviaSalesConnectionProvider _provider;
@@ -61,6 +61,11 @@ namespace AviaSalesApp.Controllers
                 View.PasswordEnabled = true;
                 View.Password = "";
             }
+        }
+
+        public void Dispose()
+        {
+            _provider?.Dispose();
         }
     }
 }

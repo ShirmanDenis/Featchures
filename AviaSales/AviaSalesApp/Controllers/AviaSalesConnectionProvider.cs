@@ -8,16 +8,16 @@ using AppContext = AviaSalesApp.Common.AppContext;
 
 namespace AviaSalesApp.Controllers
 {
-    public class AviaSalesConnectionProvider
+    public class AviaSalesConnectionProvider : IDisposable
     {
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
-        private readonly AviaSalesConnection _aviaSales = new AviaSalesConnection();
-
-        public AviaSalesConnection AviaSalesConnection => _aviaSales;
+        
+        public AviaSalesConnection AviaSalesConnection { get; } = new AviaSalesConnection();
+        public AppContext Context { get; }
 
         public AviaSalesConnectionProvider(AppContext ctx)
         {
-
+            Context = ctx;
         }
 
         public bool SetAppRole(AppRoles role, string pass)
@@ -34,7 +34,7 @@ namespace AviaSalesApp.Controllers
                     cmd.Parameters.Add(new SqlParameter("@rolename", role.ToString()));
                     cmd.Parameters.Add(new SqlParameter("@password", pass));
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.ExecuteNonQuery();
+                    var su = cmd.ExecuteNonQuery();
                 }
             }
             catch (Exception ex)
@@ -44,6 +44,11 @@ namespace AviaSalesApp.Controllers
                 return false;
             }
             return true;
+        }
+
+        public void Dispose()
+        {
+            AviaSalesConnection?.Dispose();
         }
     }
 }

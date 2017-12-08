@@ -23,7 +23,7 @@ namespace AviaSalesApp
     
         public long Flight_ID { get; set; }
         public string FlightName { get; set; }
-        public System.DateTime Date { get; set; }
+        public System.DateTime FlightDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Schedule> Schedules { get; set; }

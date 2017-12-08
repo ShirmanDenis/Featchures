@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище AviaSales" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище AviaSalesModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Airport">
           <Key>
             <PropertyRef Name="Airport_ID" />
@@ -41,13 +41,13 @@
           </Key>
           <Property Name="Flight_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FlightName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="FlightDate" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="FlightState">
           <Key>
             <PropertyRef Name="FlightState_ID" />
           </Key>
-          <Property Name="FlightState_ID" Type="int" Nullable="false" />
+          <Property Name="FlightState_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="StateName" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Passenger">
@@ -102,10 +102,10 @@
           <Property Name="Company_ID" Type="int" Nullable="false" />
           <Property Name="PlaneType_ID" Type="int" Nullable="false" />
           <Property Name="Delay" Type="time" Precision="1" Nullable="false" />
-          <Property Name="DepartureDate" Type="smalldatetime" Nullable="false" />
+          <Property Name="DepartureTime" Type="time" Precision="1" Nullable="false" />
           <Property Name="ArrivalDate" Type="smalldatetime" Nullable="false" />
           <Property Name="Rout_ID" Type="int" Nullable="false" />
-          <Property Name="State_ID" Type="int" Nullable="false" />
+          <Property Name="State_ID" Type="int" />
         </EntityType>
         <EntityType Name="SeatClass">
           <Key>
@@ -133,6 +133,22 @@
           <Property Name="PlaneSeat_ID" Type="bigint" />
           <Property Name="Passanger_ID" Type="bigint" Nullable="false" />
           <Property Name="Price_ID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "shirman-414.dbo.ScheduleView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="ScheduleView">
+          <Key>
+            <PropertyRef Name="FlightName" />
+            <PropertyRef Name="CompanyName" />
+            <PropertyRef Name="PlaneTypeName" />
+            <PropertyRef Name="DepartureTime" />
+            <PropertyRef Name="ArrivalDate" />
+          </Key>
+          <Property Name="FlightName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PlaneTypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DepartureTime" Type="time" Precision="1" Nullable="false" />
+          <Property Name="ArrivalDate" Type="smalldatetime" Nullable="false" />
         </EntityType>
         <Association Name="FK_Airport_City">
           <End Role="City" Type="Self.City" Multiplicity="1" />
@@ -171,7 +187,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Flight_FlightState">
-          <End Role="FlightState" Type="Self.FlightState" Multiplicity="1" />
+          <End Role="FlightState" Type="Self.FlightState" Multiplicity="0..1" />
           <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="FlightState">
@@ -350,46 +366,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="EmployeesCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
-        <Function Name="GetRoleName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="RoleID" Type="int" Mode="In" />
-          <Parameter Name="RoleName" Type="nvarchar" Mode="InOut" />
-        </Function>
-        <Function Name="SalesByOrderDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="OrderYear" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <EntityContainer Name="Хранилище AviaSalesContainer">
+        <EntityContainer Name="Хранилище AviaSalesModelContainer">
           <EntitySet Name="Airport" EntityType="Self.Airport" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
@@ -405,6 +382,15 @@
           <EntitySet Name="SeatClass" EntityType="Self.SeatClass" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScheduleView" EntityType="Self.ScheduleView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ScheduleView].[FlightName] AS [FlightName], 
+    [ScheduleView].[CompanyName] AS [CompanyName], 
+    [ScheduleView].[PlaneTypeName] AS [PlaneTypeName], 
+    [ScheduleView].[DepartureTime] AS [DepartureTime], 
+    [ScheduleView].[ArrivalDate] AS [ArrivalDate]
+    FROM [dbo].[ScheduleView] AS [ScheduleView]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Airport_City" Association="Self.FK_Airport_City">
             <End Role="City" EntitySet="City" />
             <End Role="Airport" EntitySet="Airport" />
@@ -478,10 +464,11 @@
             <End Role="Ticket" EntitySet="Ticket" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="AviaSales" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="AviaSalesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Airport">
           <Key>
             <PropertyRef Name="Airport_ID" />
@@ -490,8 +477,8 @@
           <Property Name="City_ID" Type="Int32" Nullable="false" />
           <Property Name="AirportName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="City" Relationship="Self.FK_Airport_City" FromRole="Airport" ToRole="City" />
-          <NavigationProperty Name="RoutsFrom" Relationship="Self.FK_Rout_AirportFrom" FromRole="Airport" ToRole="Rout" />
-          <NavigationProperty Name="RoutsTo" Relationship="Self.FK_Rout_AirportTo" FromRole="Airport" ToRole="Rout" />
+          <NavigationProperty Name="Routs" Relationship="Self.FK_Rout_AirportFrom" FromRole="Airport" ToRole="Rout" />
+          <NavigationProperty Name="Routs1" Relationship="Self.FK_Rout_AirportTo" FromRole="Airport" ToRole="Rout" />
         </EntityType>
         <EntityType Name="City">
           <Key>
@@ -526,7 +513,7 @@
           </Key>
           <Property Name="Flight_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FlightName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FlightDate" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Schedules" Relationship="Self.FK_Schedule_Flight" FromRole="Flight" ToRole="Schedule" />
           <NavigationProperty Name="Tickets" Relationship="Self.FK_Ticket_Flight" FromRole="Flight" ToRole="Ticket" />
         </EntityType>
@@ -534,7 +521,7 @@
           <Key>
             <PropertyRef Name="FlightState_ID" />
           </Key>
-          <Property Name="FlightState_ID" Type="Int32" Nullable="false" />
+          <Property Name="FlightState_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StateName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Schedules" Relationship="Self.FK_Flight_FlightState" FromRole="FlightState" ToRole="Schedule" />
         </EntityType>
@@ -604,10 +591,10 @@
           <Property Name="Company_ID" Type="Int32" Nullable="false" />
           <Property Name="PlaneType_ID" Type="Int32" Nullable="false" />
           <Property Name="Delay" Type="Time" Nullable="false" Precision="1" />
-          <Property Name="DepartureDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DepartureTime" Type="Time" Nullable="false" Precision="1" />
           <Property Name="ArrivalDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Rout_ID" Type="Int32" Nullable="false" />
-          <Property Name="State_ID" Type="Int32" Nullable="false" />
+          <Property Name="State_ID" Type="Int32" />
           <NavigationProperty Name="Company" Relationship="Self.FK_Flight_Company" FromRole="Schedule" ToRole="Company" />
           <NavigationProperty Name="Flight" Relationship="Self.FK_Schedule_Flight" FromRole="Schedule" ToRole="Flight" />
           <NavigationProperty Name="FlightState" Relationship="Self.FK_Flight_FlightState" FromRole="Schedule" ToRole="FlightState" />
@@ -646,6 +633,20 @@
           <NavigationProperty Name="Passenger" Relationship="Self.FK_Ticket_Passenger" FromRole="Ticket" ToRole="Passenger" />
           <NavigationProperty Name="PlaneSeat" Relationship="Self.FK_Ticket_PlaneSeat" FromRole="Ticket" ToRole="PlaneSeat" />
           <NavigationProperty Name="Price" Relationship="Self.FK_Ticket_Price" FromRole="Ticket" ToRole="Price" />
+        </EntityType>
+        <EntityType Name="ScheduleView">
+          <Key>
+            <PropertyRef Name="FlightName" />
+            <PropertyRef Name="CompanyName" />
+            <PropertyRef Name="PlaneTypeName" />
+            <PropertyRef Name="DepartureTime" />
+            <PropertyRef Name="ArrivalDate" />
+          </Key>
+          <Property Name="FlightName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PlaneTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DepartureTime" Type="Time" Nullable="false" Precision="1" />
+          <Property Name="ArrivalDate" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <Association Name="FK_Airport_City">
           <End Role="City" Type="Self.City" Multiplicity="1" />
@@ -744,7 +745,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Flight_FlightState">
-          <End Role="FlightState" Type="Self.FlightState" Multiplicity="1" />
+          <End Role="FlightState" Type="Self.FlightState" Multiplicity="0..1" />
           <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="FlightState">
@@ -879,6 +880,7 @@
           <EntitySet Name="SeatClasses" EntityType="Self.SeatClass" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Tickets" EntityType="Self.Ticket" />
+          <EntitySet Name="ScheduleViews" EntityType="Self.ScheduleView" />
           <AssociationSet Name="FK_Airport_City" Association="Self.FK_Airport_City">
             <End Role="City" EntitySet="Cities" />
             <End Role="Airport" EntitySet="Airports" />
@@ -951,64 +953,15 @@
             <End Role="Rout" EntitySet="Routs" />
             <End Role="Schedule" EntitySet="Schedules" />
           </AssociationSet>
-          <FunctionImport Name="EmployeesCount" />
-          <FunctionImport Name="GetRoleName">
-            <Parameter Name="RoleID" Mode="In" Type="Int32" />
-            <Parameter Name="RoleName" Mode="InOut" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="SalesByOrderDate">
-          <Parameter Name="OrderYear" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="sp_alterdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_creatediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_dropdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(AviaSales.sp_helpdiagramdefinition_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(AviaSales.sp_helpdiagrams_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_renamediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="new_diagramname" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
-        <ComplexType Name="sp_helpdiagramdefinition_Result">
-          <Property Type="Int32" Name="version" Nullable="true" />
-          <Property Type="Binary" Name="definition" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="sp_helpdiagrams_Result">
-          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-          <Property Type="Int32" Name="OwnerID" Nullable="false" />
-        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище AviaSalesContainer" CdmEntityContainer="AviaSalesConnection">
+        <EntityContainerMapping StorageEntityContainer="Хранилище AviaSalesModelContainer" CdmEntityContainer="AviaSalesConnection">
           <EntitySetMapping Name="Airports">
-            <EntityTypeMapping TypeName="AviaSales.Airport">
+            <EntityTypeMapping TypeName="AviaSalesModel.Airport">
               <MappingFragment StoreEntitySet="Airport">
                 <ScalarProperty Name="Airport_ID" ColumnName="Airport_ID" />
                 <ScalarProperty Name="City_ID" ColumnName="City_ID" />
@@ -1017,7 +970,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Cities">
-            <EntityTypeMapping TypeName="AviaSales.City">
+            <EntityTypeMapping TypeName="AviaSalesModel.City">
               <MappingFragment StoreEntitySet="City">
                 <ScalarProperty Name="City_ID" ColumnName="City_ID" />
                 <ScalarProperty Name="Country_ID" ColumnName="Country_ID" />
@@ -1026,7 +979,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Companies">
-            <EntityTypeMapping TypeName="AviaSales.Company">
+            <EntityTypeMapping TypeName="AviaSalesModel.Company">
               <MappingFragment StoreEntitySet="Company">
                 <ScalarProperty Name="Company_ID" ColumnName="Company_ID" />
                 <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
@@ -1034,7 +987,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Countries">
-            <EntityTypeMapping TypeName="AviaSales.Country">
+            <EntityTypeMapping TypeName="AviaSalesModel.Country">
               <MappingFragment StoreEntitySet="Country">
                 <ScalarProperty Name="Country_ID" ColumnName="Country_ID" />
                 <ScalarProperty Name="CountryName" ColumnName="CountryName" />
@@ -1042,16 +995,16 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Flights">
-            <EntityTypeMapping TypeName="AviaSales.Flight">
+            <EntityTypeMapping TypeName="AviaSalesModel.Flight">
               <MappingFragment StoreEntitySet="Flight">
                 <ScalarProperty Name="Flight_ID" ColumnName="Flight_ID" />
                 <ScalarProperty Name="FlightName" ColumnName="FlightName" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="FlightDate" ColumnName="FlightDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FlightStates">
-            <EntityTypeMapping TypeName="AviaSales.FlightState">
+            <EntityTypeMapping TypeName="AviaSalesModel.FlightState">
               <MappingFragment StoreEntitySet="FlightState">
                 <ScalarProperty Name="FlightState_ID" ColumnName="FlightState_ID" />
                 <ScalarProperty Name="StateName" ColumnName="StateName" />
@@ -1059,7 +1012,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Passengers">
-            <EntityTypeMapping TypeName="AviaSales.Passenger">
+            <EntityTypeMapping TypeName="AviaSalesModel.Passenger">
               <MappingFragment StoreEntitySet="Passenger">
                 <ScalarProperty Name="Passenger_ID" ColumnName="Passenger_ID" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
@@ -1069,7 +1022,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PlaneSeats">
-            <EntityTypeMapping TypeName="AviaSales.PlaneSeat">
+            <EntityTypeMapping TypeName="AviaSalesModel.PlaneSeat">
               <MappingFragment StoreEntitySet="PlaneSeat">
                 <ScalarProperty Name="PlaneSeat_ID" ColumnName="PlaneSeat_ID" />
                 <ScalarProperty Name="PlaneType_ID" ColumnName="PlaneType_ID" />
@@ -1079,7 +1032,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PlaneTypes">
-            <EntityTypeMapping TypeName="AviaSales.PlaneType">
+            <EntityTypeMapping TypeName="AviaSalesModel.PlaneType">
               <MappingFragment StoreEntitySet="PlaneType">
                 <ScalarProperty Name="PlaneType_ID" ColumnName="PlaneType_ID" />
                 <ScalarProperty Name="PlaneTypeName" ColumnName="PlaneTypeName" />
@@ -1087,7 +1040,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Prices">
-            <EntityTypeMapping TypeName="AviaSales.Price">
+            <EntityTypeMapping TypeName="AviaSalesModel.Price">
               <MappingFragment StoreEntitySet="Price">
                 <ScalarProperty Name="Price_ID" ColumnName="Price_ID" />
                 <ScalarProperty Name="Company_ID" ColumnName="Company_ID" />
@@ -1098,7 +1051,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Routs">
-            <EntityTypeMapping TypeName="AviaSales.Rout">
+            <EntityTypeMapping TypeName="AviaSalesModel.Rout">
               <MappingFragment StoreEntitySet="Rout">
                 <ScalarProperty Name="Rout_ID" ColumnName="Rout_ID" />
                 <ScalarProperty Name="AirportFrom_ID" ColumnName="AirportFrom_ID" />
@@ -1107,14 +1060,14 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Schedules">
-            <EntityTypeMapping TypeName="AviaSales.Schedule">
+            <EntityTypeMapping TypeName="AviaSalesModel.Schedule">
               <MappingFragment StoreEntitySet="Schedule">
                 <ScalarProperty Name="Schedule_ID" ColumnName="Schedule_ID" />
                 <ScalarProperty Name="Flight_ID" ColumnName="Flight_ID" />
                 <ScalarProperty Name="Company_ID" ColumnName="Company_ID" />
                 <ScalarProperty Name="PlaneType_ID" ColumnName="PlaneType_ID" />
                 <ScalarProperty Name="Delay" ColumnName="Delay" />
-                <ScalarProperty Name="DepartureDate" ColumnName="DepartureDate" />
+                <ScalarProperty Name="DepartureTime" ColumnName="DepartureTime" />
                 <ScalarProperty Name="ArrivalDate" ColumnName="ArrivalDate" />
                 <ScalarProperty Name="Rout_ID" ColumnName="Rout_ID" />
                 <ScalarProperty Name="State_ID" ColumnName="State_ID" />
@@ -1122,7 +1075,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SeatClasses">
-            <EntityTypeMapping TypeName="AviaSales.SeatClass">
+            <EntityTypeMapping TypeName="AviaSalesModel.SeatClass">
               <MappingFragment StoreEntitySet="SeatClass">
                 <ScalarProperty Name="SeatClass_ID" ColumnName="SeatClass_ID" />
                 <ScalarProperty Name="SeatClassName" ColumnName="SeatClassName" />
@@ -1130,7 +1083,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="AviaSales.sysdiagram">
+            <EntityTypeMapping TypeName="AviaSalesModel.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -1141,7 +1094,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Tickets">
-            <EntityTypeMapping TypeName="AviaSales.Ticket">
+            <EntityTypeMapping TypeName="AviaSalesModel.Ticket">
               <MappingFragment StoreEntitySet="Ticket">
                 <ScalarProperty Name="Ticket_ID" ColumnName="Ticket_ID" />
                 <ScalarProperty Name="Flight_ID" ColumnName="Flight_ID" />
@@ -1151,33 +1104,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="EmployeesCount" FunctionName="Хранилище AviaSales.EmployeesCount" />
-          <FunctionImportMapping FunctionImportName="GetRoleName" FunctionName="Хранилище AviaSales.GetRoleName" />
-          <FunctionImportMapping FunctionImportName="SalesByOrderDate" FunctionName="Хранилище AviaSales.SalesByOrderDate" />
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище AviaSales.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Хранилище AviaSales.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Хранилище AviaSales.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Хранилище AviaSales.sp_helpdiagramdefinition">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="AviaSales.sp_helpdiagramdefinition_Result">
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Хранилище AviaSales.sp_helpdiagrams">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="AviaSales.sp_helpdiagrams_Result">
-                <ScalarProperty Name="Database" ColumnName="Database" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище AviaSales.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище AviaSales.sp_upgraddiagrams" />
+          <EntitySetMapping Name="ScheduleViews">
+            <EntityTypeMapping TypeName="AviaSalesModel.ScheduleView">
+              <MappingFragment StoreEntitySet="ScheduleView">
+                <ScalarProperty Name="FlightName" ColumnName="FlightName" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="PlaneTypeName" ColumnName="PlaneTypeName" />
+                <ScalarProperty Name="DepartureTime" ColumnName="DepartureTime" />
+                <ScalarProperty Name="ArrivalDate" ColumnName="ArrivalDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

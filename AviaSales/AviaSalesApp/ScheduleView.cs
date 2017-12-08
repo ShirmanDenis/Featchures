@@ -10,10 +10,14 @@
 namespace AviaSalesApp
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class sp_helpdiagramdefinition_Result
+    public partial class ScheduleView
     {
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public string FlightName { get; set; }
+        public string CompanyName { get; set; }
+        public string PlaneTypeName { get; set; }
+        public System.TimeSpan DepartureTime { get; set; }
+        public System.DateTime ArrivalDate { get; set; }
     }
 }

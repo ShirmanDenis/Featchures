@@ -78,6 +78,7 @@
     <Compile Include="City.cs">
       <DependentUpon>AviaSalesModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Common\GeoPath.cs" />
     <Compile Include="Common\WinFormsControlFactory.cs" />
     <Compile Include="Common\Enums.cs" />
     <Compile Include="Common\AppContext.cs" />
@@ -120,13 +121,10 @@
     <Compile Include="Schedule.cs">
       <DependentUpon>AviaSalesModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ScheduleView.cs">
+      <DependentUpon>AviaSalesModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="SeatClass.cs">
-      <DependentUpon>AviaSalesModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>AviaSalesModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagrams_Result.cs">
       <DependentUpon>AviaSalesModel.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagram.cs">
@@ -134,6 +132,12 @@
     </Compile>
     <Compile Include="Ticket.cs">
       <DependentUpon>AviaSalesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="View\BuyTicketForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BuyTicketForm.Designer.cs">
+      <DependentUpon>BuyTicketForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\LoginForm.cs">
       <SubType>Form</SubType>
@@ -156,12 +160,28 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="View\BuyTicketForm.resx">
+      <DependentUpon>BuyTicketForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\ScheduleForm.resx">
       <DependentUpon>ScheduleForm.cs</DependentUpon>
     </EmbeddedResource>
+    <Content Include="AviaSalesModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AviaSalesModel.edmx</DependentUpon>
+      <LastGenOutput>AviaSalesModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="AviaSalesModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AviaSalesModel.edmx</DependentUpon>
+      <LastGenOutput>AviaSalesModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <EntityDeploy Include="AviaSalesModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>AviaSalesModel.Designer.cs</LastGenOutput>
@@ -169,9 +189,6 @@
     <None Include="AviaSalesModel.edmx.diagram">
       <DependentUpon>AviaSalesModel.edmx</DependentUpon>
     </None>
-    <Content Include="NLog.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -194,17 +211,5 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Content Include="AviaSalesModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AviaSalesModel.edmx</DependentUpon>
-      <LastGenOutput>AviaSalesModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="AviaSalesModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AviaSalesModel.edmx</DependentUpon>
-      <LastGenOutput>AviaSalesModel.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

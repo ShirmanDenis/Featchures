@@ -19,10 +19,10 @@ namespace AviaSalesApp
         public int Company_ID { get; set; }
         public int PlaneType_ID { get; set; }
         public System.TimeSpan Delay { get; set; }
-        public System.DateTime DepartureDate { get; set; }
+        public System.TimeSpan DepartureTime { get; set; }
         public System.DateTime ArrivalDate { get; set; }
         public int Rout_ID { get; set; }
-        public int State_ID { get; set; }
+        public Nullable<int> State_ID { get; set; }
     
         public virtual Company Company { get; set; }
         public virtual Flight Flight { get; set; }

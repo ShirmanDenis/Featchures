@@ -4,40 +4,41 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="cbdb9e09911c4bd4bf919b9bd9ce3a7e" Name="Diagram1">
-        <EntityTypeShape EntityType="AviaSales.Airport" Width="1.5" PointX="4.125" PointY="13" IsExpanded="true" />
-        <EntityTypeShape EntityType="AviaSales.City" Width="1.5" PointX="6.375" PointY="12.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="AviaSales.Company" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="AviaSales.Country" Width="1.5" PointX="8.25" PointY="10.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="AviaSales.Flight" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AviaSales.FlightState" Width="1.5" PointX="0.75" PointY="11.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="AviaSales.Passenger" Width="1.5" PointX="6" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AviaSales.PlaneSeat" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="AviaSales.PlaneType" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AviaSales.Price" Width="1.5" PointX="6" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="AviaSales.Rout" Width="1.5" PointX="0.75" PointY="13.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="AviaSales.Schedule" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="AviaSales.SeatClass" Width="1.5" PointX="3.75" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="AviaSales.sysdiagram" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AviaSales.Ticket" Width="1.5" PointX="8.25" PointY="5.375" IsExpanded="true" />
-        <AssociationConnector Association="AviaSales.FK_Airport_City" ManuallyRouted="false" />
-        <AssociationConnector Association="AviaSales.FK_Rout_AirportFrom" ManuallyRouted="false" />
-        <AssociationConnector Association="AviaSales.FK_Rout_AirportTo" ManuallyRouted="false" />
-        <AssociationConnector Association="AviaSales.FK_City_Country" ManuallyRouted="false" />
-        <AssociationConnector Association="AviaSales.FK_Flight_Company" ManuallyRouted="false" />
-        <AssociationConnector Association="AviaSales.FK_Price_Company" ManuallyRouted="false" />
-        <AssociationConnector Association="AviaSales.FK_Schedule_Flight" ManuallyRouted="false" />
-        <AssociationConnector Association="AviaSales.FK_Ticket_Flight" ManuallyRouted="false" />
-        <AssociationConnector Association="AviaSales.FK_Flight_FlightState" ManuallyRouted="false" />
-        <AssociationConnector Association="AviaSales.FK_Ticket_Passenger" ManuallyRouted="false" />
-        <AssociationConnector Association="AviaSales.FK_PlaneSeat_PlaneType" ManuallyRouted="false" />
-        <AssociationConnector Association="AviaSales.FK_PlaneSeat_SeatClass" ManuallyRouted="false" />
-        <AssociationConnector Association="AviaSales.FK_Ticket_PlaneSeat" ManuallyRouted="false" />
-        <AssociationConnector Association="AviaSales.FK_Flight_PlaneType" ManuallyRouted="false" />
-        <AssociationConnector Association="AviaSales.FK_Price_PlaneType" ManuallyRouted="false" />
-        <AssociationConnector Association="AviaSales.FK_Price_SeatClass" ManuallyRouted="false" />
-        <AssociationConnector Association="AviaSales.FK_Ticket_Price" ManuallyRouted="false" />
-        <AssociationConnector Association="AviaSales.FK_Flight_Rout" ManuallyRouted="false" />
+      <Diagram DiagramId="c1d0bd51785c4fb39382e4b3733737e7" Name="Diagram1">
+        <EntityTypeShape EntityType="AviaSalesModel.Airport" Width="1.5" PointX="1.5" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AviaSalesModel.City" Width="1.5" PointX="1.5" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="AviaSalesModel.Company" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AviaSalesModel.Country" Width="1.5" PointX="1.5" PointY="23.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AviaSalesModel.Flight" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AviaSalesModel.FlightState" Width="1.5" PointX="0.75" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AviaSalesModel.Passenger" Width="1.5" PointX="6" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AviaSalesModel.PlaneSeat" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AviaSalesModel.PlaneType" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AviaSalesModel.Price" Width="1.5" PointX="6" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AviaSalesModel.Rout" Width="1.5" PointX="0.75" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AviaSalesModel.Schedule" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AviaSalesModel.SeatClass" Width="1.5" PointX="3.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AviaSalesModel.sysdiagram" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AviaSalesModel.Ticket" Width="1.5" PointX="8.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AviaSalesModel.ScheduleView" Width="1.5" PointX="5.75" PointY="9.75" IsExpanded="true" />
+        <AssociationConnector Association="AviaSalesModel.FK_Airport_City" ManuallyRouted="false" />
+        <AssociationConnector Association="AviaSalesModel.FK_Rout_AirportFrom" ManuallyRouted="false" />
+        <AssociationConnector Association="AviaSalesModel.FK_Rout_AirportTo" ManuallyRouted="false" />
+        <AssociationConnector Association="AviaSalesModel.FK_City_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="AviaSalesModel.FK_Flight_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="AviaSalesModel.FK_Price_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="AviaSalesModel.FK_Schedule_Flight" ManuallyRouted="false" />
+        <AssociationConnector Association="AviaSalesModel.FK_Ticket_Flight" ManuallyRouted="false" />
+        <AssociationConnector Association="AviaSalesModel.FK_Flight_FlightState" ManuallyRouted="false" />
+        <AssociationConnector Association="AviaSalesModel.FK_Ticket_Passenger" ManuallyRouted="false" />
+        <AssociationConnector Association="AviaSalesModel.FK_PlaneSeat_PlaneType" ManuallyRouted="false" />
+        <AssociationConnector Association="AviaSalesModel.FK_PlaneSeat_SeatClass" ManuallyRouted="false" />
+        <AssociationConnector Association="AviaSalesModel.FK_Ticket_PlaneSeat" ManuallyRouted="false" />
+        <AssociationConnector Association="AviaSalesModel.FK_Flight_PlaneType" ManuallyRouted="false" />
+        <AssociationConnector Association="AviaSalesModel.FK_Price_PlaneType" ManuallyRouted="false" />
+        <AssociationConnector Association="AviaSalesModel.FK_Price_SeatClass" ManuallyRouted="false" />
+        <AssociationConnector Association="AviaSalesModel.FK_Ticket_Price" ManuallyRouted="false" />
+        <AssociationConnector Association="AviaSalesModel.FK_Flight_Rout" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
