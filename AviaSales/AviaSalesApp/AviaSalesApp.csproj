@@ -106,6 +106,7 @@
       <DependentUpon>AviaSalesModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IAviaSalesView.cs" />
+    <Compile Include="Interfaces\IBuyTicketView.cs" />
     <Compile Include="Interfaces\IControlFactory.cs" />
     <Compile Include="Interfaces\ILoginView.cs" />
     <Compile Include="Interfaces\IScheduleView.cs" />

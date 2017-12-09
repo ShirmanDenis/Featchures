@@ -43,13 +43,18 @@
             this.schedulePanel = new System.Windows.Forms.Panel();
             this.dataView = new System.Windows.Forms.DataGridView();
             this.additionalDataControls = new System.Windows.Forms.Panel();
-            this.buttonBuyTicket = new System.Windows.Forms.Button();
+            this.buttonFind = new System.Windows.Forms.Button();
+            this.buttonBuy = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBoxSelectedFlight = new System.Windows.Forms.TextBox();
             this.filterPanel.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.schedulePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataView)).BeginInit();
             this.additionalDataControls.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // filterPanel
@@ -149,7 +154,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(761, 29);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
@@ -230,27 +235,80 @@
             this.dataView.Location = new System.Drawing.Point(0, 0);
             this.dataView.Name = "dataView";
             this.dataView.ReadOnly = true;
-            this.dataView.Size = new System.Drawing.Size(906, 576);
+            this.dataView.Size = new System.Drawing.Size(908, 576);
             this.dataView.TabIndex = 1;
             // 
             // additionalDataControls
             // 
             this.additionalDataControls.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.additionalDataControls.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.additionalDataControls.Controls.Add(this.buttonBuyTicket);
+            this.additionalDataControls.Controls.Add(this.panel1);
+            this.additionalDataControls.Controls.Add(this.buttonBuy);
+            this.additionalDataControls.Controls.Add(this.buttonFind);
             this.additionalDataControls.Dock = System.Windows.Forms.DockStyle.Right;
-            this.additionalDataControls.Location = new System.Drawing.Point(906, 0);
+            this.additionalDataControls.Location = new System.Drawing.Point(908, 0);
             this.additionalDataControls.Name = "additionalDataControls";
-            this.additionalDataControls.Size = new System.Drawing.Size(224, 576);
+            this.additionalDataControls.Size = new System.Drawing.Size(222, 576);
             this.additionalDataControls.TabIndex = 0;
             // 
-            // buttonBuyTicket
+            // buttonFind
             // 
-            this.buttonBuyTicket.Location = new System.Drawing.Point(4, 4);
-            this.buttonBuyTicket.Name = "buttonBuyTicket";
-            this.buttonBuyTicket.Size = new System.Drawing.Size(213, 23);
-            this.buttonBuyTicket.TabIndex = 0;
-            this.buttonBuyTicket.UseVisualStyleBackColor = true;
+            this.buttonFind.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonFind.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonFind.Location = new System.Drawing.Point(3, 45);
+            this.buttonFind.Name = "buttonFind";
+            this.buttonFind.Size = new System.Drawing.Size(211, 32);
+            this.buttonFind.TabIndex = 0;
+            this.buttonFind.Text = "Find ";
+            this.buttonFind.UseVisualStyleBackColor = true;
+            this.buttonFind.Click += new System.EventHandler(this.buttonFind_Click);
+            // 
+            // buttonBuy
+            // 
+            this.buttonBuy.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonBuy.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonBuy.Location = new System.Drawing.Point(4, 83);
+            this.buttonBuy.Name = "buttonBuy";
+            this.buttonBuy.Size = new System.Drawing.Size(210, 28);
+            this.buttonBuy.TabIndex = 1;
+            this.buttonBuy.Text = "Buy ticket";
+            this.buttonBuy.UseVisualStyleBackColor = true;
+            this.buttonBuy.Click += new System.EventHandler(this.buttonBuy_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.AutoSize = true;
+            this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.textBoxSelectedFlight);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(218, 40);
+            this.panel1.TabIndex = 2;
+            // 
+            // label2
+            // 
+            this.label2.BackColor = System.Drawing.SystemColors.Info;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label2.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Location = new System.Drawing.Point(0, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(216, 18);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Selected flight:";
+            // 
+            // textBoxSelectedFlight
+            // 
+            this.textBoxSelectedFlight.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.textBoxSelectedFlight.Location = new System.Drawing.Point(0, 18);
+            this.textBoxSelectedFlight.Name = "textBoxSelectedFlight";
+            this.textBoxSelectedFlight.ReadOnly = true;
+            this.textBoxSelectedFlight.Size = new System.Drawing.Size(216, 20);
+            this.textBoxSelectedFlight.TabIndex = 1;
             // 
             // ScheduleForm
             // 
@@ -269,6 +327,9 @@
             this.schedulePanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataView)).EndInit();
             this.additionalDataControls.ResumeLayout(false);
+            this.additionalDataControls.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -290,6 +351,10 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DateTimePicker dateTimeTo;
         private System.Windows.Forms.DateTimePicker dateTimeFrom;
-        private System.Windows.Forms.Button buttonBuyTicket;
+        private System.Windows.Forms.Button buttonFind;
+        private System.Windows.Forms.Button buttonBuy;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TextBox textBoxSelectedFlight;
+        private System.Windows.Forms.Label label2;
     }
 }

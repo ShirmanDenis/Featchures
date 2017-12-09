@@ -43,10 +43,15 @@ namespace AviaSalesApp.View
             set => cmBxTo.SelectedItem = value;
         }
 
+        public Flight CurrentFlight
+        {
+            get => GetCurrentFlight();
+        }
+
         public event EventHandler TicketBuy
         {
-            add => buttonBuyTicket.Click += value;
-            remove => buttonBuyTicket.Click -= value;
+            add => buttonBuy.Click += value;
+            remove => buttonBuy.Click -= value;
         }
 
         public ScheduleForm(AviaSalesConnectionProvider provider)
@@ -55,12 +60,17 @@ namespace AviaSalesApp.View
 
             _controller = new ScheduleController(provider, this);
 
-            //dataView.DataSource = _controller.GetSchedule();
-
             buttonSwap.BackgroundImage = Resources.SWAP;
             buttonSwap.BackgroundImageLayout = ImageLayout.Stretch;
-            
+
+            dataView.MultiSelect = false;
+            dataView.SelectionChanged += DataView_SelectionChanged;
             InitToFromCollections();          
+        }
+
+        private void DataView_SelectionChanged(object sender, EventArgs e)
+        {
+            textBoxSelectedFlight.Text = CurrentFlight?.FlightName;
         }
 
         private void InitToFromCollections()
@@ -86,6 +96,47 @@ namespace AviaSalesApp.View
             var temp = PathFrom;
             PathFrom = PathTo;
             PathTo = temp;
+        }
+
+        private void buttonFind_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                dataView.DataSource = _controller.GetSchedule(PathFrom, PathTo, DateFrom, DateTo);
+            }
+            catch (ArgumentNullException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void buttonBuy_Click(object sender, EventArgs e)
+        {
+            if (CurrentFlight == null)
+            {
+                MessageBox.Show("Select flight in grid");
+                return;
+            }
+
+            _controller.BuyTicket(CurrentFlight);
+        }
+
+        private Flight GetCurrentFlight()
+        {
+            if (dataView.SelectedRows.Count == 0) return null;
+
+            var selectedRow = dataView.SelectedRows[0];
+
+            if (selectedRow == null) return null;
+
+            var flightSchedule = (GetSchedule_Result)selectedRow.DataBoundItem;
+            
+            return _controller.FindFlightBuyName(flightSchedule.FlightName);
+        }
+
+        public IControlFactory Factory
+        {
+            get => WinFormsControlFactory.Instance;
         }
     }
 }

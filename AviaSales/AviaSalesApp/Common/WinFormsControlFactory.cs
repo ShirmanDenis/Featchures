@@ -18,9 +18,15 @@ namespace AviaSalesApp.Common
         public static IControlFactory Instance { get; }
 
         private WinFormsControlFactory() { }
+
         public IScheduleView CreateScheduleView(AviaSalesConnectionProvider provider)
         {
             return new ScheduleForm(provider);
+        }
+
+        public IBuyTicketView CreateBuyTicketView(AviaSalesConnectionProvider provider)
+        {
+            throw new NotImplementedException();
         }
 
         public ILoginView CreateLoginView()

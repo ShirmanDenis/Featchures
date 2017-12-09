@@ -6,7 +6,7 @@ using AviaSalesApp.Common;
 
 namespace AviaSalesApp
 {
-    public interface IScheduleView
+    public interface IScheduleView : IAviaSalesView
     {
         void Show();
 
@@ -15,6 +15,8 @@ namespace AviaSalesApp
         
         GeoPath PathFrom { get; set; }
         GeoPath PathTo { get; set; }
+
+        Flight CurrentFlight { get; }
 
         event EventHandler TicketBuy;
     }

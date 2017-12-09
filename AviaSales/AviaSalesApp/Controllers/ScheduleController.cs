@@ -22,13 +22,13 @@ namespace AviaSalesApp.Controllers
             _provider.AviaSalesConnection.Schedules.Load();
         }
 
-        public BindingList<Schedule> GetSchedule()
-        {
-            return _provider.AviaSalesConnection.Schedules.Local.ToBindingList();
-        }
-
         public List<GetSchedule_Result> GetSchedule(GeoPath from, GeoPath to, DateTime dateFrom, DateTime dateTo)
         {
+            if (from == null) throw new ArgumentNullException(nameof(from));
+            if (to == null) throw new ArgumentNullException(nameof(to));
+            if (dateFrom == null) throw new ArgumentNullException(nameof(dateFrom));
+            if (dateTo == null) throw new ArgumentNullException(nameof(dateTo));
+
             _provider.AviaSalesConnection.Airports.Load();
 
             var airportFromId =
@@ -70,6 +70,20 @@ namespace AviaSalesApp.Controllers
             }
 
             return resultPaths;
+        }
+
+        public Flight FindFlightBuyName(string name)
+        {
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
+
+            _provider.AviaSalesConnection.Flights.Load();
+
+            return _provider.AviaSalesConnection.Flights.Local.First(f => f.FlightName == name);
+        }
+
+        public void BuyTicket(Flight flight)
+        {
+            _view.Factory.CreateBuyTicketView(_provider);
         }
     }
 }
