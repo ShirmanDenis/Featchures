@@ -148,6 +148,12 @@
     <Compile Include="View\BuyTicketForm.Designer.cs">
       <DependentUpon>BuyTicketForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\FlightInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\FlightInfo.Designer.cs">
+      <DependentUpon>FlightInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -173,6 +179,9 @@
     </Compile>
     <EmbeddedResource Include="View\BuyTicketForm.resx">
       <DependentUpon>BuyTicketForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FlightInfo.resx">
+      <DependentUpon>FlightInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>

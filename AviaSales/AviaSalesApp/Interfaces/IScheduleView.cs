@@ -16,7 +16,7 @@ namespace AviaSalesApp
         GeoPath PathFrom { get; set; }
         GeoPath PathTo { get; set; }
 
-        Flight CurrentFlight { get; }
+        GetSchedule_Result CurrentScheduleResult { get; }
 
         event EventHandler TicketBuy;
     }

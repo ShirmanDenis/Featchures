@@ -43,9 +43,9 @@ namespace AviaSalesApp.View
             set => cmBxTo.SelectedItem = value;
         }
 
-        public Flight CurrentFlight
+        public GetSchedule_Result CurrentScheduleResult
         {
-            get => GetCurrentFlight();
+            get => GetCurrentScheduleResult();
         }
 
         public event EventHandler TicketBuy
@@ -65,12 +65,13 @@ namespace AviaSalesApp.View
 
             dataView.MultiSelect = false;
             dataView.SelectionChanged += DataView_SelectionChanged;
+
             InitToFromCollections();          
         }
 
         private void DataView_SelectionChanged(object sender, EventArgs e)
         {
-            textBoxSelectedFlight.Text = CurrentFlight?.FlightName;
+            textBoxSelectedFlight.Text = CurrentScheduleResult?.FlightName;
         }
 
         private void InitToFromCollections()
@@ -112,26 +113,22 @@ namespace AviaSalesApp.View
 
         private void buttonBuy_Click(object sender, EventArgs e)
         {
-            if (CurrentFlight == null)
+            if (CurrentScheduleResult == null)
             {
                 MessageBox.Show("Select flight in grid");
                 return;
             }
 
-            _controller.BuyTicket(CurrentFlight);
+            _controller.BuyTicket(CurrentScheduleResult);
         }
 
-        private Flight GetCurrentFlight()
+        private GetSchedule_Result GetCurrentScheduleResult()
         {
             if (dataView.SelectedRows.Count == 0) return null;
 
             var selectedRow = dataView.SelectedRows[0];
 
-            if (selectedRow == null) return null;
-
-            var flightSchedule = (GetSchedule_Result)selectedRow.DataBoundItem;
-            
-            return _controller.FindFlightBuyName(flightSchedule.FlightName);
+            return (GetSchedule_Result) selectedRow?.DataBoundItem;
         }
 
         public IControlFactory Factory

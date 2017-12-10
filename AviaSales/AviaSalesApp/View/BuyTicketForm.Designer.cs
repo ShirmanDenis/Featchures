@@ -30,8 +30,9 @@
         {
             this.splitContainerMain = new System.Windows.Forms.SplitContainer();
             this.splitContainerLeft = new System.Windows.Forms.SplitContainer();
-            this.button1 = new System.Windows.Forms.Button();
             this.labelFlightInfoHeader = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.flightInfo1 = new AviaSalesApp.View.FlightInfo();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).BeginInit();
             this.splitContainerMain.Panel1.SuspendLayout();
             this.splitContainerMain.SuspendLayout();
@@ -50,12 +51,17 @@
             // splitContainerMain.Panel1
             // 
             this.splitContainerMain.Panel1.Controls.Add(this.splitContainerLeft);
+            // 
+            // splitContainerMain.Panel2
+            // 
+            this.splitContainerMain.Panel2.BackColor = System.Drawing.Color.LightCyan;
             this.splitContainerMain.Size = new System.Drawing.Size(901, 524);
-            this.splitContainerMain.SplitterDistance = 300;
+            this.splitContainerMain.SplitterDistance = 295;
             this.splitContainerMain.TabIndex = 0;
             // 
             // splitContainerLeft
             // 
+            this.splitContainerLeft.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.splitContainerLeft.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerLeft.Location = new System.Drawing.Point(0, 0);
             this.splitContainerLeft.Name = "splitContainerLeft";
@@ -63,15 +69,29 @@
             // 
             // splitContainerLeft.Panel1
             // 
+            this.splitContainerLeft.Panel1.BackColor = System.Drawing.Color.LightCyan;
+            this.splitContainerLeft.Panel1.Controls.Add(this.labelFlightInfoHeader);
             this.splitContainerLeft.Panel1.Controls.Add(this.button1);
             // 
             // splitContainerLeft.Panel2
             // 
             this.splitContainerLeft.Panel2.BackColor = System.Drawing.Color.LightCyan;
-            this.splitContainerLeft.Panel2.Controls.Add(this.labelFlightInfoHeader);
-            this.splitContainerLeft.Size = new System.Drawing.Size(300, 524);
+            this.splitContainerLeft.Panel2.Controls.Add(this.flightInfo1);
+            this.splitContainerLeft.Size = new System.Drawing.Size(295, 524);
             this.splitContainerLeft.SplitterDistance = 25;
             this.splitContainerLeft.TabIndex = 0;
+            // 
+            // labelFlightInfoHeader
+            // 
+            this.labelFlightInfoHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.labelFlightInfoHeader.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelFlightInfoHeader.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelFlightInfoHeader.Location = new System.Drawing.Point(75, 0);
+            this.labelFlightInfoHeader.Name = "labelFlightInfoHeader";
+            this.labelFlightInfoHeader.Size = new System.Drawing.Size(218, 23);
+            this.labelFlightInfoHeader.TabIndex = 0;
+            this.labelFlightInfoHeader.Text = "Selected flight info:";
+            this.labelFlightInfoHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // button1
             // 
@@ -79,22 +99,18 @@
             this.button1.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button1.Location = new System.Drawing.Point(0, 0);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 25);
+            this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 0;
             this.button1.Text = "Back";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // labelFlightInfoHeader
+            // flightInfo1
             // 
-            this.labelFlightInfoHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.labelFlightInfoHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.labelFlightInfoHeader.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelFlightInfoHeader.Location = new System.Drawing.Point(0, 0);
-            this.labelFlightInfoHeader.Name = "labelFlightInfoHeader";
-            this.labelFlightInfoHeader.Size = new System.Drawing.Size(300, 23);
-            this.labelFlightInfoHeader.TabIndex = 0;
-            this.labelFlightInfoHeader.Text = "Selected flight info:";
-            this.labelFlightInfoHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.flightInfo1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flightInfo1.Location = new System.Drawing.Point(3, 3);
+            this.flightInfo1.Name = "flightInfo1";
+            this.flightInfo1.Size = new System.Drawing.Size(287, 162);
+            this.flightInfo1.TabIndex = 0;
             // 
             // BuyTicketForm
             // 
@@ -121,5 +137,6 @@
         private System.Windows.Forms.SplitContainer splitContainerLeft;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label labelFlightInfoHeader;
+        private FlightInfo flightInfo1;
     }
 }

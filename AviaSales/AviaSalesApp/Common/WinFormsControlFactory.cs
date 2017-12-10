@@ -26,7 +26,7 @@ namespace AviaSalesApp.Common
 
         public IBuyTicketView CreateBuyTicketView(AviaSalesConnectionProvider provider)
         {
-            throw new NotImplementedException();
+            return new BuyTicketForm(provider);
         }
 
         public ILoginView CreateLoginView()

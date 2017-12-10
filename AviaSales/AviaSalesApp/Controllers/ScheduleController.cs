@@ -81,9 +81,11 @@ namespace AviaSalesApp.Controllers
             return _provider.AviaSalesConnection.Flights.Local.First(f => f.FlightName == name);
         }
 
-        public void BuyTicket(Flight flight)
+        public void BuyTicket(GetSchedule_Result scheduleResult)
         {
-            _view.Factory.CreateBuyTicketView(_provider);
+            var buyTicketForm = _view.Factory.CreateBuyTicketView(_provider);
+            buyTicketForm.SetFlightInfo(FindFlightBuyName(scheduleResult.FlightName), scheduleResult, _view.PathFrom, _view.PathTo);
+            buyTicketForm.Show();
         }
     }
 }
