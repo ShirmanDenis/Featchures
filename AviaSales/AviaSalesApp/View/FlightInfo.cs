@@ -30,7 +30,8 @@ namespace AviaSalesApp.View
             txBxDepartureDate.Text = flight.FlightDate.ToShortDateString() + @" " + scheduleResult.DepartureTime;
             txBxArrivalDate.Text = scheduleResult.ArrivalDate.Date.ToShortDateString() + @" " + scheduleResult.ArrivalDate.TimeOfDay;
             txBxFrom.Text = from.ToString();
-            txBxTo.Text = from.ToString();
+            txBxTo.Text = to.ToString();
+            txBxPlaneType.Text = scheduleResult.PlaneTypeName;
         }
     }
 }
