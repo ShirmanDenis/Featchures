@@ -160,6 +160,12 @@
     <Compile Include="View\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\PassangerInfoView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\PassangerInfoView.Designer.cs">
+      <DependentUpon>PassangerInfoView.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\ScheduleForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -185,6 +191,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PassangerInfoView.resx">
+      <DependentUpon>PassangerInfoView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\ScheduleForm.resx">
       <DependentUpon>ScheduleForm.cs</DependentUpon>
