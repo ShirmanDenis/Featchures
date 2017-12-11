@@ -14,19 +14,75 @@ namespace AviaSalesApp.View
 {
     public partial class BuyTicketForm : Form, IBuyTicketView
     {
-        public BuyTicketForm(AviaSalesConnectionProvider provider)
+        private readonly BuyTicketController _controller;
+        private readonly IScheduleView _parent;
+
+        public BuyTicketForm(AviaSalesConnectionProvider provider, IScheduleView parent)
         {
-            InitializeComponent();           
+            InitializeComponent();
+            _parent = parent;
+            _controller = new BuyTicketController(provider, this);
         }
 
         public void SetFlightInfo(Flight flight, GetSchedule_Result scheduleResult, GeoPath from, GeoPath to)
         {
+            Flight = flight;
+            From = from;
+            ScheduleResult = scheduleResult;
+            To = to;
+
             flightInfo1.SetFlight(flight, scheduleResult, from, to);
         }
+
+        public Flight Flight { get; set; }
+        public GetSchedule_Result ScheduleResult { get; set; }
+        public GeoPath From { get; set; }
+        public GeoPath To { get; set; }
+
+        public string PassangerName => passangerInfoView1.PassangerName;
+        public string SurName => passangerInfoView1.Surname;
+        public string Patronymic => passangerInfoView1.Patronymic;
+        public int Passport => passangerInfoView1.Passport;
 
         public new void Show()
         {
             base.Show();
+        }
+
+        private void buttonBack_Click(object sender, EventArgs e)
+        {
+            _parent.Show();
+
+            Close();
+        }
+
+        private void buttonBuyTicket_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(PassangerName) ||
+                string.IsNullOrEmpty(SurName) ||
+                string.IsNullOrEmpty(Patronymic) ||
+                string.IsNullOrEmpty(Passport.ToString()))
+            {
+                MessageBox.Show("All fields in \"PassangerInfo\" must be filled!");
+                return;
+            }
+
+            var fullNameBuilder = new StringBuilder();
+
+            fullNameBuilder
+                .Append(PassangerName)
+                .Append(" ")
+                .Append(SurName)
+                .Append(" ")
+                .Append(Patronymic);
+            try
+            {
+                _controller.BuyTicket(Flight, fullNameBuilder.ToString(), Passport.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

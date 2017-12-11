@@ -18,7 +18,7 @@ namespace AviaSalesApp
         public long Flight_ID { get; set; }
         public Nullable<long> PlaneSeat_ID { get; set; }
         public long Passanger_ID { get; set; }
-        public long Price_ID { get; set; }
+        public Nullable<long> Price_ID { get; set; }
     
         public virtual Flight Flight { get; set; }
         public virtual Passenger Passenger { get; set; }

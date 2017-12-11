@@ -50,8 +50,8 @@
             // 
             this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43.03798F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 56.96202F));
             this.tableLayoutPanel1.Controls.Add(this.txBxArrivalDate, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.txBxDepartureDate, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.txBxTo, 1, 3);
@@ -84,50 +84,50 @@
             // 
             this.txBxArrivalDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txBxArrivalDate.Location = new System.Drawing.Point(162, 139);
+            this.txBxArrivalDate.Location = new System.Drawing.Point(140, 139);
             this.txBxArrivalDate.Name = "txBxArrivalDate";
             this.txBxArrivalDate.ReadOnly = true;
-            this.txBxArrivalDate.Size = new System.Drawing.Size(151, 20);
+            this.txBxArrivalDate.Size = new System.Drawing.Size(173, 20);
             this.txBxArrivalDate.TabIndex = 11;
             // 
             // txBxDepartureDate
             // 
             this.txBxDepartureDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txBxDepartureDate.Location = new System.Drawing.Point(162, 112);
+            this.txBxDepartureDate.Location = new System.Drawing.Point(140, 112);
             this.txBxDepartureDate.Name = "txBxDepartureDate";
             this.txBxDepartureDate.ReadOnly = true;
-            this.txBxDepartureDate.Size = new System.Drawing.Size(151, 20);
+            this.txBxDepartureDate.Size = new System.Drawing.Size(173, 20);
             this.txBxDepartureDate.TabIndex = 10;
             // 
             // txBxTo
             // 
             this.txBxTo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txBxTo.Location = new System.Drawing.Point(162, 85);
+            this.txBxTo.Location = new System.Drawing.Point(140, 85);
             this.txBxTo.Name = "txBxTo";
             this.txBxTo.ReadOnly = true;
-            this.txBxTo.Size = new System.Drawing.Size(151, 20);
+            this.txBxTo.Size = new System.Drawing.Size(173, 20);
             this.txBxTo.TabIndex = 9;
             // 
             // txBxFrom
             // 
             this.txBxFrom.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txBxFrom.Location = new System.Drawing.Point(162, 58);
+            this.txBxFrom.Location = new System.Drawing.Point(140, 58);
             this.txBxFrom.Name = "txBxFrom";
             this.txBxFrom.ReadOnly = true;
-            this.txBxFrom.Size = new System.Drawing.Size(151, 20);
+            this.txBxFrom.Size = new System.Drawing.Size(173, 20);
             this.txBxFrom.TabIndex = 8;
             // 
             // txBxCompanyName
             // 
             this.txBxCompanyName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txBxCompanyName.Location = new System.Drawing.Point(162, 31);
+            this.txBxCompanyName.Location = new System.Drawing.Point(140, 31);
             this.txBxCompanyName.Name = "txBxCompanyName";
             this.txBxCompanyName.ReadOnly = true;
-            this.txBxCompanyName.Size = new System.Drawing.Size(151, 20);
+            this.txBxCompanyName.Size = new System.Drawing.Size(173, 20);
             this.txBxCompanyName.TabIndex = 7;
             // 
             // label1
@@ -194,10 +194,10 @@
             // 
             this.txBxFlightName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txBxFlightName.Location = new System.Drawing.Point(162, 4);
+            this.txBxFlightName.Location = new System.Drawing.Point(140, 4);
             this.txBxFlightName.Name = "txBxFlightName";
             this.txBxFlightName.ReadOnly = true;
-            this.txBxFlightName.Size = new System.Drawing.Size(151, 20);
+            this.txBxFlightName.Size = new System.Drawing.Size(173, 20);
             this.txBxFlightName.TabIndex = 6;
             // 
             // label7
@@ -207,7 +207,7 @@
             this.label7.Font = new System.Drawing.Font("Courier New", 10F);
             this.label7.Location = new System.Drawing.Point(4, 163);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(151, 25);
+            this.label7.Size = new System.Drawing.Size(129, 25);
             this.label7.TabIndex = 12;
             this.label7.Text = "Plane type:";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -216,9 +216,9 @@
             // 
             this.txBxPlaneType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txBxPlaneType.Location = new System.Drawing.Point(162, 166);
+            this.txBxPlaneType.Location = new System.Drawing.Point(140, 166);
             this.txBxPlaneType.Name = "txBxPlaneType";
-            this.txBxPlaneType.Size = new System.Drawing.Size(151, 20);
+            this.txBxPlaneType.Size = new System.Drawing.Size(173, 20);
             this.txBxPlaneType.TabIndex = 13;
             // 
             // FlightInfo

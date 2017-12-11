@@ -41,7 +41,7 @@ namespace AviaSalesApp.Controllers
             }
             catch (Exception ex)
             {
-                msg = ex.Message;
+                msg = ex.InnerException?.Message ?? ex.Message;
             }
             LoggingValidated?.Invoke(succes, msg);
 

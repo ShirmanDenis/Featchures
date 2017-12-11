@@ -87,13 +87,14 @@
     <Compile Include="Company.cs">
       <DependentUpon>AviaSalesModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\AviaSalesConnectionProvider.cs" />
+    <Compile Include="Common\AviaSalesConnectionProvider.cs" />
+    <Compile Include="Controllers\BuyTicketController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Country.cs">
       <DependentUpon>AviaSalesModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="C__MigrationHistory.cs">
+    <Compile Include="CreatePassanger_Result.cs">
       <DependentUpon>AviaSalesModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Flight.cs">

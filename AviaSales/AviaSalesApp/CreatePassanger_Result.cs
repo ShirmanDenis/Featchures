@@ -10,13 +10,12 @@
 namespace AviaSalesApp
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class C__MigrationHistory
+    public partial class CreatePassanger_Result
     {
-        public string MigrationId { get; set; }
-        public string ContextKey { get; set; }
-        public byte[] Model { get; set; }
-        public string ProductVersion { get; set; }
+        public long Passenger_ID { get; set; }
+        public string FullName { get; set; }
+        public string Passport { get; set; }
+        public bool IsRegistered { get; set; }
     }
 }

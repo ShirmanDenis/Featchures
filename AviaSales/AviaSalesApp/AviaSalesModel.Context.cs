@@ -27,7 +27,6 @@ namespace AviaSalesApp
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public virtual DbSet<Airport> Airports { get; set; }
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<Company> Companies { get; set; }
@@ -64,6 +63,32 @@ namespace AviaSalesApp
                 new ObjectParameter("DateTo", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSchedule_Result>("GetSchedule", airportFrom_IDParameter, airportTo_IDParameter, dateFromParameter, dateToParameter);
+        }
+    
+        public virtual int BuyTicket(Nullable<long> flight_ID, Nullable<long> passanger_ID)
+        {
+            var flight_IDParameter = flight_ID.HasValue ?
+                new ObjectParameter("Flight_ID", flight_ID) :
+                new ObjectParameter("Flight_ID", typeof(long));
+    
+            var passanger_IDParameter = passanger_ID.HasValue ?
+                new ObjectParameter("Passanger_ID", passanger_ID) :
+                new ObjectParameter("Passanger_ID", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BuyTicket", flight_IDParameter, passanger_IDParameter);
+        }
+    
+        public virtual ObjectResult<CreatePassanger_Result> CreatePassanger(string fullName, string passport)
+        {
+            var fullNameParameter = fullName != null ?
+                new ObjectParameter("FullName", fullName) :
+                new ObjectParameter("FullName", typeof(string));
+    
+            var passportParameter = passport != null ?
+                new ObjectParameter("Passport", passport) :
+                new ObjectParameter("Passport", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CreatePassanger_Result>("CreatePassanger", fullNameParameter, passportParameter);
         }
     }
 }

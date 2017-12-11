@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="873022592ac64bd4a943fe86d9c68489" Name="Diagram1">
-        <EntityTypeShape EntityType="AviaSalesModel.C__MigrationHistory" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AviaSalesModel.Airport" Width="1.5" PointX="1.5" PointY="16.875" IsExpanded="true" />
         <EntityTypeShape EntityType="AviaSalesModel.City" Width="1.5" PointX="1.5" PointY="20" IsExpanded="true" />
         <EntityTypeShape EntityType="AviaSalesModel.Company" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />

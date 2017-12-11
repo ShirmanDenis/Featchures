@@ -43,11 +43,11 @@
             this.schedulePanel = new System.Windows.Forms.Panel();
             this.dataView = new System.Windows.Forms.DataGridView();
             this.additionalDataControls = new System.Windows.Forms.Panel();
-            this.buttonFind = new System.Windows.Forms.Button();
-            this.buttonBuy = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
             this.textBoxSelectedFlight = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.buttonBuy = new System.Windows.Forms.Button();
+            this.buttonFind = new System.Windows.Forms.Button();
             this.filterPanel.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -134,6 +134,7 @@
             this.dateTimeFrom.Name = "dateTimeFrom";
             this.dateTimeFrom.Size = new System.Drawing.Size(294, 20);
             this.dateTimeFrom.TabIndex = 7;
+            this.dateTimeFrom.Value = new System.DateTime(2017, 12, 5, 0, 0, 0, 0);
             // 
             // tableLayoutPanel1
             // 
@@ -163,9 +164,9 @@
             this.buttonSwap.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSwap.Location = new System.Drawing.Point(369, 3);
+            this.buttonSwap.Location = new System.Drawing.Point(375, 3);
             this.buttonSwap.Name = "buttonSwap";
-            this.buttonSwap.Size = new System.Drawing.Size(45, 23);
+            this.buttonSwap.Size = new System.Drawing.Size(33, 23);
             this.buttonSwap.TabIndex = 5;
             this.buttonSwap.UseVisualStyleBackColor = true;
             this.buttonSwap.Click += new System.EventHandler(this.buttonSwap_Click);
@@ -176,7 +177,7 @@
             this.cmBxFrom.FormattingEnabled = true;
             this.cmBxFrom.Location = new System.Drawing.Point(74, 3);
             this.cmBxFrom.Name = "cmBxFrom";
-            this.cmBxFrom.Size = new System.Drawing.Size(289, 21);
+            this.cmBxFrom.Size = new System.Drawing.Size(295, 21);
             this.cmBxFrom.TabIndex = 2;
             // 
             // labelFrom
@@ -195,9 +196,9 @@
             // 
             this.cmBxTo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmBxTo.FormattingEnabled = true;
-            this.cmBxTo.Location = new System.Drawing.Point(469, 3);
+            this.cmBxTo.Location = new System.Drawing.Point(463, 3);
             this.cmBxTo.Name = "cmBxTo";
-            this.cmBxTo.Size = new System.Drawing.Size(289, 21);
+            this.cmBxTo.Size = new System.Drawing.Size(295, 21);
             this.cmBxTo.TabIndex = 3;
             // 
             // label1
@@ -205,7 +206,7 @@
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Font = new System.Drawing.Font("Courier New", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(420, 1);
+            this.label1.Location = new System.Drawing.Point(414, 1);
             this.label1.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(43, 27);
@@ -251,18 +252,38 @@
             this.additionalDataControls.Size = new System.Drawing.Size(222, 576);
             this.additionalDataControls.TabIndex = 0;
             // 
-            // buttonFind
+            // panel1
             // 
-            this.buttonFind.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonFind.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonFind.Location = new System.Drawing.Point(3, 45);
-            this.buttonFind.Name = "buttonFind";
-            this.buttonFind.Size = new System.Drawing.Size(211, 32);
-            this.buttonFind.TabIndex = 0;
-            this.buttonFind.Text = "Find ";
-            this.buttonFind.UseVisualStyleBackColor = true;
-            this.buttonFind.Click += new System.EventHandler(this.buttonFind_Click);
+            this.panel1.AutoSize = true;
+            this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.textBoxSelectedFlight);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(218, 40);
+            this.panel1.TabIndex = 2;
+            // 
+            // textBoxSelectedFlight
+            // 
+            this.textBoxSelectedFlight.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.textBoxSelectedFlight.Location = new System.Drawing.Point(0, 18);
+            this.textBoxSelectedFlight.Name = "textBoxSelectedFlight";
+            this.textBoxSelectedFlight.ReadOnly = true;
+            this.textBoxSelectedFlight.Size = new System.Drawing.Size(216, 20);
+            this.textBoxSelectedFlight.TabIndex = 1;
+            // 
+            // label2
+            // 
+            this.label2.BackColor = System.Drawing.SystemColors.Info;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label2.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Location = new System.Drawing.Point(0, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(216, 18);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Selected flight:";
             // 
             // buttonBuy
             // 
@@ -277,38 +298,18 @@
             this.buttonBuy.UseVisualStyleBackColor = true;
             this.buttonBuy.Click += new System.EventHandler(this.buttonBuy_Click);
             // 
-            // panel1
+            // buttonFind
             // 
-            this.panel1.AutoSize = true;
-            this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.textBoxSelectedFlight);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(218, 40);
-            this.panel1.TabIndex = 2;
-            // 
-            // label2
-            // 
-            this.label2.BackColor = System.Drawing.SystemColors.Info;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label2.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(0, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(216, 18);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Selected flight:";
-            // 
-            // textBoxSelectedFlight
-            // 
-            this.textBoxSelectedFlight.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.textBoxSelectedFlight.Location = new System.Drawing.Point(0, 18);
-            this.textBoxSelectedFlight.Name = "textBoxSelectedFlight";
-            this.textBoxSelectedFlight.ReadOnly = true;
-            this.textBoxSelectedFlight.Size = new System.Drawing.Size(216, 20);
-            this.textBoxSelectedFlight.TabIndex = 1;
+            this.buttonFind.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonFind.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonFind.Location = new System.Drawing.Point(3, 45);
+            this.buttonFind.Name = "buttonFind";
+            this.buttonFind.Size = new System.Drawing.Size(211, 32);
+            this.buttonFind.TabIndex = 0;
+            this.buttonFind.Text = "Find ";
+            this.buttonFind.UseVisualStyleBackColor = true;
+            this.buttonFind.Click += new System.EventHandler(this.buttonFind_Click);
             // 
             // ScheduleForm
             // 

@@ -44,9 +44,6 @@
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
@@ -59,6 +56,7 @@
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label4, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.txBxName, 1, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 4;
@@ -66,16 +64,16 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(347, 110);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(337, 104);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // txBxPassport
             // 
             this.txBxPassport.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txBxPassport.Location = new System.Drawing.Point(118, 85);
+            this.txBxPassport.Location = new System.Drawing.Point(118, 79);
             this.txBxPassport.Name = "txBxPassport";
-            this.txBxPassport.Size = new System.Drawing.Size(225, 20);
+            this.txBxPassport.Size = new System.Drawing.Size(215, 20);
             this.txBxPassport.TabIndex = 7;
             this.txBxPassport.Validating += new System.ComponentModel.CancelEventHandler(this.txBxPassport_Validating);
             // 
@@ -83,18 +81,18 @@
             // 
             this.txBxPatronymic.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txBxPatronymic.Location = new System.Drawing.Point(118, 58);
+            this.txBxPatronymic.Location = new System.Drawing.Point(118, 54);
             this.txBxPatronymic.Name = "txBxPatronymic";
-            this.txBxPatronymic.Size = new System.Drawing.Size(225, 20);
+            this.txBxPatronymic.Size = new System.Drawing.Size(215, 20);
             this.txBxPatronymic.TabIndex = 6;
             // 
             // txBxSurname
             // 
             this.txBxSurname.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txBxSurname.Location = new System.Drawing.Point(118, 31);
+            this.txBxSurname.Location = new System.Drawing.Point(118, 29);
             this.txBxSurname.Name = "txBxSurname";
-            this.txBxSurname.Size = new System.Drawing.Size(225, 20);
+            this.txBxSurname.Size = new System.Drawing.Size(215, 20);
             this.txBxSurname.TabIndex = 5;
             // 
             // label1
@@ -106,7 +104,7 @@
             this.label1.Font = new System.Drawing.Font("Courier New", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.Location = new System.Drawing.Point(4, 1);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(107, 26);
+            this.label1.Size = new System.Drawing.Size(107, 24);
             this.label1.TabIndex = 0;
             this.label1.Text = "Name:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -118,9 +116,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Courier New", 11F);
-            this.label2.Location = new System.Drawing.Point(4, 28);
+            this.label2.Location = new System.Drawing.Point(4, 26);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(107, 26);
+            this.label2.Size = new System.Drawing.Size(107, 24);
             this.label2.TabIndex = 1;
             this.label2.Text = "Surname:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -132,9 +130,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Courier New", 11F);
-            this.label3.Location = new System.Drawing.Point(4, 55);
+            this.label3.Location = new System.Drawing.Point(4, 51);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(107, 26);
+            this.label3.Size = new System.Drawing.Size(107, 24);
             this.label3.TabIndex = 2;
             this.label3.Text = "Patronymic:";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -146,7 +144,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Courier New", 11F);
-            this.label4.Location = new System.Drawing.Point(4, 82);
+            this.label4.Location = new System.Drawing.Point(4, 76);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(107, 27);
             this.label4.TabIndex = 3;
@@ -159,7 +157,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txBxName.Location = new System.Drawing.Point(118, 4);
             this.txBxName.Name = "txBxName";
-            this.txBxName.Size = new System.Drawing.Size(225, 20);
+            this.txBxName.Size = new System.Drawing.Size(215, 20);
             this.txBxName.TabIndex = 4;
             // 
             // passportValidatingError
@@ -171,10 +169,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "PassangerInfoView";
-            this.Size = new System.Drawing.Size(350, 113);
+            this.Size = new System.Drawing.Size(337, 104);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);

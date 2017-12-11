@@ -6,7 +6,7 @@ using AviaSalesApp.Common;
 using NLog;
 using AppContext = AviaSalesApp.Common.AppContext;
 
-namespace AviaSalesApp.Controllers
+namespace AviaSalesApp.Common
 {
     public class AviaSalesConnectionProvider : IDisposable
     {

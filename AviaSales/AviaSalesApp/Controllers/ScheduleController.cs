@@ -83,7 +83,7 @@ namespace AviaSalesApp.Controllers
 
         public void BuyTicket(GetSchedule_Result scheduleResult)
         {
-            var buyTicketForm = _view.Factory.CreateBuyTicketView(_provider);
+            var buyTicketForm = _view.Factory.CreateBuyTicketView(_provider, _view);
             buyTicketForm.SetFlightInfo(FindFlightBuyName(scheduleResult.FlightName), scheduleResult, _view.PathFrom, _view.PathTo);
             buyTicketForm.Show();
         }

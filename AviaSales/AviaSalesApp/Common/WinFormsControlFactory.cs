@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using AviaSalesApp.Controllers;
 using AviaSalesApp.View;
 
@@ -24,9 +25,9 @@ namespace AviaSalesApp.Common
             return new ScheduleForm(provider);
         }
 
-        public IBuyTicketView CreateBuyTicketView(AviaSalesConnectionProvider provider)
+        public IBuyTicketView CreateBuyTicketView(AviaSalesConnectionProvider provider, IScheduleView parent)
         {
-            return new BuyTicketForm(provider);
+            return new BuyTicketForm(provider, parent);
         }
 
         public ILoginView CreateLoginView()

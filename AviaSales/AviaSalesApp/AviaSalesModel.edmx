@@ -4,17 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище AviaSalesModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="__MigrationHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-            <PropertyRef Name="ContextKey" />
-          </Key>
-          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
-          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
-          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
-        </EntityType>
+    <Schema Namespace="Хранилище AviaSalesModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Airport">
           <Key>
             <PropertyRef Name="Airport_ID" />
@@ -142,7 +132,7 @@
           <Property Name="Flight_ID" Type="bigint" Nullable="false" />
           <Property Name="PlaneSeat_ID" Type="bigint" />
           <Property Name="Passanger_ID" Type="bigint" Nullable="false" />
-          <Property Name="Price_ID" Type="bigint" Nullable="false" />
+          <Property Name="Price_ID" Type="bigint" />
         </EntityType>
         <EntityType Name="Tourist">
           <Key>
@@ -357,7 +347,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Ticket_Price">
-          <End Role="Price" Type="Self.Price" Multiplicity="1" />
+          <End Role="Price" Type="Self.Price" Multiplicity="0..1" />
           <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Price">
@@ -368,6 +358,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="BuyTicket" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Flight_ID" Type="bigint" Mode="In" />
+          <Parameter Name="Passanger_ID" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="CreatePassanger" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FullName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Passport" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="GetSchedule" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="AirportFrom_ID" Type="int" Mode="In" />
           <Parameter Name="AirportTo_ID" Type="int" Mode="In" />
@@ -375,7 +373,6 @@
           <Parameter Name="DateTo" Type="date" Mode="In" />
         </Function>
         <EntityContainer Name="Хранилище AviaSalesModelContainer">
-          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Airport" EntityType="Self.Airport" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
@@ -465,21 +462,10 @@
             <End Role="Ticket" EntitySet="Ticket" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AviaSalesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="C__MigrationHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-            <PropertyRef Name="ContextKey" />
-          </Key>
-          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
-        </EntityType>
         <EntityType Name="Airport">
           <Key>
             <PropertyRef Name="Airport_ID" />
@@ -639,7 +625,7 @@
           <Property Name="Flight_ID" Type="Int64" Nullable="false" />
           <Property Name="PlaneSeat_ID" Type="Int64" />
           <Property Name="Passanger_ID" Type="Int64" Nullable="false" />
-          <Property Name="Price_ID" Type="Int64" Nullable="false" />
+          <Property Name="Price_ID" Type="Int64" />
           <NavigationProperty Name="Flight" Relationship="Self.FK_Ticket_Flight" FromRole="Ticket" ToRole="Flight" />
           <NavigationProperty Name="Passenger" Relationship="Self.FK_Ticket_Passenger" FromRole="Ticket" ToRole="Passenger" />
           <NavigationProperty Name="PlaneSeat" Relationship="Self.FK_Ticket_PlaneSeat" FromRole="Ticket" ToRole="PlaneSeat" />
@@ -846,7 +832,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Ticket_Price">
-          <End Role="Price" Type="Self.Price" Multiplicity="1" />
+          <End Role="Price" Type="Self.Price" Multiplicity="0..1" />
           <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Price">
@@ -870,7 +856,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="AviaSalesConnection" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
           <EntitySet Name="Airports" EntityType="Self.Airport" />
           <EntitySet Name="Cities" EntityType="Self.City" />
           <EntitySet Name="Companies" EntityType="Self.Company" />
@@ -965,6 +950,14 @@
             <Parameter Name="DateFrom" Mode="In" Type="DateTime" />
             <Parameter Name="DateTo" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <FunctionImport Name="BuyTicket">
+            <Parameter Name="Flight_ID" Mode="In" Type="Int64" />
+            <Parameter Name="Passanger_ID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="CreatePassanger" ReturnType="Collection(AviaSalesModel.CreatePassanger_Result)">
+            <Parameter Name="FullName" Mode="In" Type="String" />
+            <Parameter Name="Passport" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetSchedule_Result">
           <Property Type="String" Name="FlightName" Nullable="false" MaxLength="50" />
@@ -973,22 +966,18 @@
           <Property Type="Time" Name="DepartureTime" Nullable="false" />
           <Property Type="DateTime" Name="ArrivalDate" Nullable="false" Precision="16" />
         </ComplexType>
+        <ComplexType Name="CreatePassanger_Result">
+          <Property Type="Int64" Name="Passenger_ID" Nullable="false" />
+          <Property Type="String" Name="FullName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Passport" Nullable="false" MaxLength="11" />
+          <Property Type="Boolean" Name="IsRegistered" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Хранилище AviaSalesModelContainer" CdmEntityContainer="AviaSalesConnection">
-          <EntitySetMapping Name="C__MigrationHistory">
-            <EntityTypeMapping TypeName="AviaSalesModel.C__MigrationHistory">
-              <MappingFragment StoreEntitySet="__MigrationHistory">
-                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
-                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
-                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Airports">
             <EntityTypeMapping TypeName="AviaSalesModel.Airport">
               <MappingFragment StoreEntitySet="Airport">
@@ -1150,6 +1139,17 @@
                 <ScalarProperty Name="PlaneTypeName" ColumnName="PlaneTypeName" />
                 <ScalarProperty Name="DepartureTime" ColumnName="DepartureTime" />
                 <ScalarProperty Name="ArrivalDate" ColumnName="ArrivalDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="BuyTicket" FunctionName="Хранилище AviaSalesModel.BuyTicket" />
+          <FunctionImportMapping FunctionImportName="CreatePassanger" FunctionName="Хранилище AviaSalesModel.CreatePassanger">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AviaSalesModel.CreatePassanger_Result">
+                <ScalarProperty Name="Passenger_ID" ColumnName="Passenger_ID" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Passport" ColumnName="Passport" />
+                <ScalarProperty Name="IsRegistered" ColumnName="IsRegistered" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
