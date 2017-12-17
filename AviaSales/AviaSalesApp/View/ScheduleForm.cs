@@ -19,6 +19,10 @@ namespace AviaSalesApp.View
     {
         private readonly ScheduleController _controller;
 
+        public new IAviaSalesView Parent { get; set; }
+
+        public IControlFactory Factory => WinFormsControlFactory.Instance;
+
         public DateTime DateFrom
         {
             get => dateTimeFrom.Value;
@@ -43,10 +47,7 @@ namespace AviaSalesApp.View
             set => cmBxTo.SelectedItem = value;
         }
 
-        public GetSchedule_Result CurrentScheduleResult
-        {
-            get => GetCurrentScheduleResult();
-        }
+        public GetSchedule_Result CurrentScheduleResult => GetCurrentScheduleResult();
 
         public event EventHandler TicketBuy
         {
@@ -54,19 +55,24 @@ namespace AviaSalesApp.View
             remove => buttonBuy.Click -= value;
         }
 
-        public ScheduleForm(AviaSalesConnectionProvider provider)
+        public ScheduleForm(AviaSalesConnectionProvider provider, IAviaSalesView parent)
         {
             InitializeComponent();
 
             _controller = new ScheduleController(provider, this);
-
+            Parent = parent;
             buttonSwap.BackgroundImage = Resources.SWAP;
             buttonSwap.BackgroundImageLayout = ImageLayout.Stretch;
 
             dataView.MultiSelect = false;
             dataView.SelectionChanged += DataView_SelectionChanged;
-
+            Closing += ScheduleForm_Closing;
             InitToFromCollections();          
+        }
+
+        private void ScheduleForm_Closing(object sender, CancelEventArgs e)
+        {
+            Parent?.Show();
         }
 
         private void DataView_SelectionChanged(object sender, EventArgs e)
@@ -76,7 +82,16 @@ namespace AviaSalesApp.View
 
         private void InitToFromCollections()
         {
-            var localCollections = _controller.GetAirplanesPath().Select(i => (object)i).ToArray();
+            object[] localCollections;
+            try
+            {
+                localCollections = _controller.GetAirplanesPath().Select(i => (object) i).ToArray();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
             cmBxFrom.Items.AddRange(localCollections);
             cmBxTo.Items.AddRange(localCollections);
 
@@ -105,7 +120,7 @@ namespace AviaSalesApp.View
             {
                 dataView.DataSource = _controller.GetSchedule(PathFrom, PathTo, DateFrom, DateTo);
             }
-            catch (ArgumentNullException ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -129,11 +144,6 @@ namespace AviaSalesApp.View
             var selectedRow = dataView.SelectedRows[0];
 
             return (GetSchedule_Result) selectedRow?.DataBoundItem;
-        }
-
-        public IControlFactory Factory
-        {
-            get => WinFormsControlFactory.Instance;
         }
     }
 }

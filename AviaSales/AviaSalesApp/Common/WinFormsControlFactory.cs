@@ -20,12 +20,12 @@ namespace AviaSalesApp.Common
 
         private WinFormsControlFactory() { }
 
-        public IScheduleView CreateScheduleView(AviaSalesConnectionProvider provider)
+        public IScheduleView CreateScheduleView(AviaSalesConnectionProvider provider, IAviaSalesView parent)
         {
-            return new ScheduleForm(provider);
+            return new ScheduleForm(provider, parent);
         }
 
-        public IBuyTicketView CreateBuyTicketView(AviaSalesConnectionProvider provider, IScheduleView parent)
+        public IBuyTicketView CreateBuyTicketView(AviaSalesConnectionProvider provider, IAviaSalesView parent)
         {
             return new BuyTicketForm(provider, parent);
         }

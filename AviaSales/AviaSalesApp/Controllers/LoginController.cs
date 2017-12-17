@@ -16,9 +16,11 @@ namespace AviaSalesApp.Controllers
 
     class LoginController : IDisposable
     {
+        public event LoggingValidatedEventHandler LoggingValidated;
+
         private AppContext _context;
         private AviaSalesConnectionProvider _provider;
-        public event LoggingValidatedEventHandler LoggingValidated;
+        private Logger _logger = LogManager.GetCurrentClassLogger();
 
         public ILoginView View { get; set; }
         public AviaSalesConnectionProvider ConnectionProvider { get { return _provider; } }
@@ -31,22 +33,26 @@ namespace AviaSalesApp.Controllers
         }
         private void View_Logged(object sender, EventArgs e)
         {
-            var succes = false;
+            var success = false;
             var msg = "";
             try
             {
                 _context = new AppContext(View.Role);
                 _provider = new AviaSalesConnectionProvider(_context);
-                succes = ConnectionProvider.SetAppRole(View.Role, View.Password);
+                success = ConnectionProvider.SetAppRole(View.Role, View.Password);
             }
             catch (Exception ex)
             {
                 msg = ex.InnerException?.Message ?? ex.Message;
+                _logger.ConditionalDebug(ex);
             }
-            LoggingValidated?.Invoke(succes, msg);
+            LoggingValidated?.Invoke(success, msg);
 
+            if (!success) return;
+
+            View.Hide();
             if (_context.AppRole == AppRoles.Client)
-                View.Factory.CreateScheduleView(_provider).Show();
+                View.Factory.CreateScheduleView(_provider, View).Show();
         }
 
         private void View_RoleSelected(object sender, EventArgs e)
@@ -65,6 +71,9 @@ namespace AviaSalesApp.Controllers
 
         public void Dispose()
         {
+            View.Logged -= View_Logged;
+            View.RoleSelected -= View_RoleSelected;
+
             _provider?.Dispose();
         }
     }

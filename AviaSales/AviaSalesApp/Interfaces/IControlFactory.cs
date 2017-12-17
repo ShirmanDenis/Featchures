@@ -6,7 +6,7 @@ namespace AviaSalesApp
     public interface IControlFactory
     {
         ILoginView CreateLoginView();
-        IScheduleView CreateScheduleView(AviaSalesConnectionProvider provider);
-        IBuyTicketView CreateBuyTicketView(AviaSalesConnectionProvider provider, IScheduleView parent);
+        IScheduleView CreateScheduleView(AviaSalesConnectionProvider provider, IAviaSalesView parent);
+        IBuyTicketView CreateBuyTicketView(AviaSalesConnectionProvider provider, IAviaSalesView parent);
     }
 }

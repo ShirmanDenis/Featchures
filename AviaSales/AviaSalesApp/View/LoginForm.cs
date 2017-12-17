@@ -18,6 +18,7 @@ namespace AviaSalesApp.View
         private readonly LoginController _controller;
         private readonly AppContext _context;
 
+        public new IAviaSalesView Parent { get; set; } = null;
         public IControlFactory Factory => WinFormsControlFactory.Instance;
 
         public AppContext Context { get; }

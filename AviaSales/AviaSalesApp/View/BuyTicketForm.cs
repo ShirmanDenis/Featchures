@@ -14,13 +14,15 @@ namespace AviaSalesApp.View
 {
     public partial class BuyTicketForm : Form, IBuyTicketView
     {
-        private readonly BuyTicketController _controller;
-        private readonly IScheduleView _parent;
+        public IAviaSalesView Parent { get; set; }
+        public IControlFactory Factory => WinFormsControlFactory.Instance;
 
-        public BuyTicketForm(AviaSalesConnectionProvider provider, IScheduleView parent)
+        private readonly BuyTicketController _controller;
+
+        public BuyTicketForm(AviaSalesConnectionProvider provider, IAviaSalesView parent)
         {
             InitializeComponent();
-            _parent = parent;
+            Parent = parent;
             _controller = new BuyTicketController(provider, this);
         }
 
@@ -46,12 +48,12 @@ namespace AviaSalesApp.View
 
         public new void Show()
         {
-            base.Show();
+            base.ShowDialog();
         }
 
         private void buttonBack_Click(object sender, EventArgs e)
         {
-            _parent.Show();
+            Parent.Show();
 
             Close();
         }
@@ -75,6 +77,7 @@ namespace AviaSalesApp.View
                 .Append(SurName)
                 .Append(" ")
                 .Append(Patronymic);
+
             try
             {
                 _controller.BuyTicket(Flight, fullNameBuilder.ToString(), Passport.ToString());
@@ -82,7 +85,10 @@ namespace AviaSalesApp.View
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                return;
             }
+
+            MessageBox.Show("Ticket bought!");
         }
     }
 }

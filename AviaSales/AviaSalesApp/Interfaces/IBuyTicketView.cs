@@ -3,7 +3,7 @@ using AviaSalesApp.Common;
 
 namespace AviaSalesApp
 {
-    public interface IBuyTicketView
+    public interface IBuyTicketView : IAviaSalesView
     {
         Flight Flight { get; set; }
         GetSchedule_Result ScheduleResult { get; set; }
@@ -15,7 +15,6 @@ namespace AviaSalesApp
         string Patronymic { get;}
         int Passport { get;}
 
-        void Show();
         void SetFlightInfo(Flight findFlightBuyName, GetSchedule_Result scheduleResult, GeoPath viewPathFrom, GeoPath viewPathTo);
     }
 }

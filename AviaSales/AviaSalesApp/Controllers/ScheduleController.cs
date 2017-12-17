@@ -6,12 +6,14 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using AviaSalesApp.Common;
+using NLog;
 using AppContext = AviaSalesApp.Common.AppContext;
 
 namespace AviaSalesApp.Controllers
 {
     public class ScheduleController
     {
+        private readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly AviaSalesConnectionProvider _provider;
         private IScheduleView _view;
 
@@ -28,22 +30,32 @@ namespace AviaSalesApp.Controllers
             if (to == null) throw new ArgumentNullException(nameof(to));
             if (dateFrom == null) throw new ArgumentNullException(nameof(dateFrom));
             if (dateTo == null) throw new ArgumentNullException(nameof(dateTo));
+            try
+            {
+                _provider.AviaSalesConnection.Airports.Load();
 
-            _provider.AviaSalesConnection.Airports.Load();
+                var airportFromId =
+                    _provider
+                        .AviaSalesConnection
+                        .Airports
+                        .Local.Where(airport => airport.AirportName == from.Airport &&
+                                                airport.City.CityName == from.City).Select(i => i.Airport_ID)
+                        .FirstOrDefault();
 
-            var airportFromId =
-                _provider
+                var airportToId = _provider
                     .AviaSalesConnection
                     .Airports
-                    .Local.Where(airport => airport.AirportName == from.Airport &&
-                                            airport.City.CityName == from.City).Select(i => i.Airport_ID).FirstOrDefault();
-            var airportToId = _provider
-                .AviaSalesConnection
-                .Airports
-                .Local.Where(airport => airport.AirportName == to.Airport &&
-                                        airport.City.CityName == to.City).Select(i => i.Airport_ID).FirstOrDefault();
+                    .Local.Where(airport => airport.AirportName == to.Airport &&
+                                            airport.City.CityName == to.City).Select(i => i.Airport_ID)
+                    .FirstOrDefault();
 
-            return _provider.AviaSalesConnection.GetSchedule(airportFromId, airportToId, dateFrom, dateTo).ToList();
+                return _provider.AviaSalesConnection.GetSchedule(airportFromId, airportToId, dateFrom, dateTo).ToList();
+            }
+            catch (Exception ex)
+            {
+                _logger.ConditionalDebug(ex);
+                throw;
+            }
         }
 
         public List<GeoPath> GetAirplanesPath()
@@ -51,25 +63,32 @@ namespace AviaSalesApp.Controllers
             var resultPaths = new List<GeoPath>();
             _provider.AviaSalesConnection.Airports.Load();
             var localAirports = _provider.AviaSalesConnection.Airports.Local;
-            foreach (var airport in localAirports)
+            try
             {
-                _provider.AviaSalesConnection.Countries.Load();
-                var country = _provider
-                                    .AviaSalesConnection
-                                    .Countries
-                                    .Local
-                                    .FirstOrDefault(c => c.Cities.Contains(airport.City));
+                foreach (var airport in localAirports)
+                {
+                    _provider.AviaSalesConnection.Countries.Load();
+                    var country = _provider
+                        .AviaSalesConnection
+                        .Countries
+                        .Local
+                        .FirstOrDefault(c => c.Cities.Contains(airport.City));
 
-                Debug.Assert(country != null);
+                    Debug.Assert(country != null);
 
-                resultPaths.Add(
-                    new GeoPath(airport.AirportName, 
-                                airport.City.CityName, 
-                                country.CountryName)
+                    resultPaths.Add(
+                        new GeoPath(airport.AirportName,
+                            airport.City.CityName,
+                            country.CountryName)
                     );
+                }
+                return resultPaths;
             }
-
-            return resultPaths;
+            catch (Exception ex)
+            {
+                _logger.ConditionalDebug(ex);
+                throw;
+            }
         }
 
         public Flight FindFlightBuyName(string name)
