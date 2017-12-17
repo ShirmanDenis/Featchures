@@ -173,6 +173,7 @@
     <Compile Include="View\ScheduleForm.Designer.cs">
       <DependentUpon>ScheduleForm.cs</DependentUpon>
     </Compile>
+    <None Include="Properties\DataSources\SeatClass.datasource" />
     <None Include="Resources\SWAP.png" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

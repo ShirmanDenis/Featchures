@@ -28,18 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.splitContainerMain = new System.Windows.Forms.SplitContainer();
             this.splitContainerLeft = new System.Windows.Forms.SplitContainer();
             this.buttonBack = new System.Windows.Forms.Button();
-            this.flightInfo1 = new AviaSalesApp.View.FlightInfo();
             this.labelFlightInfoHeader = new System.Windows.Forms.Label();
             this.buttonBuyTicket = new System.Windows.Forms.Button();
             this.panelPassangerInfo = new System.Windows.Forms.Panel();
-            this.passangerInfoView1 = new AviaSalesApp.View.PassangerInfoView();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.cmBxSeatClass = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txBxCost = new System.Windows.Forms.TextBox();
+            this.flightInfo1 = new AviaSalesApp.View.FlightInfo();
+            this.passangerInfoView1 = new AviaSalesApp.View.PassangerInfoView();
+            this.seatClassBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).BeginInit();
             this.splitContainerMain.Panel1.SuspendLayout();
             this.splitContainerMain.Panel2.SuspendLayout();
@@ -49,6 +53,7 @@
             this.splitContainerLeft.Panel2.SuspendLayout();
             this.splitContainerLeft.SuspendLayout();
             this.panelPassangerInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.seatClassBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainerMain
@@ -64,6 +69,8 @@
             // splitContainerMain.Panel2
             // 
             this.splitContainerMain.Panel2.BackColor = System.Drawing.Color.LightCyan;
+            this.splitContainerMain.Panel2.Controls.Add(this.txBxCost);
+            this.splitContainerMain.Panel2.Controls.Add(this.label4);
             this.splitContainerMain.Panel2.Controls.Add(this.cmBxSeatClass);
             this.splitContainerMain.Panel2.Controls.Add(this.label3);
             this.splitContainerMain.Panel2.Controls.Add(this.buttonBuyTicket);
@@ -111,15 +118,6 @@
             this.buttonBack.UseVisualStyleBackColor = true;
             this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
             // 
-            // flightInfo1
-            // 
-            this.flightInfo1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flightInfo1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flightInfo1.Location = new System.Drawing.Point(0, 29);
-            this.flightInfo1.Name = "flightInfo1";
-            this.flightInfo1.Size = new System.Drawing.Size(322, 189);
-            this.flightInfo1.TabIndex = 1;
-            // 
             // labelFlightInfoHeader
             // 
             this.labelFlightInfoHeader.BackColor = System.Drawing.Color.SkyBlue;
@@ -135,9 +133,9 @@
             // buttonBuyTicket
             // 
             this.buttonBuyTicket.Font = new System.Drawing.Font("Courier New", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonBuyTicket.Location = new System.Drawing.Point(429, 178);
+            this.buttonBuyTicket.Location = new System.Drawing.Point(6, 231);
             this.buttonBuyTicket.Name = "buttonBuyTicket";
-            this.buttonBuyTicket.Size = new System.Drawing.Size(115, 30);
+            this.buttonBuyTicket.Size = new System.Drawing.Size(104, 30);
             this.buttonBuyTicket.TabIndex = 5;
             this.buttonBuyTicket.Text = "Buy";
             this.buttonBuyTicket.UseVisualStyleBackColor = true;
@@ -153,17 +151,6 @@
             this.panelPassangerInfo.Padding = new System.Windows.Forms.Padding(2, 4, 2, 0);
             this.panelPassangerInfo.Size = new System.Drawing.Size(556, 142);
             this.panelPassangerInfo.TabIndex = 4;
-            // 
-            // passangerInfoView1
-            // 
-            this.passangerInfoView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.passangerInfoView1.AutoSize = true;
-            this.passangerInfoView1.Location = new System.Drawing.Point(2, 36);
-            this.passangerInfoView1.Name = "passangerInfoView1";
-            this.passangerInfoView1.Size = new System.Drawing.Size(552, 106);
-            this.passangerInfoView1.TabIndex = 5;
             // 
             // label2
             // 
@@ -204,11 +191,56 @@
             // 
             // cmBxSeatClass
             // 
+            this.cmBxSeatClass.DataSource = this.seatClassBindingSource;
+            this.cmBxSeatClass.DisplayMember = "SeatClassName";
             this.cmBxSeatClass.FormattingEnabled = true;
             this.cmBxSeatClass.Location = new System.Drawing.Point(116, 178);
             this.cmBxSeatClass.Name = "cmBxSeatClass";
             this.cmBxSeatClass.Size = new System.Drawing.Size(121, 21);
             this.cmBxSeatClass.TabIndex = 7;
+            this.cmBxSeatClass.SelectedIndexChanged += new System.EventHandler(this.cmBxSeatClass_SelectedIndexChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Courier New", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.Location = new System.Drawing.Point(3, 208);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(53, 17);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Cost:";
+            // 
+            // txBxCost
+            // 
+            this.txBxCost.Location = new System.Drawing.Point(116, 205);
+            this.txBxCost.Name = "txBxCost";
+            this.txBxCost.ReadOnly = true;
+            this.txBxCost.Size = new System.Drawing.Size(121, 20);
+            this.txBxCost.TabIndex = 9;
+            // 
+            // flightInfo1
+            // 
+            this.flightInfo1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flightInfo1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flightInfo1.Location = new System.Drawing.Point(0, 29);
+            this.flightInfo1.Name = "flightInfo1";
+            this.flightInfo1.Size = new System.Drawing.Size(322, 189);
+            this.flightInfo1.TabIndex = 1;
+            // 
+            // passangerInfoView1
+            // 
+            this.passangerInfoView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.passangerInfoView1.AutoSize = true;
+            this.passangerInfoView1.Location = new System.Drawing.Point(2, 36);
+            this.passangerInfoView1.Name = "passangerInfoView1";
+            this.passangerInfoView1.Size = new System.Drawing.Size(552, 106);
+            this.passangerInfoView1.TabIndex = 5;
+            // 
+            // seatClassBindingSource
+            // 
+            this.seatClassBindingSource.DataSource = typeof(AviaSalesApp.SeatClass);
             // 
             // BuyTicketForm
             // 
@@ -229,6 +261,7 @@
             this.splitContainerLeft.ResumeLayout(false);
             this.panelPassangerInfo.ResumeLayout(false);
             this.panelPassangerInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.seatClassBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -247,5 +280,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmBxSeatClass;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txBxCost;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.BindingSource seatClassBindingSource;
     }
 }

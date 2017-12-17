@@ -366,6 +366,11 @@
           <Parameter Name="FullName" Type="nvarchar" Mode="In" />
           <Parameter Name="Passport" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="GetPrice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CompanyID" Type="int" Mode="In" />
+          <Parameter Name="PlaneTypeID" Type="int" Mode="In" />
+          <Parameter Name="SeatClassID" Type="bigint" Mode="In" />
+        </Function>
         <Function Name="GetSchedule" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="AirportFrom_ID" Type="int" Mode="In" />
           <Parameter Name="AirportTo_ID" Type="int" Mode="In" />
@@ -958,6 +963,11 @@
             <Parameter Name="FullName" Mode="In" Type="String" />
             <Parameter Name="Passport" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="GetPrice" ReturnType="Collection(Decimal)">
+            <Parameter Name="CompanyID" Mode="In" Type="Int32" />
+            <Parameter Name="PlaneTypeID" Mode="In" Type="Int32" />
+            <Parameter Name="SeatClassID" Mode="In" Type="Int64" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetSchedule_Result">
           <Property Type="String" Name="FlightName" Nullable="false" MaxLength="50" />
@@ -1153,6 +1163,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetPrice" FunctionName="Хранилище AviaSalesModel.GetPrice" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

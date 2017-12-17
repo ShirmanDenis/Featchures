@@ -9,6 +9,8 @@ namespace AviaSalesApp
         GetSchedule_Result ScheduleResult { get; set; }
         GeoPath From { get; set; }
         GeoPath To { get; set; }
+        SeatClass SeatClass { get; set; }
+        decimal Price { get; }
 
         string PassangerName { get;}
         string SurName { get;}

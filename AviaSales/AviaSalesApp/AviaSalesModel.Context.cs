@@ -90,5 +90,22 @@ namespace AviaSalesApp
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CreatePassanger_Result>("CreatePassanger", fullNameParameter, passportParameter);
         }
+    
+        public virtual ObjectResult<Nullable<decimal>> GetPrice(Nullable<int> companyID, Nullable<int> planeTypeID, Nullable<long> seatClassID)
+        {
+            var companyIDParameter = companyID.HasValue ?
+                new ObjectParameter("CompanyID", companyID) :
+                new ObjectParameter("CompanyID", typeof(int));
+    
+            var planeTypeIDParameter = planeTypeID.HasValue ?
+                new ObjectParameter("PlaneTypeID", planeTypeID) :
+                new ObjectParameter("PlaneTypeID", typeof(int));
+    
+            var seatClassIDParameter = seatClassID.HasValue ?
+                new ObjectParameter("SeatClassID", seatClassID) :
+                new ObjectParameter("SeatClassID", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("GetPrice", companyIDParameter, planeTypeIDParameter, seatClassIDParameter);
+        }
     }
 }
