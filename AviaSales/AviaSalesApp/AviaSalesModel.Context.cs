@@ -65,19 +65,6 @@ namespace AviaSalesApp
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSchedule_Result>("GetSchedule", airportFrom_IDParameter, airportTo_IDParameter, dateFromParameter, dateToParameter);
         }
     
-        public virtual int BuyTicket(Nullable<long> flight_ID, Nullable<long> passanger_ID)
-        {
-            var flight_IDParameter = flight_ID.HasValue ?
-                new ObjectParameter("Flight_ID", flight_ID) :
-                new ObjectParameter("Flight_ID", typeof(long));
-    
-            var passanger_IDParameter = passanger_ID.HasValue ?
-                new ObjectParameter("Passanger_ID", passanger_ID) :
-                new ObjectParameter("Passanger_ID", typeof(long));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BuyTicket", flight_IDParameter, passanger_IDParameter);
-        }
-    
         public virtual ObjectResult<CreatePassanger_Result> CreatePassanger(string fullName, string passport)
         {
             var fullNameParameter = fullName != null ?
@@ -91,7 +78,24 @@ namespace AviaSalesApp
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CreatePassanger_Result>("CreatePassanger", fullNameParameter, passportParameter);
         }
     
-        public virtual ObjectResult<Nullable<decimal>> GetPrice(Nullable<int> companyID, Nullable<int> planeTypeID, Nullable<long> seatClassID)
+        public virtual int BuyTicket(Nullable<long> flight_ID, Nullable<long> passanger_ID, Nullable<long> price_ID)
+        {
+            var flight_IDParameter = flight_ID.HasValue ?
+                new ObjectParameter("Flight_ID", flight_ID) :
+                new ObjectParameter("Flight_ID", typeof(long));
+    
+            var passanger_IDParameter = passanger_ID.HasValue ?
+                new ObjectParameter("Passanger_ID", passanger_ID) :
+                new ObjectParameter("Passanger_ID", typeof(long));
+    
+            var price_IDParameter = price_ID.HasValue ?
+                new ObjectParameter("Price_ID", price_ID) :
+                new ObjectParameter("Price_ID", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BuyTicket", flight_IDParameter, passanger_IDParameter, price_IDParameter);
+        }
+    
+        public virtual ObjectResult<GetPrice_Result> GetPrice(Nullable<int> companyID, Nullable<int> planeTypeID, Nullable<long> seatClassID)
         {
             var companyIDParameter = companyID.HasValue ?
                 new ObjectParameter("CompanyID", companyID) :
@@ -105,7 +109,7 @@ namespace AviaSalesApp
                 new ObjectParameter("SeatClassID", seatClassID) :
                 new ObjectParameter("SeatClassID", typeof(long));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("GetPrice", companyIDParameter, planeTypeIDParameter, seatClassIDParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPrice_Result>("GetPrice", companyIDParameter, planeTypeIDParameter, seatClassIDParameter);
         }
     }
 }

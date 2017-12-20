@@ -20,7 +20,7 @@ namespace AviaSalesApp.Common
             Context = ctx;
         }
 
-        public bool SetAppRole(AppRoles role, string pass)
+        public void SetAppRole(AppRoles role, string pass)
         {
             var conn = AviaSalesConnection.Database.Connection;
             var initialState = conn.State;
@@ -40,10 +40,9 @@ namespace AviaSalesApp.Common
             catch (Exception ex)
             {
                 logger.ConditionalDebug(ex.Message);
-
-                return false;
+                throw;
             }
-            return true;
+
         }
 
         public void Dispose()

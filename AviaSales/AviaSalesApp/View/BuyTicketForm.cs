@@ -41,7 +41,7 @@ namespace AviaSalesApp.View
         public GetSchedule_Result ScheduleResult { get; set; }
         public GeoPath From { get; set; }
         public GeoPath To { get; set; }
-
+        public GetPrice_Result PriceResult { get; set; }
         public SeatClass SeatClass
         {
             get => (SeatClass)cmBxSeatClass.SelectedItem;
@@ -56,7 +56,7 @@ namespace AviaSalesApp.View
         public string PassangerName => passangerInfoView1.PassangerName;
         public string SurName => passangerInfoView1.Surname;
         public string Patronymic => passangerInfoView1.Patronymic;
-        public int Passport => passangerInfoView1.Passport;
+        public long Passport => passangerInfoView1.Passport;
 
         public new void Show()
         {
@@ -80,7 +80,7 @@ namespace AviaSalesApp.View
                 MessageBox.Show("All fields in \"PassangerInfo\" must be filled!");
                 return;
             }
-            if (Price == null || SeatClass == null)
+            if (SeatClass == null)
             {
                 MessageBox.Show("Choose seat class");
                 return;
@@ -94,10 +94,10 @@ namespace AviaSalesApp.View
                 .Append(SurName)
                 .Append(" ")
                 .Append(Patronymic);
-            
+            long id = 0;
             try
             {
-                _controller.BuyTicket(Flight, fullNameBuilder.ToString(), Passport.ToString());
+               id = _controller.BuyTicket(Flight, fullNameBuilder.ToString(), Passport.ToString(), PriceResult.Price_ID);
             }
             catch (Exception ex)
             {
@@ -105,13 +105,14 @@ namespace AviaSalesApp.View
                 return;
             }
 
-            MessageBox.Show("Ticket bought!");
+            MessageBox.Show($"Ticket bought! Your ticket id = {id}");
         }
 
         private void cmBxSeatClass_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Price = _controller.GetPrice(ScheduleResult.CompanyName, SeatClass.SeatClassName,
-                ScheduleResult.PlaneTypeName) ?? 0;
+            PriceResult = _controller.GetPrice(ScheduleResult.CompanyName, SeatClass.SeatClassName,
+                              ScheduleResult.PlaneTypeName);
+            Price = PriceResult.Cost;
         }
     }
 }

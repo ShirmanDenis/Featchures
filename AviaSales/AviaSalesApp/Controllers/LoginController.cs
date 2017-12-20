@@ -20,10 +20,10 @@ namespace AviaSalesApp.Controllers
 
         private AppContext _context;
         private AviaSalesConnectionProvider _provider;
-        private Logger _logger = LogManager.GetCurrentClassLogger();
+        private readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
         public ILoginView View { get; set; }
-        public AviaSalesConnectionProvider ConnectionProvider { get { return _provider; } }
+        public AviaSalesConnectionProvider ConnectionProvider => _provider;
 
         public LoginController(ILoginView view)
         {
@@ -31,18 +31,21 @@ namespace AviaSalesApp.Controllers
             View.Logged += View_Logged;
             View.RoleSelected += View_RoleSelected;
         }
+
         private void View_Logged(object sender, EventArgs e)
         {
-            var success = false;
+            var success = true;
             var msg = "";
             try
             {
                 _context = new AppContext(View.Role);
                 _provider = new AviaSalesConnectionProvider(_context);
-                success = ConnectionProvider.SetAppRole(View.Role, View.Password);
+                
+                ConnectionProvider.SetAppRole(View.Role, View.Password);
             }
             catch (Exception ex)
             {
+                success = false;
                 msg = ex.InnerException?.Message ?? ex.Message;
                 _logger.ConditionalDebug(ex);
             }
@@ -53,6 +56,8 @@ namespace AviaSalesApp.Controllers
             View.Hide();
             if (_context.AppRole == AppRoles.Client)
                 View.Factory.CreateScheduleView(_provider, View).Show();
+            if (_context.AppRole == AppRoles.Receptionist)
+                View.Factory.CreateRegisterView(_provider, View).Show();
         }
 
         private void View_RoleSelected(object sender, EventArgs e)

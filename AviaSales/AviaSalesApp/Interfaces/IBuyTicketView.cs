@@ -15,7 +15,7 @@ namespace AviaSalesApp
         string PassangerName { get;}
         string SurName { get;}
         string Patronymic { get;}
-        int Passport { get;}
+        long Passport { get;}
 
         void SetFlightInfo(Flight findFlightBuyName, GetSchedule_Result scheduleResult, GeoPath viewPathFrom, GeoPath viewPathTo);
     }

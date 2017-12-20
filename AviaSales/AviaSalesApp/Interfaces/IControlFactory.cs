@@ -8,5 +8,6 @@ namespace AviaSalesApp
         ILoginView CreateLoginView();
         IScheduleView CreateScheduleView(AviaSalesConnectionProvider provider, IAviaSalesView parent);
         IBuyTicketView CreateBuyTicketView(AviaSalesConnectionProvider provider, IAviaSalesView parent);
+        IRegisterView CreateRegisterView(AviaSalesConnectionProvider provider, IAviaSalesView parent);
     }
 }

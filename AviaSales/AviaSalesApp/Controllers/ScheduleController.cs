@@ -53,8 +53,8 @@ namespace AviaSalesApp.Controllers
             }
             catch (Exception ex)
             {
-                _logger.ConditionalDebug(ex);
-                throw;
+                _logger.Debug(ex.InnerException ?? ex);
+                throw ex.InnerException ?? ex;
             }
         }
 
@@ -86,8 +86,8 @@ namespace AviaSalesApp.Controllers
             }
             catch (Exception ex)
             {
-                _logger.ConditionalDebug(ex);
-                throw;
+                _logger.ConditionalDebug(ex.InnerException ?? ex);
+                throw ex.InnerException ?? ex;
             }
         }
 

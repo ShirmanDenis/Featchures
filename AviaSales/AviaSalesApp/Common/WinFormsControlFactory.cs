@@ -30,6 +30,11 @@ namespace AviaSalesApp.Common
             return new BuyTicketForm(provider, parent);
         }
 
+        public IRegisterView CreateRegisterView(AviaSalesConnectionProvider provider, IAviaSalesView parent)
+        {
+            return new RegisterForm(provider, parent);
+        }
+
         public ILoginView CreateLoginView()
         {
             return new LoginForm();

@@ -25,19 +25,22 @@ namespace AviaSalesApp.Controllers
             return _provider.AviaSalesConnection.CreatePassanger(fullName, passport).FirstOrDefault();
         }
 
-        public void BuyTicket(Flight flight, string fullName, string passport)
+        public long BuyTicket(Flight flight, string fullName, string passport, long priceId)
         {
             try
             {
                 var passanger = GetPassenger(fullName, passport);
 
-                if (passanger == null) return;
+                if (passanger == null) return -1;
 
-                _provider.AviaSalesConnection.BuyTicket(flight.Flight_ID, passanger.Passenger_ID);
+                _provider.AviaSalesConnection.BuyTicket(flight.Flight_ID, passanger.Passenger_ID, priceId);
+                _provider.AviaSalesConnection.Tickets.Load();
+                return _provider.AviaSalesConnection.Tickets.Local.First(t =>
+                    t.Flight_ID == flight.Flight_ID && t.Passanger_ID == passanger.Passenger_ID).Ticket_ID;
             }
             catch (Exception e)
             {
-                _logger.ConditionalDebug(e, e.InnerException?.Message ?? "Inner is empty");
+                _logger.Debug(e, e.InnerException?.Message ?? "Inner is empty");
                 throw new Exception(e.InnerException?.Message ?? e.Message);
             }
         }
@@ -55,7 +58,7 @@ namespace AviaSalesApp.Controllers
                 .ToList();
         }
 
-        public decimal? GetPrice(string company, string seatClass, string planeType)
+        public GetPrice_Result GetPrice(string company, string seatClass, string planeType)
         {
             var companyId = _provider.AviaSalesConnection.Companies.FirstOrDefault(c => c.CompanyName == company);
             var seatClassId = _provider.AviaSalesConnection.SeatClasses.FirstOrDefault(sc => sc.SeatClassName == seatClass);

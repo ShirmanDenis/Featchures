@@ -361,6 +361,7 @@
         <Function Name="BuyTicket" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Flight_ID" Type="bigint" Mode="In" />
           <Parameter Name="Passanger_ID" Type="bigint" Mode="In" />
+          <Parameter Name="Price_ID" Type="bigint" Mode="In" />
         </Function>
         <Function Name="CreatePassanger" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="FullName" Type="nvarchar" Mode="In" />
@@ -955,15 +956,16 @@
             <Parameter Name="DateFrom" Mode="In" Type="DateTime" />
             <Parameter Name="DateTo" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="BuyTicket">
-            <Parameter Name="Flight_ID" Mode="In" Type="Int64" />
-            <Parameter Name="Passanger_ID" Mode="In" Type="Int64" />
-          </FunctionImport>
           <FunctionImport Name="CreatePassanger" ReturnType="Collection(AviaSalesModel.CreatePassanger_Result)">
             <Parameter Name="FullName" Mode="In" Type="String" />
             <Parameter Name="Passport" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="GetPrice" ReturnType="Collection(Decimal)">
+          <FunctionImport Name="BuyTicket">
+            <Parameter Name="Flight_ID" Mode="In" Type="Int64" />
+            <Parameter Name="Passanger_ID" Mode="In" Type="Int64" />
+            <Parameter Name="Price_ID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="GetPrice" ReturnType="Collection(AviaSalesModel.GetPrice_Result)">
             <Parameter Name="CompanyID" Mode="In" Type="Int32" />
             <Parameter Name="PlaneTypeID" Mode="In" Type="Int32" />
             <Parameter Name="SeatClassID" Mode="In" Type="Int64" />
@@ -981,6 +983,20 @@
           <Property Type="String" Name="FullName" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="Passport" Nullable="false" MaxLength="11" />
           <Property Type="Boolean" Name="IsRegistered" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetPrice1_Result">
+          <Property Type="Int64" Name="Price_ID" Nullable="false" />
+          <Property Type="Int32" Name="Company_ID" Nullable="false" />
+          <Property Type="Int32" Name="PlaneType_ID" Nullable="false" />
+          <Property Type="Int64" Name="SeatClass_ID" Nullable="false" />
+          <Property Type="Decimal" Name="Cost" Nullable="false" Precision="19" />
+        </ComplexType>
+        <ComplexType Name="GetPrice_Result">
+          <Property Type="Int64" Name="Price_ID" Nullable="false" />
+          <Property Type="Int32" Name="Company_ID" Nullable="false" />
+          <Property Type="Int32" Name="PlaneType_ID" Nullable="false" />
+          <Property Type="Int64" Name="SeatClass_ID" Nullable="false" />
+          <Property Type="Decimal" Name="Cost" Nullable="false" Precision="19" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1152,7 +1168,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="BuyTicket" FunctionName="Хранилище AviaSalesModel.BuyTicket" />
           <FunctionImportMapping FunctionImportName="CreatePassanger" FunctionName="Хранилище AviaSalesModel.CreatePassanger">
             <ResultMapping>
               <ComplexTypeMapping TypeName="AviaSalesModel.CreatePassanger_Result">
@@ -1163,7 +1178,18 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetPrice" FunctionName="Хранилище AviaSalesModel.GetPrice" />
+          <FunctionImportMapping FunctionImportName="BuyTicket" FunctionName="Хранилище AviaSalesModel.BuyTicket" />
+          <FunctionImportMapping FunctionImportName="GetPrice" FunctionName="Хранилище AviaSalesModel.GetPrice">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AviaSalesModel.GetPrice_Result">
+                <ScalarProperty Name="Price_ID" ColumnName="Price_ID" />
+                <ScalarProperty Name="Company_ID" ColumnName="Company_ID" />
+                <ScalarProperty Name="PlaneType_ID" ColumnName="PlaneType_ID" />
+                <ScalarProperty Name="SeatClass_ID" ColumnName="SeatClass_ID" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

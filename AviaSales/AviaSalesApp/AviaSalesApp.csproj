@@ -80,7 +80,6 @@
     </Compile>
     <Compile Include="Common\GeoPath.cs" />
     <Compile Include="Common\Helper.cs" />
-    <Compile Include="Common\ScheduleViewProxy.cs" />
     <Compile Include="Common\WinFormsControlFactory.cs" />
     <Compile Include="Common\Enums.cs" />
     <Compile Include="Common\AppContext.cs" />
@@ -90,6 +89,7 @@
     <Compile Include="Common\AviaSalesConnectionProvider.cs" />
     <Compile Include="Controllers\BuyTicketController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Country.cs">
       <DependentUpon>AviaSalesModel.tt</DependentUpon>
@@ -103,6 +103,12 @@
     <Compile Include="FlightState.cs">
       <DependentUpon>AviaSalesModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetPrice1_Result.cs">
+      <DependentUpon>AviaSalesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetPrice_Result.cs">
+      <DependentUpon>AviaSalesModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetSchedule_Result.cs">
       <DependentUpon>AviaSalesModel.tt</DependentUpon>
     </Compile>
@@ -110,6 +116,7 @@
     <Compile Include="Interfaces\IBuyTicketView.cs" />
     <Compile Include="Interfaces\IControlFactory.cs" />
     <Compile Include="Interfaces\ILoginView.cs" />
+    <Compile Include="Interfaces\IRegisterView.cs" />
     <Compile Include="Interfaces\IScheduleView.cs" />
     <Compile Include="Passenger.cs">
       <DependentUpon>AviaSalesModel.tt</DependentUpon>
@@ -167,13 +174,22 @@
     <Compile Include="View\PassangerInfoView.Designer.cs">
       <DependentUpon>PassangerInfoView.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\RegisterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\RegisterForm.Designer.cs">
+      <DependentUpon>RegisterForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\ScheduleForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\ScheduleForm.Designer.cs">
       <DependentUpon>ScheduleForm.cs</DependentUpon>
     </Compile>
+    <None Include="Properties\DataSources\Passenger.datasource" />
+    <None Include="Properties\DataSources\PlaneSeat.datasource" />
     <None Include="Properties\DataSources\SeatClass.datasource" />
+    <None Include="Properties\DataSources\Ticket.datasource" />
     <None Include="Resources\SWAP.png" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -196,6 +212,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\PassangerInfoView.resx">
       <DependentUpon>PassangerInfoView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\RegisterForm.resx">
+      <DependentUpon>RegisterForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\ScheduleForm.resx">
       <DependentUpon>ScheduleForm.cs</DependentUpon>

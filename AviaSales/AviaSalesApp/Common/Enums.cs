@@ -9,7 +9,6 @@ namespace AviaSalesApp.Common
     public enum AppRoles
     {
         Client,
-        Receptionist,
-        Leader
+        Receptionist
     }
 }

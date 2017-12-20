@@ -20,14 +20,14 @@ namespace AviaSalesApp.View
 
         public string Patronymic => txBxPatronymic.Text;
 
-        public int Passport => GetPassport();
+        public long Passport => GetPassport();
 
-        private int GetPassport()
+        private long GetPassport()
         {
-            if (int.TryParse(txBxPassport.Text, NumberStyles.Integer, CultureInfo.InvariantCulture, out int parsedInt))
-                return parsedInt;
+            if (long.TryParse(txBxPassport.Text, NumberStyles.Integer, CultureInfo.InvariantCulture, out long parsedLong))
+                return parsedLong;
 
-            return -1;
+            throw new Exception("Can't parse passport");
         }
 
         public PassangerInfoView()
