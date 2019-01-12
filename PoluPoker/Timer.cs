@@ -48,15 +48,19 @@ namespace PoluPoker
             _updateTimer.Start();
             Task.Run(() =>
             {
-                while (true)
+                while (_real.IsRunning)
                 {
-                    if (Time - _real.Elapsed < new TimeSpan(0, 0, 0, 0))
+                    if (Time - _real.Elapsed <= new TimeSpan(0, 0, 0, 0))
                         break;
                     Thread.Sleep(150);
                 }
-                Stop();
-                Reset();
-                Ended?.Invoke(this, null);
+
+                if (Time - _real.Elapsed <= new TimeSpan(0, 0, 0, 0))
+                {
+                    Stop();
+                    Reset();
+                    Ended?.Invoke(this, null);
+                }
             });
         }
 
@@ -69,6 +73,7 @@ namespace PoluPoker
         public void Reset()
         {
             _real.Reset();
+            _updateTimer.Stop();
         }
     }
 }
