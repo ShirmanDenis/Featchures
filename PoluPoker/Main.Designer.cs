@@ -52,9 +52,8 @@
             this.HeaderPanel.Controls.Add(this.flowLayoutPanel1);
             this.HeaderPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.HeaderPanel.Location = new System.Drawing.Point(0, 0);
-            this.HeaderPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.HeaderPanel.Name = "HeaderPanel";
-            this.HeaderPanel.Size = new System.Drawing.Size(1315, 64);
+            this.HeaderPanel.Size = new System.Drawing.Size(1169, 52);
             this.HeaderPanel.TabIndex = 0;
             // 
             // flowLayoutPanel1
@@ -63,10 +62,10 @@
             this.flowLayoutPanel1.Controls.Add(this.RollUpPanel);
             this.flowLayoutPanel1.Controls.Add(this.ClosePanel);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(1182, 0);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(1051, 0);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 8);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(131, 62);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(116, 50);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
             // RollUpPanel
@@ -74,10 +73,9 @@
             this.RollUpPanel.BackColor = System.Drawing.Color.Transparent;
             this.RollUpPanel.BackgroundImage = global::PoluPoker.Properties.Resources.icons8_вычитание_96;
             this.RollUpPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.RollUpPanel.Location = new System.Drawing.Point(3, 4);
-            this.RollUpPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.RollUpPanel.Location = new System.Drawing.Point(3, 3);
             this.RollUpPanel.Name = "RollUpPanel";
-            this.RollUpPanel.Size = new System.Drawing.Size(59, 37);
+            this.RollUpPanel.Size = new System.Drawing.Size(52, 30);
             this.RollUpPanel.TabIndex = 1;
             this.RollUpPanel.Click += new System.EventHandler(this.panel1_Click);
             this.RollUpPanel.MouseEnter += new System.EventHandler(this.panel1_MouseEnter);
@@ -88,9 +86,10 @@
             this.ClosePanel.BackColor = System.Drawing.Color.Transparent;
             this.ClosePanel.BackgroundImage = global::PoluPoker.Properties.Resources.This_is_my_close_button_for_this_image__e08deb6b87983b314d88a24c09f4d13f;
             this.ClosePanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClosePanel.Location = new System.Drawing.Point(68, 3);
+            this.ClosePanel.Location = new System.Drawing.Point(61, 2);
+            this.ClosePanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ClosePanel.Name = "ClosePanel";
-            this.ClosePanel.Size = new System.Drawing.Size(59, 55);
+            this.ClosePanel.Size = new System.Drawing.Size(52, 44);
             this.ClosePanel.TabIndex = 0;
             this.ClosePanel.Click += new System.EventHandler(this.ClosePanel_Click);
             this.ClosePanel.MouseEnter += new System.EventHandler(this.ClosePanel_MouseEnter);
@@ -101,10 +100,9 @@
             this.ContentPanel.Controls.Add(this.FunctionalPanel);
             this.ContentPanel.Controls.Add(this.GameTablesPanel);
             this.ContentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ContentPanel.Location = new System.Drawing.Point(0, 64);
-            this.ContentPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ContentPanel.Location = new System.Drawing.Point(0, 52);
             this.ContentPanel.Name = "ContentPanel";
-            this.ContentPanel.Size = new System.Drawing.Size(1315, 772);
+            this.ContentPanel.Size = new System.Drawing.Size(1169, 617);
             this.ContentPanel.TabIndex = 1;
             // 
             // FunctionalPanel
@@ -112,18 +110,16 @@
             this.FunctionalPanel.BackColor = System.Drawing.Color.LightGreen;
             this.FunctionalPanel.Controls.Add(this.button1);
             this.FunctionalPanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.FunctionalPanel.Location = new System.Drawing.Point(1144, 0);
-            this.FunctionalPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.FunctionalPanel.Location = new System.Drawing.Point(984, 0);
             this.FunctionalPanel.Name = "FunctionalPanel";
-            this.FunctionalPanel.Size = new System.Drawing.Size(171, 772);
+            this.FunctionalPanel.Size = new System.Drawing.Size(185, 617);
             this.FunctionalPanel.TabIndex = 1;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(7, 4);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button1.Location = new System.Drawing.Point(6, 3);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(160, 64);
+            this.button1.Size = new System.Drawing.Size(142, 51);
             this.button1.TabIndex = 0;
             this.button1.Text = "Add table";
             this.button1.UseVisualStyleBackColor = true;
@@ -132,11 +128,10 @@
             // GameTablesPanel
             // 
             this.GameTablesPanel.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.GameTablesPanel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.GameTablesPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.GameTablesPanel.Location = new System.Drawing.Point(0, 0);
-            this.GameTablesPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.GameTablesPanel.Name = "GameTablesPanel";
-            this.GameTablesPanel.Size = new System.Drawing.Size(666, 772);
+            this.GameTablesPanel.Size = new System.Drawing.Size(1169, 617);
             this.GameTablesPanel.TabIndex = 0;
             // 
             // notifyIcon
@@ -148,13 +143,12 @@
             // 
             // Main
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1315, 836);
+            this.ClientSize = new System.Drawing.Size(1169, 669);
             this.ControlBox = false;
             this.Controls.Add(this.ContentPanel);
             this.Controls.Add(this.HeaderPanel);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Main";

@@ -37,6 +37,8 @@ namespace PoluPoker
         public Main()
         {
             InitializeComponent();
+            GameTablesPanel.BackColor = Color.FromArgb(206, 211, 219);
+            FunctionalPanel.BackColor = Color.FromArgb(151, 152, 153);
             var path = AppDomain.CurrentDomain.BaseDirectory + "Settings.json";
             if (File.Exists(path))
                 _settings = JsonConvert.DeserializeObject<Settings>(File.ReadAllText(path));
@@ -48,10 +50,7 @@ namespace PoluPoker
             HeaderPanel.MouseDown += Form1_MouseDown;
             for (int i = 0; i < 7; i++)
             {
-                _tables.Add(new GameTable.GameTable(_settings, this)
-                {
-                    TableText = $"table{i+1}"
-                });
+                _tables.Add(CreateTable());
             }
             _tables.ForEach(table => GameTablesPanel.Controls.Add(table));
         }
@@ -82,7 +81,7 @@ namespace PoluPoker
 
         private void button1_Click(object sender, EventArgs e)
         {
-            GameTablesPanel.Controls.Add(new GameTable.GameTable(_settings, this));
+            GameTablesPanel.Controls.Add(CreateTable());
         }
 
         private void panel1_MouseEnter(object sender, EventArgs e)
@@ -128,6 +127,16 @@ namespace PoluPoker
             notifyIcon.Visible = false;
 
             this.Show();
+        }
+
+        private GameTable.GameTable CreateTable()
+        {
+            return new GameTable.GameTable(_settings, this)
+            {
+                TableText = "Введи сам!",
+                Size = new Size(240, 136),
+                BackColor = Color.FromArgb(150,66, 134, 244)
+        };
         }
 
         public void Notify(string title, string text)
