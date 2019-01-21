@@ -17,6 +17,7 @@ namespace PoluPoker.GameTable
     {
         private Image _start = Resources.play;
         private Image _stop = Resources.stop;
+        private TextBox _enterTimeTextBox = new TextBox();
         private INotifier _notifier;
         private bool f;
         private readonly Timer _timer = new Timer();
@@ -25,8 +26,8 @@ namespace PoluPoker.GameTable
         [Browsable(true)]
         public string TableText
         {
-            get { return label.Text; }
-            set { label.Text = value; }
+            get { return labelTableName.Text; }
+            set { labelTableName.Text = value; }
         }
 
         public GameTable(): this(new Settings(), new Notifier())
@@ -46,6 +47,22 @@ namespace PoluPoker.GameTable
             panelStartStop.Click += btnStartStop_Click;
             panelStartStop.MouseEnter += PanelStartStop_MouseEnter;
             panelStartStop.MouseLeave += PanelStartStop_MouseLeave;
+            _enterTimeTextBox.KeyDown += _enterTimeTextBox_KeyDown;
+            Controls.Add(_enterTimeTextBox);
+        }
+
+        private void _enterTimeTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                labelTime.Text = _enterTimeTextBox.Text;
+                _enterTimeTextBox.Hide();
+            }
+
+            if (e.KeyCode == Keys.Escape)
+            {
+                _enterTimeTextBox.Hide();
+            }
         }
 
         private void PanelStartStop_MouseLeave(object sender, EventArgs e)
@@ -141,10 +158,10 @@ namespace PoluPoker.GameTable
 
         private void label_DoubleClick(object sender, EventArgs e)
         {
-            var height = label.Font.Height;
-            var width = TextRenderer.MeasureText(TableText, label.Font).Width;
-            var x = (label.Width - width) / 2;
-            var y = (label.Height - height) / 2;
+            var height = labelTableName.Font.Height;
+            var width = TextRenderer.MeasureText(TableText, labelTableName.Font).Width;
+            var x = (labelTableName.Width - width) / 2;
+            var y = (labelTableName.Height - height) / 2;
             textBox1.Location = new Point(x, y);
             textBox1.Width = width;
             textBox1.Show();
@@ -165,6 +182,23 @@ namespace PoluPoker.GameTable
         {
             panelEdit.BackgroundImage.Dispose();
             panelEdit.BackgroundImage = Helpers.SetImageOpacity(Resources.edit, 0.7f);
+        }
+
+        private void panelEdit_Click(object sender, EventArgs e)
+        {
+            if (_timer.IsStarted)
+            {
+                MessageBox.Show("выключи таймер");
+                return;
+            }
+            _enterTimeTextBox.Text = labelTime.Text;
+            _enterTimeTextBox.BringToFront();
+            _enterTimeTextBox.Width = 150;
+            _enterTimeTextBox.Font = labelTableName.Font;
+            var x = labelTableName.Width - panelEdit.Width - _enterTimeTextBox.Width;
+            var y = panelEdit.Location.Y;
+            _enterTimeTextBox.Location = new Point(x, y);
+            _enterTimeTextBox.Show();
         }
     }
 }

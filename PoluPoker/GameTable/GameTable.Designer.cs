@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label = new System.Windows.Forms.Label();
+            this.labelTableName = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panelEdit = new System.Windows.Forms.Panel();
@@ -39,20 +39,20 @@
             this.panelForTime.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label
+            // labelTableName
             // 
-            this.label.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label.Font = new System.Drawing.Font("Malgun Gothic Semilight", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label.Location = new System.Drawing.Point(0, 0);
-            this.label.Name = "label";
-            this.label.Size = new System.Drawing.Size(559, 324);
-            this.label.TabIndex = 0;
-            this.label.Text = "label1";
-            this.label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label.Click += new System.EventHandler(this.label_Click);
-            this.label.DoubleClick += new System.EventHandler(this.label_DoubleClick);
-            this.label.MouseEnter += new System.EventHandler(this.label_MouseEnter);
-            this.label.MouseLeave += new System.EventHandler(this.label_MouseLeave);
+            this.labelTableName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelTableName.Font = new System.Drawing.Font("Malgun Gothic Semilight", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelTableName.Location = new System.Drawing.Point(0, 0);
+            this.labelTableName.Name = "labelTableName";
+            this.labelTableName.Size = new System.Drawing.Size(559, 324);
+            this.labelTableName.TabIndex = 0;
+            this.labelTableName.Text = "label1";
+            this.labelTableName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelTableName.Click += new System.EventHandler(this.label_Click);
+            this.labelTableName.DoubleClick += new System.EventHandler(this.label_DoubleClick);
+            this.labelTableName.MouseEnter += new System.EventHandler(this.label_MouseEnter);
+            this.labelTableName.MouseLeave += new System.EventHandler(this.label_MouseLeave);
             // 
             // textBox1
             // 
@@ -83,6 +83,7 @@
             this.panelEdit.Name = "panelEdit";
             this.panelEdit.Size = new System.Drawing.Size(42, 42);
             this.panelEdit.TabIndex = 1;
+            this.panelEdit.Click += new System.EventHandler(this.panelEdit_Click);
             this.panelEdit.MouseEnter += new System.EventHandler(this.panelEdit_MouseEnter);
             this.panelEdit.MouseLeave += new System.EventHandler(this.panelEdit_MouseLeave);
             // 
@@ -113,9 +114,9 @@
             this.labelTime.Font = new System.Drawing.Font("Malgun Gothic Semilight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelTime.Location = new System.Drawing.Point(0, 0);
             this.labelTime.Name = "labelTime";
-            this.labelTime.Size = new System.Drawing.Size(63, 20);
+            this.labelTime.Size = new System.Drawing.Size(61, 20);
             this.labelTime.TabIndex = 0;
-            this.labelTime.Text = "00:05:00";
+            this.labelTime.Text = "00:00:10";
             // 
             // GameTable
             // 
@@ -125,7 +126,7 @@
             this.Controls.Add(this.panelForTime);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label);
+            this.Controls.Add(this.labelTableName);
             this.Name = "GameTable";
             this.Size = new System.Drawing.Size(559, 324);
             this.panel1.ResumeLayout(false);
@@ -138,7 +139,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label;
+        private System.Windows.Forms.Label labelTableName;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panelStartStop;

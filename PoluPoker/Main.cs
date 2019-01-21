@@ -41,7 +41,17 @@ namespace PoluPoker
             FunctionalPanel.BackColor = Color.FromArgb(151, 152, 153);
             var path = AppDomain.CurrentDomain.BaseDirectory + "Settings.json";
             if (File.Exists(path))
-                _settings = JsonConvert.DeserializeObject<Settings>(File.ReadAllText(path));
+            {
+                try
+                {
+                    _settings = JsonConvert.DeserializeObject<Settings>(File.ReadAllText(path));
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Накасяпорил с форматом настроек в файле, криворук!!!");
+                    _settings = new Settings();
+                }
+            }
             else
             {
                 _settings = new Settings();
