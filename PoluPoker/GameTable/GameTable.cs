@@ -22,12 +22,20 @@ namespace PoluPoker.GameTable
         private bool f;
         private readonly Timer _timer = new Timer();
         private Settings _settings;
+
+        public int Id { get; set; }
+
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         [Browsable(true)]
         public string TableText
         {
-            get { return labelTableName.Text; }
-            set { labelTableName.Text = value; }
+            get => labelTableName.Text;
+            set
+            {
+                labelTableName.Text = value;
+
+                _settings.Update(Id, value);
+            }
         }
 
         public GameTable(): this(new Settings(), new Notifier())
@@ -48,6 +56,7 @@ namespace PoluPoker.GameTable
             panelStartStop.MouseEnter += PanelStartStop_MouseEnter;
             panelStartStop.MouseLeave += PanelStartStop_MouseLeave;
             _enterTimeTextBox.KeyDown += _enterTimeTextBox_KeyDown;
+
             Controls.Add(_enterTimeTextBox);
         }
 
@@ -191,6 +200,12 @@ namespace PoluPoker.GameTable
                 MessageBox.Show("выключи таймер");
                 return;
             }
+
+            if (_enterTimeTextBox.Visible)
+            {
+                _enterTimeTextBox.Hide();
+                return;
+            }
             _enterTimeTextBox.Text = labelTime.Text;
             _enterTimeTextBox.BringToFront();
             _enterTimeTextBox.Width = 150;
@@ -199,6 +214,55 @@ namespace PoluPoker.GameTable
             var y = panelEdit.Location.Y;
             _enterTimeTextBox.Location = new Point(x, y);
             _enterTimeTextBox.Show();
+        }
+
+        private void panelClose_MouseEnter(object sender, EventArgs e)
+        {
+            panelClose.BackgroundImage.Dispose();
+            panelClose.BackgroundImage = Helpers.SetImageOpacity(Resources.delete, 1);
+        }
+
+        private void panelClose_MouseLeave(object sender, EventArgs e)
+        {
+            panelClose.BackgroundImage.Dispose();
+            panelClose.BackgroundImage = Helpers.SetImageOpacity(Resources.delete, 0.7f);
+        }
+
+        private void panelClose_Click(object sender, EventArgs e)
+        {
+            var parent = Parent;
+            if (parent == null)
+                return;
+
+            parent.Controls.Remove(this);
+            this.Dispose();
+        }
+
+        /// <summary> 
+        /// Required designer variable.
+        /// </summary>
+        private readonly System.ComponentModel.IContainer components = null;
+
+        /// <summary> 
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+
+            _timer.Updated -= _timer_Updated;
+            _timer.Ended -= _timer_Ended;
+            textBox1.KeyDown -= TextBox1_KeyDown;
+            panelStartStop.Click -= btnStartStop_Click;
+            panelStartStop.MouseEnter -= PanelStartStop_MouseEnter;
+            panelStartStop.MouseLeave -= PanelStartStop_MouseLeave;
+            _enterTimeTextBox.KeyDown -= _enterTimeTextBox_KeyDown;
+
+            base.Dispose(disposing);
         }
     }
 }

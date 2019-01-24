@@ -46,10 +46,19 @@ namespace PoluPoker
                 {
                     _settings = JsonConvert.DeserializeObject<Settings>(File.ReadAllText(path));
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     MessageBox.Show("Накасяпорил с форматом настроек в файле, криворук!!!");
                     _settings = new Settings();
+                    _settings.TableNames = new List<TableDesc>();
+                    for (int i = 0; i < 7; i++)
+                    {
+                        _settings.TableNames.Add(new TableDesc()
+                        {
+                            Name = "Введи сам!",
+                            Id = i
+                        });
+                    }
                 }
             }
             else
@@ -58,9 +67,9 @@ namespace PoluPoker
             }
             ClosePanel.BackgroundImage = Helpers.SetImageOpacity(_defaultCloseBtn, 0.7f);
             HeaderPanel.MouseDown += Form1_MouseDown;
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i < _settings.TableNames.Count; i++)
             {
-                _tables.Add(CreateTable());
+                _tables.Add(CreateTable(i));
             }
             _tables.ForEach(table => GameTablesPanel.Controls.Add(table));
         }
@@ -91,7 +100,7 @@ namespace PoluPoker
 
         private void button1_Click(object sender, EventArgs e)
         {
-            GameTablesPanel.Controls.Add(CreateTable());
+            GameTablesPanel.Controls.Add(CreateTable(_tables.Count));
         }
 
         private void panel1_MouseEnter(object sender, EventArgs e)
@@ -139,14 +148,29 @@ namespace PoluPoker
             this.Show();
         }
 
-        private GameTable.GameTable CreateTable()
+        private GameTable.GameTable CreateTable(int id)
         {
-            return new GameTable.GameTable(_settings, this)
+            var tdesc = _settings.TableNames.FirstOrDefault(desc => desc.Id == id);
+            if (tdesc == null)
             {
-                TableText = "Введи сам!",
+                tdesc = new TableDesc()
+                {
+                    Name = "Введи сам!",
+                    Id = id
+                };
+                _settings.TableNames.Add(tdesc);
+                _settings.Update(tdesc.Id, tdesc.Name);
+            }
+
+            var t = new GameTable.GameTable(_settings, this)
+            {
+                Id = id,
+                TableText = tdesc.Name,
                 Size = new Size(240, 136),
-                BackColor = Color.FromArgb(150,66, 134, 244)
-        };
+                BackColor = Color.FromArgb(150, 66, 134, 244)
+            };
+            _tables.Add(t);
+            return t;
         }
 
         public void Notify(string title, string text)
